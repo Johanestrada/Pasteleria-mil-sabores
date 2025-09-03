@@ -16,17 +16,31 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
-            <p class="slogan">¡El sabor que endulza tu vida!</p>
-            <nav class="nav">
-                <a href="#inicio" class="nav-btn">Inicio</a>
-                <a href="#productos" class="nav-btn">Productos</a>
-                <a href="#contacto" class="nav-btn">Contacto</a>
-            </nav>
-        </div>
+    <header>
+      <div class="header-content">
+        <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+        <p class="slogan">¡El sabor que endulza tu vida!</p>
+        <nav class="nav">
+          <a href="#inicio" class="nav-btn">Inicio</a>
+          <a href="#productos" class="nav-btn">Productos</a>
+          <a href="#contacto" class="nav-btn">Contacto</a>
+          <!-- Menú desplegable -->
+          <div class="nav-dropdown">
+            <button class="nav-btn">Mi Cuenta</button>
+            <div class="nav-dropdown-content">
+              <a href="#">Iniciar Sesión</a>
+              <a href="#">Registrarse</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-btn">Carrito</button>
+            <div class="nav-dropdown-content">
+              <a href="#">Ver Carrito</a>
+              <a href="#">Finalizar Compra</a>
+            </div>
+          </div>
+        </nav>
+      </div>
     </header>
     <div id="carouselExampleIndicators" class="carousel slide">
   <!-- Indicadores -->
@@ -62,7 +76,7 @@
         alt="Cristiano Ronaldo haciendo ejercicio"
       >
       <div class="pastel">
-        <h1>Gym</h1>
+        <h1>Promocion Especial</h1>
       </div>
     </div>
     <div class="carousel-item">
@@ -72,7 +86,7 @@
         alt="Juguetes Funko Pop"
       >
       <div class="pastel">
-        <h1>Juguetes</h1>
+        <h1>Tortas</h1>
       </div>
     </div>
     <div class="carousel-item">
@@ -82,7 +96,7 @@
         alt="Ropa usada"
       >
       <div class="pastel">
-        <h1>Ropa</h1>
+        <h1>Mas tortas</h1>
       </div>
     </div>
   </div>
@@ -158,11 +172,32 @@
             </div>
           </div>
         </div>
+        <a href="destacados.html" class="btn btn-secondary">Ver Más Productos</a>
       </div>
-
+      <section>
+        <!--Sobre nosotros-->
+        <div class="Destacados">
+          <h1>Sobre Nosotros</h1>
+        </div>
+        <div class="container my-4">
+          <div class="row">
+            <div class="col-md-6">
+              <p>En Pastelería Mil Sabores, nos apasiona crear momentos dulces e inolvidables. Desde nuestros inicios, hemos
+                trabajado con dedicación y amor por la repostería, utilizando ingredientes frescos y de alta calidad para
+                ofrecer productos que no solo deleitan el paladar, sino que también cuentan una historia en cada bocado.</p>
+              <p>Nuestro equipo de expertos pasteleros está comprometido con la innovación y la creatividad, siempre buscando
+                nuevas recetas y técnicas para sorprender a nuestros clientes. Ya sea un pastel clásico o una tarta
+                personalizada, cada creación es elaborada con esmero y atención al detalle.</p>
+              <p>Gracias por elegirnos para endulzar tus celebraciones y momentos especiales. En Pastelería Mil Sabores,
+                cada día es una oportunidad para compartir alegría y sabor con quienes más quieres.</p>
+            </div>
+            <div class="col-md-6">
+              <img src="assets/img/sNosotros.jpg" alt="Sobre Nosotros" class="img-fluid rounded">
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-
-   
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-content">

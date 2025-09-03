@@ -1,8 +1,12 @@
 header {
     background: #FFC0CB;
-    color: #B0BEC5;
+    color: black;
     padding: 10px;
     width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    box-shadow:  0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
@@ -46,17 +50,14 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-
 main, .bienvenida {
     flex: 1;
 }
-
 footer {
     text-align: center;
     background: #FFC0CB;
@@ -65,19 +66,38 @@ footer {
     width: 100%;
     margin-top: auto;
 }
-
-main {
-    
+/*ocultar lo demas del header del menu */
+.nav {
+  display: flex;
+  gap: 1rem;
 }
-
-
-
-
-
-
-
-
-
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 0.5rem 0;
+  border-radius: 6px;
+}
+.nav-dropdown-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-dropdown-content a:hover {
+  background-color: #ececec;
+}
+.nav-dropdown:hover .nav-dropdown-content {
+  display: block;
+}
 
 
 
@@ -160,4 +180,34 @@ main{
     font-size: 2em;
     margin-bottom: 10px;
     font-family: 'Montserrat', sans-serif;
+}
+.sobre-nosotros {
+    text-align: center;
+    margin: 40px 0;
+}
+.sobre-nosotros h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+.sobre-nosotros p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+.btn.btn-primary.stretched-link {
+    position: relative;
+    z-index: 1;
+    bottom: 10px;
+    color: white;
+    background-color: pink;
+}
+.btn.btn-secondary {
+    color: black;
+    background-color: #fff;
+    text-align: center;
+    margin: 40px 0;
 }
