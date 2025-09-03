@@ -98,62 +98,6 @@ footer {
 .nav-dropdown:hover .nav-dropdown-content {
   display: block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*apartado de index de la pagina*/
 .carousel-item img {
     height: 400px;
@@ -210,4 +154,11 @@ main{
     background-color: #fff;
     text-align: center;
     margin: 40px 0;
+}
+/*Apartados de la vista de productos destacados*/
+.container.text-center.my-4 {
+    background-color: rgb(255, 228, 240);
+    border: 1px solid #333;
+    border-radius: 0;
+    width: 100%;
 }
