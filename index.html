@@ -1,40 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pasteleria 1000 sabores</title>
-
-    <!--conexion a nuestro provedor de boostrap js-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
+    <title>Pastelería Mil Sabores</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-    <header>
-        <nav>
-            <a href="#">Inicio</a>
-            <a href="#">---</a>
-            <a href="#">----</a>
-        </nav>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+            <p class="slogan">¡El sabor que endulza tu vida!</p>
+            <nav class="nav">
+                <a href="#inicio" class="nav-btn">Inicio</a>
+                <a href="#productos" class="nav-btn">Productos</a>
+                <a href="#contacto" class="nav-btn">Contacto</a>
+            </nav>
+        </div>
     </header>
 
+    <!-- Sección de bienvenida -->
+    <section id="inicio" class="bienvenida">
+        <h2>Bienvenidos a Pastelería Mil Sabores</h2>
+        <p>Descubre la mejor variedad de pasteles, postres y dulces artesanales. ¡Déjate tentar por nuestros sabores únicos y vive una experiencia deliciosa!</p>
+    </section>
 
-
-
-
-
-    <main>
-        <h1>Pasteleria 1000 sabores</h1>
-    </main>
-
-    <footer>
-        <p>Pasteleria 1000 sabores</p>
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Contacto: pasteleria@milsabores.com | Tel: 555-123-4567</p>
+            <p>&copy; 2025 Pastelería Mil Sabores. Todos los derechos reservados.</p>
+        </div>
     </footer>
-    <!--conexion a nuestro provedor de boostrap js-->
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous">
-    </script>   
+    </script>
 </body>
 </html>
