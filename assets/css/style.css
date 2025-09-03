@@ -69,3 +69,95 @@ footer {
 main {
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*apartado de index de la pagina*/
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+.pastel {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+main{
+    padding: 20px;
+    position: center;
+}
+.Destacados {
+    text-align: center;
+    margin: 20px 0;
+}
+.Destacados h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
