@@ -9,10 +9,24 @@ header {
     box-shadow:  0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+h1, h2, h3 {
+  font-family: 'Pacifico', cursive;
+}
+
 .header-content {
     display: flex;
     align-items: center;
     gap: 30px;
+}
+
+body {
+    background: #FFF5E1;
+    color: #5D4037;
+    font-family: 'Lato', sans-serif;
+}
+
+header, footer {
+  background-color: #FFC0CB; /* rosa suave */
 }
 
 .logo {
@@ -33,31 +47,31 @@ header {
 }
 
 .nav-btn {
-    background: #A1887F;
+    background: #8B4513;
     color: #fff;
     padding: 8px 16px;
+    border: 2px solid #000; 
     border-radius: 20px;
     text-decoration: none;
     font-weight: bold;
-    transition: background 0.2s;
+    transition: background 0.3s, color 0.3s;
 }
+
 .nav-btn:hover {
-    background: #BCAAA4;
-    color: #6D4C41;
+    background: #FFC0CB;
+    color: #5D4037
 }
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+
 main, .bienvenida {
     flex: 1;
 }
+
 footer {
     text-align: center;
     background: #FFC0CB;
@@ -66,6 +80,7 @@ footer {
     width: 100%;
     margin-top: auto;
 }
+
 /*ocultar lo demas del header del menu */
 .nav {
   display: flex;
@@ -161,4 +176,18 @@ main{
     border: 1px solid #333;
     border-radius: 0;
     width: 100%;
+}
+
+/* Redefinir el estilo de los botones principales */
+.btn-primary {
+  background-color: #8B4513 !important; /* Chocolate */
+  border: none !important;
+  color: #fff !important;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #FFC0CB !important; /* Rosa suave */
+  color: #5D4037 !important; /* Marrón oscuro */
 }
