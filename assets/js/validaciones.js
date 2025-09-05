@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('form-registro');
     const mensaje = document.getElementById('mensaje-descuento');
@@ -43,24 +42,3 @@ document.addEventListener('DOMContentLoaded', function () {
         // form.reset();
     });
 });
-=======
-/// configuracion del carrito de compras
-const listProd = document.getElementById("listProd");
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    eventListeners();
-});
-
-function eventListeners() {
-    listProd.addEventListener("click",getDataElement);
-}
-
-function getDataElement(eve){
-    if (eve.target.classList.contains("btn-add")) {
-        console.log(eve.target.parentElement);
-    }
-}
->>>>>>> Stashed changes

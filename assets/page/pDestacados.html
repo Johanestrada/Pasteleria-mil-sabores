@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!--Nuestra hoja de estilos-->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!--Nuestros modelos de boostrap-->
+    <!--Conexion a nuestra querisima hoja de estilos-->
+    <link rel="stylesheet" href="../css/style.css">
+    <!--Conexion a nuestra querisimo boostrap-->
     <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-    crossorigin="anonymous"
-     />
-</head>
+    crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    </head>
 <body>
-    <!--Encabezado de la pagina-->
     <header>
       <div class="header-content">
-        <a href="index.html">
-          <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
-        </a>
+        <div>
+            <a href="assets/index.html">
+                <img src="../img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+            </a>
+        </div>    
         <p class="slogan">¡El sabor que endulza tu vida!</p>
         <nav class="nav">
           <a href="#inicio" class="nav-btn">Inicio</a>
@@ -28,10 +29,10 @@
           <a href="#contacto" class="nav-btn">Contacto</a>
           <!-- Menú desplegable -->
           <div class="nav-dropdown">
-            <button class="nav-btn">Mi Cuenta</button>
+            <button class="nav-btn">Cuenta</button>
             <div class="nav-dropdown-content">
               <a href="#">Iniciar Sesión</a>
-              <a href="#">Registrarse</a>
+              <a href="../page/registro.html">Registrarse</a>
             </div>
           </div>
           <div class="nav-dropdown">
@@ -44,19 +45,161 @@
         </nav>
       </div>
     </header>
-    <div class="container text-center my-4">
-        <h1> Productos Destacados</h1>
+    <!--Titulo de la categoria-->
+    <div class="container-fluid">
+        <h2 class="text-center my-4">Productos Destacados</h2>
     </div>
-
-    <!--Pie de la pagina-->
+    <!--Contenido principal de la paginita-->
+    <main>
+        <section class="productos" id="listProd">
+            <!--Aplicar el filtro para los productos destacados-->
+            <div class="container my-4">
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/pastelchocolate.jpg" class="card-img-top" alt="Pastel 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Pastel de Chocolate</h5>
+                                <p class="card-text">Delicioso pastel de chocolate con relleno cremoso, ideal para cualquier ocasión.</p>
+                                <a href="#" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/pastel_frutas.jpg" class="card-img-top" alt="Pastel 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Pastel de Frutas</h5>
+                                <p class="card-text">Fresco y colorido, con frutas de temporada y un toque especial de la casa.</p>
+                                <a href="#" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/futbol.jpg" class="card-img-top" alt="Pastel 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Cupcakes</h5>
+                                <p class="card-text">Mini pasteles decorados con crema y toppings, perfectos para compartir.</p>
+                                <a href="#" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/pastelpzl.jpg" class="card-img-top" alt="Pastel 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tartas Personalizadas</h5>
+                                <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/cookis.jpg" class="card-img-top" alt="Pastel 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tartas Personalizadas</h5>
+                                <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/pastelBlanco.jpg" class="card-img-top" alt="Pastel 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tartas Personalizadas</h5>
+                                <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/cars.jpg" class="card-img-top" alt="Pastel 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tartas Personalizadas</h5>
+                                <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/pelota-h040.jpg" class="card-img-top" alt="Pastel 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tartas Personalizadas</h5>
+                                <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="../img/nube.jpg" class="card-img-top" alt="Pastel 4">
+                            <div class="card-body">
+                                <h5 class="card-title">Tartas Personalizadas</h5>
+                                <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
     <footer class="footer">
-        <div class="footer-content">
-            <p>Contacto: pasteleria@milsabores.com | Tel: 555-123-4567</p>
-            <p>&copy; 2025 Pastselería Mil Sabores. Todos los derechos reservados.</p>
+        <div class="footer-flex">
+            <div>
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+            </div>
+            <div class="informacion">
+            <h3>Información</h3>
+            <ul>
+                <li><a href="#">Teléfono: +569 27905271</a></li>
+                <li><a href="#">Avenida Concha y Toro, San Carlos 1340, Puente Alto</a></li>
+                <li><a href="#">Correo: pasteleria100sabores@milsabores.cl</a></li>
+                <li><a href="#">Horario: Lun–Vie 09:00–16:30, Sáb–Dom 08:00–20:00</a></li>
+            </ul>
+            </div>
+            <div class="productos">
+            <h3>Productos</h3>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Carrito</a></li>
+                <li><a href="#">Login/Registro</a></li>
+            </ul>
+            </div>
+            <div class="rd">
+                <h3>Redes Sociales</h3>
+                <ul class="social-icons">
+                    <div>
+                        <a href="#wha">
+                    </div>
+                    <li><a href="#"><img src="assets/img/instagram.png" alt="Instagram" class="social-icon"></a></li>
+                    <li><a href="#"><img src="assets/img/twitter.png" alt="Twitter" class="social-icon"></a></li>
+                    <li><a href="#"><img src="assets/img/whatsapp.png" alt="WhatsApp" class="social-icon"></a></li>
+            </div>
+            
         </div>
     </footer>
 
-    <!--Segunda parte de boostrap-->
+
+
+
+
+
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous">

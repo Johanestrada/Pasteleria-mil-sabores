@@ -129,7 +129,7 @@ footer {
 }
 main{
     padding: 20px;
-    position: center;
+    position: relative;
 }
 .Destacados {
     text-align: center;
@@ -175,9 +175,8 @@ main{
     background-color: rgb(255, 228, 240);
     border: 1px solid #333;
     border-radius: 0;
-    width: 100%;
+    padding: 1rem;
 }
-<<<<<<< Updated upstream
 
 /* Redefinir el estilo de los botones principales */
 .btn-primary {
@@ -192,21 +191,77 @@ main{
   background-color: #FFC0CB !important; /* Rosa suave */
   color: #5D4037 !important; /* Marrón oscuro */
 }
-=======
-/*Detalles Producto*/
-section.s{
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff0f5;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+
+.container-fluid{
+    background-color: rgb(255, 228, 240);
+    border: 1px solid;
+    width: 100%;
+    padding: 0%;
+    margin: 0;
 }
-.imgPro {
-    height: auto;
-    max-width: 400px;
-    margin: 0 auto 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/*Confección del footer*/
+.footer {
+  background-color: #FFC0CB; /* rosa suave */
+  color: #5D4037; /* marrón pastel */
+  padding: 2rem 1rem;
+  font-family: 'Lato', sans-serif;
 }
->>>>>>> Stashed changes
+
+/* Contenedor que alinea las dos secciones */
+.footer-flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: nowrap; /* evita que se apilen */
+}
+
+/* Sección de información */
+.informacion {
+  flex: 0 0 300px; /* ancho fijo pero flexible */
+  padding: 1rem;
+}
+
+/* Sección de productos */
+.productos {
+  flex: 0 0 300px; /* mismo ancho que información */
+  padding: 1rem;
+}
+
+/* Títulos */
+.informacion h3,
+.productos h3,rd h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-family: 'Pacifico', cursive;
+  color: #6b4c3b;
+}
+
+/* Listas */
+.informacion ul,
+.productos ul ,
+rd ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.informacion ul li,
+.productos ul li , rd ul li {
+  margin-bottom: 0.5rem;
+}
+
+.informacion ul li a,
+.productos ul li a, 
+rd ul li a {
+  color: #6b4c3b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.informacion ul li a:hover,
+.productos ul li a:hover, rd ul li a:hover {
+  color: #d2691e;
+  text-decoration: underline;
+}

@@ -8,26 +8,22 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Bootstrap CSS -->
     <link
-<<<<<<< Updated upstream
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
     crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
-=======
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-        crossorigin="anonymous"
-    />
->>>>>>> Stashed changes
+
 </head>
 
 <body>
     <header>
-<<<<<<< Updated upstream
       <div class="header-content">
-        <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+        <div>
+            <a href="index.html">
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+            </a>
+        </div>
         <p class="slogan">¡El sabor que endulza tu vida!</p>
         <nav class="nav">
           <a href="#inicio" class="nav-btn">Inicio</a>
@@ -38,7 +34,7 @@
             <button class="nav-btn">Cuenta</button>
             <div class="nav-dropdown-content">
               <a href="#">Iniciar Sesión</a>
-              <a href="registro.html">Registrarse</a>
+              <a href="../page/registro.html">Registrarse</a>
             </div>
           </div>
           <div class="nav-dropdown">
@@ -50,34 +46,6 @@
           </div>
         </nav>
       </div>
-=======
-        <div class="header-content">
-            <a href="index.html">
-                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
-            </a>
-            <p class="slogan">¡El sabor que endulza tu vida!</p>
-            <nav class="nav">
-                <a href="#inicio" class="nav-btn">Inicio</a>
-                <a href="#productos" class="nav-btn">Productos</a>
-                <a href="#contacto" class="nav-btn">Contacto</a>
-                <!-- Menú desplegable -->
-                <div class="nav-dropdown">
-                    <button class="nav-btn">Mi Cuenta</button>
-                    <div class="nav-dropdown-content">
-                        <a href="#">Iniciar Sesión</a>
-                        <a href="#">Registrarse</a>
-                    </div>
-                </div>
-                <div class="nav-dropdown">
-                    <button class="nav-btn">Carrito</button>
-                    <div class="nav-dropdown-content">
-                        <a href="#">Ver Carrito</a>
-                        <a href="#">Ir A Pagar</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
->>>>>>> Stashed changes
     </header>
 
     <div id="carouselExampleIndicators" class="carousel slide">
@@ -165,12 +133,12 @@
                             <div class="card-body">
                                 <h5 class="card-title">Tartas Personalizadas</h5>
                                 <p class="card-text">Diseña tu propia tarta para cumpleaños, eventos o celebraciones especiales.</p>
-                                <a href="p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                                <a href="assets/page/p1.html" class="btn btn-primary stretched-link">Ver Detalle</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a href="pDestacados.html" class="btn btn-secondary">Ver Más Productos</a>
+                <a href="assets/page/pDestacados.html" class="btn btn-secondary">Ver Más Productos</a>
             </div>
         </section>
         <section>
@@ -194,12 +162,43 @@
     </main>
     <!-- Pie de página -->
     <footer class="footer">
-        <div class="footer-content">
-            <p>Contacto: pasteleria@milsabores.com | Tel: 555-123-4567</p>
-            <p>&copy; 2025 Pastselería Mil Sabores. Todos los derechos reservados.</p>
+        <div class="footer-flex">
+            <div>
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+            </div>
+            <div class="informacion">
+            <h3>Información</h3>
+            <ul>
+                <li><a href="#">Teléfono: +569 27905271</a></li>
+                <li><a href="#">Avenida Concha y Toro, San Carlos 1340, Puente Alto</a></li>
+                <li><a href="#">Correo: pasteleria100sabores@milsabores.cl</a></li>
+                <li><a href="#">Horario: Lun–Vie 09:00–16:30, Sáb–Dom 08:00–20:00</a></li>
+            </ul>
+            </div>
+            <div class="productos">
+            <h3>Productos</h3>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Carrito</a></li>
+                <li><a href="#">Login/Registro</a></li>
+            </ul>
+            </div>
+            <div class="rd">
+                <h3>Redes Sociales</h3>
+                <ul class="social-icons">
+                    <div>
+                        <a href="#wha">
+                    </div>
+                    <li><a href="#"><img src="assets/img/instagram.png" alt="Instagram" class="social-icon"></a></li>
+                    <li><a href="#"><img src="assets/img/twitter.png" alt="Twitter" class="social-icon"></a></li>
+                    <li><a href="#"><img src="assets/img/whatsapp.png" alt="WhatsApp" class="social-icon"></a></li>
+            </div>
+            
         </div>
     </footer>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
