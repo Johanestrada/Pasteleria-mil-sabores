@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mensaje = document.getElementById('mensaje-login');
 
     // Datos del admin
-    const adminEmail = "admin@midominio.cl";
+    const adminEmail = "admin@duocuc.cl";
     const adminPassword = "admin123";
 
     form.addEventListener('submit', function (e) {
