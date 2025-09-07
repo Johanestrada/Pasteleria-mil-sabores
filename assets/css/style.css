@@ -30,15 +30,21 @@ header, footer {
 }
 
 .logo {
-    width: 80px;
+    max-width: 80px;
     height: auto;
-    margin-right: 20px;
-    display: block;
 }
 
 .slogan {
-    flex: 1;
-    font-size: 1.2em;
+  font-size: 1.05rem;
+  margin: 0;
+  color: #5D4037;
+  font-weight: 600;
+}
+
+nav.d-flex { justify-content: center;
+}
+@media (min-width: 768px) {
+  nav.d-flex { justify-content: flex-end; }
 }
 
 .nav {
@@ -49,11 +55,11 @@ header, footer {
 .nav-btn {
     background: #8B4513;
     color: #fff;
-    padding: 8px 16px;
+    padding: .35rem .9rem;
     border: 2px solid #000; 
     border-radius: 20px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
     transition: background 0.3s, color 0.3s;
 }
 
@@ -115,11 +121,15 @@ footer {
 }
 /*apartado de index de la pagina*/
 .carousel-item img {
-    height: 400px;
+    height: 60vh;        /* ocupa 60% altura de la ventana, se adapta */
     object-fit: cover;
-    object-position: center;
-    border-radius: 10px;
 }
+
+@media (max-width: 576px) {
+  .carousel-item img { height: 40vh; } /* menos altura en móviles */
+  .pastel h1 { font-size: 1.2rem; padding: 0.25rem 0.5rem; }
+}
+
 .pastel {
     position: absolute;
     bottom: 20px;
@@ -212,10 +222,9 @@ main{
 /* Contenedor que alinea las dos secciones */
 .footer-flex {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 2rem;
-  flex-wrap: nowrap; /* evita que se apilen */
+  align-items: flex-start;
 }
 
 /* Sección de información */
