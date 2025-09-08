@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Cake</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <!--Conexion a nuestra querisima hoja de estilos-->
+    <!--Conexion a nuestra querisimo boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <a href="../../index.html">
+                    <img src="../img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+                </a>
+            </div>
+            <p class="slogan">¡El sabor que endulza tu vida!</p>
+            <nav class="nav">
+                <a href="../../index.html" class="nav-btn">Inicio</a>
+                <a href="../page/pDestacados.html" class="nav-btn">Productos</a>
+                <a href="#contacto" class="nav-btn">Contacto</a>
+                <!-- Menú desplegable -->
+                <div class="nav-dropdown">
+                    <button class="nav-btn">Cuenta</button>
+                    <div class="nav-dropdown-content">
+                        <a href="../page/login.html">Iniciar Sesión</a>
+                        <a href="../page/registro.html">Registrarse</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-btn">Carrito</button>
+                    <div class="nav-dropdown-content">
+                        <a href="#">Ver Carrito</a>
+                        <a href="#">Finalizar Compra</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--Contenido principal de la pagina-->
+    <main>
+        <section>
+            <!-- Sobre nosotros -->
+            <div class="Destacados">
+                <h1>Pastel Chocolate</h1>
+            </div>
+            <div class="container my-4">
+                <div class="row">
+                    <div class="col-md-6 tex">
+                        <span class="precio">$12.500</span>
+                        <p>Un clásico irresistible que combina suavidad, intensidad y dulzura en cada bocado. 
+                            Este pastel está elaborado con cacao puro de alta calidad, lo que le da 
+                            un sabor profundo y envolvente.
+                        </p>
+                        <div class="input-group" style="width:140px;">
+                            <label class="input-group-text" for="cantidad">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" max="99" value="1">
+                        </div>
+                        <!--Detalle profundo del producto-->
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Fechas de entrega
+                                </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    Ofrecemos retiro en tienda y entregas a domicilio dentro de la Región Metropolitana. Los pedidos deben 
+                                    realizarse con al menos 24 horas de anticipación. Para el retiro, se debe presentar el comprobante de compra.
+                                    Las entregas se realizan entre las 10:00 y 18:00 hrs
+                                    <label for="fecha">Selecciona una fecha:</label>
+                                    <input type="date" id="fecha" name="fecha">
+                                </div>
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    Ingredientes
+                                </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <p>-Harina</p>
+                                    <br>
+                                    <p>-Azucar</p>
+                                    <br>
+                                    <p>-Huevos</p>
+                                    <br>
+                                    <p>-Chocolate</p>
+                                    <br>
+                                    <p>-Vainilla</p>
+                                    <br>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <img src="../img/pastelchocolate.jpg" alt="Sobre Nosotros" class="img-nosotros">
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+    <footer class="footer py-4 bg-pink">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
+                    <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Información</h3>
+                    <ul class="list-unstyled">
+                        <li>Teléfono: +569 27905271</li>
+                        <li>Avenida Concha y Toro...</li>
+                        <li>Correo: pasteleria100...@milsabores.cl</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Productos</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Productos</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Redes</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><img src="assets/img/instagram.png" alt="IG" style="max-width:28px;"></a></li>
+                        <li><a href="#"><img src="assets/img/whatsapp.png" alt="WA" style="max-width:28px;"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Segunda parte de nuestro boostrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+        </script>
+    
+</body>
+</html>
