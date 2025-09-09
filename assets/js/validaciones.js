@@ -47,19 +47,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Validaciones básicas
         if (password !== confirmPassword) {
-            errores.push("⚠️ Las contraseñas no coinciden.");
+            errores.push("Las contraseñas no coinciden.");
         }
 
         if (!region) {
-            errores.push("⚠️ Debes seleccionar una región.");
+            errores.push("Debes seleccionar una región.");
         }
 
         if (!comuna) {
-            errores.push("⚠️ Debes seleccionar una comuna.");
+            errores.push("Debes seleccionar una comuna.");
         }
 
         if (!fechaNacimiento) {
-            errores.push("⚠️ Debes ingresar tu fecha de nacimiento.");
+            errores.push("Debes ingresar tu fecha de nacimiento.");
         }
 
         // Validación de descuentos/promociones
@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Redireccionamos
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('form-login');
     const mensaje = document.getElementById('mensaje-login');
