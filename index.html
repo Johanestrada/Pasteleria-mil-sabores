@@ -12,52 +12,37 @@
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
     <!--CSS personalizado-->
     <link rel="stylesheet" href="assets/css/style.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
 
 </head>
 
 <body>
-    <header class="py-2 bg-pink">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Logo -->
-                <div class="col-12 col-md-2 text-center text-md-start mb-2 mb-md-0">
-                    <a href="index.html">
-                        <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid"
-                            style="max-width:80px;">
-                    </a>
+    <header>
+        <div class="header-content">
+            <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
+            <p class="slogan">¡El sabor que endulza tu vida!</p>
+            <nav class="nav">
+                <a href="index.html" class="nav-btn">Inicio</a>
+                <a href="assets/page/pDestacados.html" class="nav-btn">Productos</a>
+                <a href="assets/page/contacto.html" class="nav-btn">Contacto</a>
+                <!-- Menú desplegable -->
+                <div class="nav-dropdown">
+                    <button class="nav-btn">Cuenta</button>
+                    <div class="nav-dropdown-content">
+                        <a href="assets/page/login.html">Iniciar Sesión</a>
+                        <a href="assets/page/registro.html">Registrarse</a>
+                    </div>
                 </div>
-
-                <!-- Slogan -->
-                <div class="col-12 col-md-4 text-center text-md-start mb-2 mb-md-0">
-                    <p class="slogan mb-0">¡El sabor que endulza tu vida!</p>
+                <div class="nav-dropdown">
+                    <button class="nav-btn">Carrito</button>
+                    <div class="nav-dropdown-content">
+                        <a href="carrito.html">Ver Carrito</a>
+                        <a href="#">Finalizar Compra</a>
+                    </div>
                 </div>
-
-                <!-- Navegación -->
-                <div class="col-12 col-md-6">
-                    <nav class="d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
-                        <a href="#inicio" class="nav-btn btn btn-sm">Inicio</a>
-                        <a href="assets/page/pDestacados.html" class="nav-btn btn btn-sm">Productos</a>
-                        <a href="assets/page/contacto.html" class="nav-btn btn btn-sm">Contacto</a>
-
-                        <div class="dropdown">
-                            <button class="nav-btn btn btn-sm dropdown-toggle" data-bs-toggle="dropdown">Cuenta</button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="assets/page/login.html">Iniciar Sesión</a></li>
-                                <li><a class="dropdown-item" href="assets/page/registro.html">Registrarse</a></li>
-                            </ul>
-                        </div>
-                        <div class="dropdown">
-                            <button class="nav-btn btn btn-sm dropdown-toggle"
-                                data-bs-toggle="dropdown">Carrito</button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Ver Carrito</a></li>
-                                <li><a class="dropdown-item" href="#">Finalizar Compra</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
+            </nav>
         </div>
     </header>
 
@@ -75,20 +60,20 @@
                 <img src="assets/img/umesh-soni-LDnmyOaA-ew-unsplash.jpg" class="d-block w-100"
                     alt="Cristiano Ronaldo haciendo ejercicio">
                 <div class="pastel">
-                    <h1>Promocion Especial</h1>
+                    <h1>Tortas</h1>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="assets/img/patryk-sikora-D3_u5E6E2Hg-unsplash.jpg" class="d-block w-100"
                     alt="Juguetes Funko Pop">
                 <div class="pastel">
-                    <h1>Tortas</h1>
+                    <h1>Tortas especiales</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="assets/img/swapnil-dwivedi-Nl8Oa6ZuNcA-unsplash.jpg" class="d-block w-100" alt="Ropa usada">
+                <img src="assets/img/Empanadas.jpg" class="d-block w-100" alt="Ropa usada">
                 <div class="pastel">
-                    <h1>Mas tortas</h1>
+                    <h1>cócteles</h1>
                 </div>
             </div>
         </div>
@@ -121,7 +106,8 @@
                                 <h5 class="card-title">Pastel de Chocolate</h5>
                                 <p class="card-text">Delicioso pastel de chocolate con relleno cremoso, ideal para
                                     cualquier ocasión.</p>
-                                <a href="assets/page/PastelChocolate.html" class="btn btn-primary stretched-link">Ver Detalle</a>
+                                <a href="assets/page/PastelChocolate.html" class="btn btn-primary stretched-link">Ver
+                                    Detalle</a>
                             </div>
                         </div>
                     </div>
@@ -219,7 +205,7 @@
                 </div>
             </div>
         </section>
-        
+
 
     </main>
     <!-- Pie de página -->
@@ -247,8 +233,14 @@
                 <div class="col-12 col-md-3">
                     <h3>Redes</h3>
                     <ul class="list-unstyled">
-                        <li><a href="#"><img src="assets/img/instagram.png" alt="IG" style="max-width:28px;"></a></li>
-                        <li><a href="#"><img src="assets/img/whatsapp.png" alt="WA" style="max-width:28px;"></a></li>
+                        <li>
+                            <a href="#">
+                                <i class="bi bi-instagram" style="font-size: 28px; color: #5D4037;"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="bi bi-whatsapp" style="font-size: 28px; color: #5D4037;"></i>
+                        </li>
                     </ul>
                 </div>
             </div>
