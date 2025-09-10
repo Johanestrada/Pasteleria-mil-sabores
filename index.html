@@ -26,6 +26,7 @@
                 <a href="index.html" class="nav-link text-dark">Inicio</a>
                 <a href="assets/page/Productos.html" class="nav-link text-dark">Producto</a>
                 <a href="assets/page/contacto.html" class="nav-link text-dark">Contacto</a>
+                <a href="assets/page/noticias.html" class="nav-link text-dark">Noticias</a>
             </nav>
             <div class="nav-dropdown">
                     <a href="#" class="nav-link text-dark">Cuenta ▾</a>
@@ -38,7 +39,7 @@
             <div class="nav-dropdown">
                     <a href="#" class="nav-link text-dark">Carrito ▾</a>
                     <div class="nav-dropdown-content">
-                        <a href="#">Ver Carrito</a>
+                        <a href="assets/page/carrito.html">Ver Carrito</a>
                         <a href="#">Modificar Carrito</a>
                     </div>
             </div>
@@ -46,7 +47,7 @@
             <div class="d-flex align-items-center">
         
             <div class="d-none d-md-block">
-                <input type="text" class="form-control form-control-sm" placeholder="Search...">
+                <input type="text" class="form-control form-control-sm" placeholder="Buscar">
                 </div>
                 <a href="#" class="btn text-dark d-none d-md-block">
                 <i class="ri-login-circle-line"></i>
@@ -191,32 +192,35 @@
                 <a href="assets/page/nosotros.html" class="btn btn-primary stretched-link">Ver más</a>
             </div>
         </section>
-        <section>
-            <div class="container-fluid">
-                <h2 class="text-center my-4">Organizate con nosotros</h2>
-            </div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <!-- Opción 1 -->
-                    <div class="col-md-3 mb-4 text-center">
-                        <a href="assets/page/ubicacion.html">
-                            <img src="assets/img/1067602.png" class="card-img-top" alt="Pastel 2">
-
-                            <p>Tiendas</p>
-                        </a>
-                    </div>
-                    <!-- Opción 2 -->
-                    <div class="col-md-3 mb-4 text-center">
-                        <a href="assets/page/contacto.html">
-                            <img src="assets/img/16603.png" class="card-img-top" alt="Pastel 2">
-
-                            <p>Contactos</p>
-                        </a>
-                    </div>
-                    <!-- Puedes agregar más opciones aquí repitiendo el div.col-md-3 -->
-                </div>
-            </div>
-        </section>
+        <section class="organizacion py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Organízate con nosotros</h2>
+    <div class="row justify-content-center">
+      <!-- Opción 1 -->
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-center shadow-sm h-100 border-0">
+          <div class="card-body">
+            <img src="assets/img/1067602.png" alt="Tiendas" class="icono-opcion mb-3">
+            <h5 class="card-title">Tiendas</h5>
+            <p class="card-text">Encuentra nuestras sucursales cercanas y ven a visitarnos.</p>
+            <a href="assets/page/ubicacion.html" class="btn btn-primary">Ver Tiendas</a>
+          </div>
+        </div>
+      </div>
+      <!-- Opción 2 -->
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card text-center shadow-sm h-100 border-0">
+          <div class="card-body">
+            <img src="assets/img/16603.png" alt="Contacto" class="icono-opcion mb-3">
+            <h5 class="card-title">Contáctanos</h5>
+            <p class="card-text">¿Dudas o pedidos especiales? Escríbenos aquí.</p>
+            <a href="assets/page/contacto.html" class="btn btn-primary">Ir a Contacto</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
     </main>

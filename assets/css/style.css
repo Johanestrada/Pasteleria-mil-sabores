@@ -29,14 +29,20 @@
 /* ==============================
    ESTILOS BASE
 =================================*/
+body {
+  background-color: var(--crema-pastel);
+  font-family: 'Lato', sans-serif;
+}
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif !important;
+  display: flex;
+  flex-direction: column;
   background: #FFF5E1; /* Fondo pastel */
-  color: #5D4037;      /* Marrón suave */
+  font-family: 'Lato', sans-serif !important;
+  color: #5D4037;
 }
 
 /* Títulos principales */
@@ -65,6 +71,14 @@ h1, h2, h3 {
 .logo {
   max-width: 80px;
   height: auto;
+}
+
+main {
+  flex: 1; /* ocupa todo el espacio disponible */
+}
+
+main, section.noticias {
+  background: #FFF5E1;
 }
 
 .slogan {
@@ -196,6 +210,17 @@ footer, .footer {
    VISTA: INDEX
 =================================*/
 
+
+.organizacion {
+  background-color: #FFF5E1; /* mismo tono pastel del body */
+}
+
+.icono-opcion {
+  border-radius: 50px;
+  height: 80px;
+  object-fit: contain;
+}
+
 .carousel-item img {
   height: 60vh;
   object-fit: cover;
@@ -228,7 +253,7 @@ footer, .footer {
 .Destacados h1 {
   font-size: 2em;
   margin-bottom: 10px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Pacifico', sans-serif;
 }
 
 .sobre-nosotros {
