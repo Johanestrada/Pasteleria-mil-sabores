@@ -1,3 +1,29 @@
+/* Lato Regular */
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Lato Bold */
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Pacifico */
+@font-face {
+    font-family: 'Pacifico';
+    src: url('../fonts/Pacifico-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
 header {
   background: #FFC0CB;
   color: black;
@@ -18,7 +44,7 @@ h3 {
 
 /* Para todo el texto */
 body {
-  font-family: 'Lato', sans-serif !important;
+  font-family: 'Lato', sans-serif;
 }
 
 
@@ -46,6 +72,7 @@ footer {
 }
 
 .slogan {
+  font-family: 'Pacifico', cursive;
   font-size: 1.05rem;
   margin: 0;
   color: #5D4037;
@@ -227,6 +254,7 @@ main {
   border: 1px solid #333;
   border-radius: 0;
   padding: 1rem;
+  
 }
 
 
@@ -248,8 +276,6 @@ main {
 }
 
 .container-fluid {
-  background-color: rgb(255, 228, 240);
-  border: 1px solid;
   width: 100%;
   padding: 0%;
   margin: 0;

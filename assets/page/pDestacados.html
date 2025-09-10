@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productoss destacados</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
-        rel="stylesheet">
     <!--Conexion a nuestra querisima hoja de estilos-->
     <!--Conexion a nuestra querisimo boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -27,14 +27,14 @@
             <p class="slogan">¡El sabor que endulza tu vida!</p>
             <nav class="nav">
                 <a href="../../index.html" class="nav-btn">Inicio</a>
-                <a href="../page/pDestacados.html" class="nav-btn">Productos</a>
-                <a href="#contacto" class="nav-btn">Contacto</a>
+                <a href="pDestacados.html" class="nav-btn">Productos</a>
+                <a href="contacto.html" class="nav-btn">Contacto</a>
                 <!-- Menú desplegable -->
                 <div class="nav-dropdown">
                     <button class="nav-btn">Cuenta</button>
                     <div class="nav-dropdown-content">
-                        <a href="../page/login.html">Iniciar Sesión</a>
-                        <a href="../page/registro.html">Registrarse</a>
+                        <a href="login.html">Iniciar Sesión</a>
+                        <a href="registro.html">Registrarse</a>
                     </div>
                 </div>
                 <div class="nav-dropdown">
@@ -180,7 +180,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
-                    <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+                    <img src="../img/Logo_Pasteleria_mil.png " alt="Logo" class="img-fluid" style="max-width:80px;">
                 </div>
                 <div class="col-12 col-md-3">
                     <h3>Información</h3>
@@ -200,8 +200,14 @@
                 <div class="col-12 col-md-3">
                     <h3>Redes</h3>
                     <ul class="list-unstyled">
-                        <li><a href="#"><img src="assets/img/instagram.png" alt="IG" style="max-width:28px;"></a></li>
-                        <li><a href="#"><img src="assets/img/whatsapp.png" alt="WA" style="max-width:28px;"></a></li>
+                        <li>
+                            <a href="#">
+                                <i class="bi bi-instagram" style="font-size: 28px; color: #5D4037;"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="bi bi-whatsapp" style="font-size: 28px; color: #5D4037;"></i>
+                        </li>
                     </ul>
                 </div>
             </div>
