@@ -13,78 +13,96 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo Pastelería Mil Sabores" class="logo">
-            <p class="slogan">¡El sabor que endulza tu vida!</p>
-            <nav class="nav">
-                <a href="index.html" class="nav-btn">Inicio</a>
-                <a href="assets/page/pDestacados.html" class="nav-btn">Productos</a>
-                <a href="assets/page/contacto.html" class="nav-btn">Contacto</a>
-                <!-- Menú desplegable -->
-                <div class="nav-dropdown">
-                    <button class="nav-btn">Cuenta</button>
-                    <div class="nav-dropdown-content">
-                        <a href="assets/page/login.html">Iniciar Sesión</a>
-                        <a href="assets/page/registro.html">Registrarse</a>
-                    </div>
-                </div>
-                <div class="nav-dropdown">
-                    <button class="nav-btn">Carrito</button>
-                    <div class="nav-dropdown-content">
-                        <a href="carrito.html">Ver Carrito</a>
-                        <a href="#">Finalizar Compra</a>
-                    </div>
-                </div>
+    <header class="header-custom  shadow-sm py-2">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="logo me-2">
+            </div>
+
+            <!-- Menú -->
+            <nav class="d-none d-md-flex gap-3">
+                <a href="index.html" class="nav-link text-dark">Inicio</a>
+                <a href="assets/page/Productos.html" class="nav-link text-dark">Producto</a>
+                <a href="assets/page/contacto.html" class="nav-link text-dark">Contacto</a>
             </nav>
+            <div class="nav-dropdown">
+                    <a href="#" class="nav-link text-dark">Cuenta ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="assets/page/login.html">Perfil</a>
+                        <a href="assets/page/registro.html">Registrarse</a>
+                        
+                    </div>
+            </div>
+            <div class="nav-dropdown">
+                    <a href="#" class="nav-link text-dark">Carrito ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="#">Ver Carrito</a>
+                        <a href="#">Modificar Carrito</a>
+                    </div>
+            </div>
+            <!--Seach-->
+            <div class="d-flex align-items-center">
+        
+            <div class="d-none d-md-block">
+                <input type="text" class="form-control form-control-sm" placeholder="Search...">
+                </div>
+                <a href="#" class="btn text-dark d-none d-md-block">
+                <i class="ri-login-circle-line"></i>
+                </a>
+                <a href="#" class="btn text-dark d-none d-md-block">
+                <i class="ri-shopping-cart-2-line"></i>
+                </a>
+            </div>
         </div>
     </header>
-
-    <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="assets/img/umesh-soni-LDnmyOaA-ew-unsplash.jpg" class="d-block w-100"
-                    alt="Cristiano Ronaldo haciendo ejercicio">
-                <div class="pastel">
-                    <h1>Tortas</h1>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="assets/img/patryk-sikora-D3_u5E6E2Hg-unsplash.jpg" class="d-block w-100"
-                    alt="Juguetes Funko Pop">
-                <div class="pastel">
-                    <h1>Tortas especiales</h1>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="assets/img/Empanadas.jpg" class="d-block w-100" alt="Ropa usada">
-                <div class="pastel">
-                    <h1>cócteles</h1>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-        </button>
-    </div>
-
     <!-- Contenido principal de la pagina -->
     <main>
+        <section>
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/img/umesh-soni-LDnmyOaA-ew-unsplash.jpg" class="d-block w-100"
+                            alt="Cristiano Ronaldo haciendo ejercicio">
+                        <div class="pastel">
+                            <h1>Tortas</h1>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/patryk-sikora-D3_u5E6E2Hg-unsplash.jpg" class="d-block w-100"
+                            alt="Juguetes Funko Pop">
+                        <div class="pastel">
+                            <h1>Tortas especiales</h1>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/Empanadas.jpg" class="d-block w-100" alt="Ropa usada">
+                        <div class="pastel">
+                            <h1>cócteles</h1>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </section>
         <section class="productos" id="listProd">
             <!-- Productos destacados -->
             <div class="Destacados">

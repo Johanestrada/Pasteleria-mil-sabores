@@ -1,31 +1,55 @@
+/* ==============================
+   FUENTES
+=================================*/
+
 /* Lato Regular */
 @font-face {
-    font-family: 'Lato';
-    src: url('../fonts/Lato-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Lato Bold */
 @font-face {
-    font-family: 'Lato';
-    src: url('../fonts/Lato-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
 }
 
 /* Pacifico */
 @font-face {
-    font-family: 'Pacifico';
-    src: url('../fonts/Pacifico-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Pacifico';
+  src: url('../fonts/Pacifico-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* ==============================
+   ESTILOS BASE
+=================================*/
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif !important;
+  background: #FFF5E1; /* Fondo pastel */
+  color: #5D4037;      /* Marrón suave */
+}
 
-header {
-  background: #FFC0CB;
+/* Títulos principales */
+h1, h2, h3 {
+  font-family: 'Pacifico', cursive !important;
+}
+
+/* ==============================
+   HEADER
+=================================*/
+
+.header-custom {
+  background: #FFC0CB; /* Rosa suave */
   color: black;
   padding: 10px;
   width: 100%;
@@ -33,37 +57,9 @@ header {
   top: 0;
   z-index: 1030;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Para títulos principales */
-h1,
-h2,
-h3 {
-  font-family: 'Pacifico', cursive !important;
-}
-
-/* Para todo el texto */
-body {
-  font-family: 'Lato', sans-serif;
-}
-
-
-.header-content {
   display: flex;
   align-items: center;
   gap: 30px;
-}
-
-body {
-  font-family: 'Lato', sans-serif !important;
-  background: #FFF5E1;
-  color: #5D4037;
-}
-
-header,
-footer {
-  background-color: #FFC0CB;
-  /* rosa suave */
 }
 
 .logo {
@@ -79,19 +75,10 @@ footer {
   font-weight: 600;
 }
 
-nav.d-flex {
-  justify-content: center;
-}
-
-@media (min-width: 768px) {
-  nav.d-flex {
-    justify-content: flex-end;
-  }
-}
-
+/* Navegación */
 .nav {
   display: flex;
-  gap: 15px;
+  gap: 1rem;
 }
 
 .nav-btn {
@@ -107,36 +94,10 @@ nav.d-flex {
 
 .nav-btn:hover {
   background: #FFC0CB;
-  color: #5D4037
+  color: #5D4037;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-main,
-.bienvenida {
-  flex: 1;
-}
-
-footer {
-  text-align: center;
-  background: #FFC0CB;
-  color: #B0BEC5;
-  padding: 10px;
-  width: 100%;
-  margin-top: auto;
-}
-
-/*ocultar lo demas del header del menu */
-.nav {
-  display: flex;
-  gap: 1rem;
-}
-
+/* Dropdown personalizado */
 .nav-dropdown {
   position: relative;
   display: inline-block;
@@ -147,7 +108,7 @@ footer {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
   z-index: 1;
   padding: 0.5rem 0;
   border-radius: 6px;
@@ -168,11 +129,75 @@ footer {
 .nav-dropdown:hover .nav-dropdown-content {
   display: block;
 }
+.logo{
+  max-width: 60px;
+  height: auto;
+}
+/* ==============================
+   FOOTER
+=================================*/
 
-/*apartado de index de la pagina*/
+footer, .footer {
+  background-color: #FFC0CB;
+  color: #5D4037;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  margin-top: auto;
+}
+
+/* Contenedor flexible */
+.footer-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Secciones */
+.informacion, .productos {
+  flex: 0 0 300px;
+  padding: 1rem;
+  background-color: #fee2e2;
+}
+
+/* Títulos footer */
+.informacion h3, .productos h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-family: 'Pacifico', cursive;
+  color: #6b4c3b;
+}
+
+/* Listas footer */
+.informacion ul, .productos ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.informacion ul li, .productos ul li {
+  margin-bottom: 0.5rem;
+}
+
+.informacion ul li a, .productos ul li a {
+  color: #6b4c3b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.informacion ul li a:hover, .productos ul li a:hover {
+  color: #d2691e;
+  text-decoration: underline;
+}
+
+/* ==============================
+   VISTA: INDEX
+=================================*/
+
 .carousel-item img {
   height: 60vh;
-  /* ocupa 60% altura de la ventana, se adapta */
   object-fit: cover;
 }
 
@@ -181,7 +206,6 @@ footer {
     height: 40vh;
   }
 
-  /* menos altura en móviles */
   .pastel h1 {
     font-size: 1.2rem;
     padding: 0.25rem 0.5rem;
@@ -193,12 +217,7 @@ footer {
   bottom: 20px;
   left: 20px;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-main {
-  padding: 20px;
-  position: relative;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 
 .Destacados {
@@ -227,6 +246,17 @@ main {
   line-height: 1.6;
 }
 
+/* ==============================
+   VISTA: PRODUCTOS DESTACADOS
+=================================*/
+
+.container.text-center.my-4 {
+  background-color: rgb(255, 228, 240);
+  border: 1px solid #333;
+  border-radius: 0;
+  padding: 1rem;
+}
+
 .card img {
   height: 200px;
   object-fit: cover;
@@ -248,177 +278,156 @@ main {
   margin: 40px 0;
 }
 
-/*Apartados de la vista de productos destacados*/
-.container.text-center.my-4 {
-  background-color: rgb(255, 228, 240);
-  border: 1px solid #333;
-  border-radius: 0;
-  padding: 1rem;
-  
+/* ==============================
+   VISTA: DETALLE DE PRODUCTO
+=================================*/
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
 }
 
-
-/* Redefinir el estilo de los botones principales */
-.btn-primary {
-  background-color: #8B4513 !important;
-  /* Chocolate */
-  border: none !important;
-  color: #fff !important;
-  font-weight: bold;
-  transition: background 0.3s, color 0.3s;
+.thumbnail.active {
+  border-color: #0d6efd;
 }
 
-.btn-primary:hover {
-  background-color: #FFC0CB !important;
-  /* Rosa suave */
-  color: #5D4037 !important;
-  /* Marrón oscuro */
+.product-image {
+  max-height: 450px;
+  object-fit: cover;
 }
 
-.container-fluid {
-  width: 100%;
-  padding: 0%;
-  margin: 0;
+/* ==============================
+   VISTA: PESTAÑA PRODUCTOS
+=================================*/
+
+.filter-sidebar {
+  background: white;
+  border-radius: 12px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
 }
 
-/*Confección del footer*/
-.footer {
-  background-color: #FFC0CB;
-  /* rosa suave */
-  color: #5D4037;
-  /* marrón pastel */
-  padding: 2rem 1rem;
-  font-family: 'Lato', sans-serif;
+.product-card {
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  height: 100%;
 }
 
-/* Contenedor que alinea las dos secciones */
-.footer-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: flex-start;
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Sección de información */
-.informacion {
-  flex: 0 0 300px;
-  /* ancho fijo pero flexible */
-  padding: 1rem;
+.product-image {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
 }
 
-/* Sección de productos */
-.productos {
-  flex: 0 0 300px;
-  /* mismo ancho que información */
-  padding: 1rem;
+.price {
+  color: #2563eb;
+  font-weight: 600;
 }
 
-/* Títulos */
-.informacion h3,
-.productos h3,
-rd h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  font-family: 'Pacifico', cursive;
-  color: #6b4c3b;
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #dc2626;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.875rem;
 }
 
-/* Listas */
-.informacion ul,
-.productos ul,
-rd ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.informacion ul li,
-.productos ul li,
-rd ul li {
-  margin-bottom: 0.5rem;
-}
-
-.informacion ul li a,
-.productos ul li a,
-rd ul li a {
-  color: #6b4c3b;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.informacion ul li a:hover,
-.productos ul li a:hover,
-rd ul li a:hover {
-  color: #d2691e;
-  text-decoration: underline;
-}
-
-/*Sobre nosotros*/
-.nosotros {
-  padding: 2rem 1rem;
-  background-color: #fff0f5;
-  text-align: center;
-}
-
-
-/* Contenedor que alinea imagen y texto */
-
-
-/* Imagen */
-.img-nosotros {
-  width: 100%;
-  height: auto;
-  border-radius: 12%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Texto */
-.txt-nosotros {
-  max-width: 500px;
-  text-align: left;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #5D4037;
-  background-color: re;
-
-}
-
-.sidebar {
-  background-color: #f8c7d6;
-  /* fondo rosa pastel */
-  min-height: 100vh;
-  color: #5D4037;
-}
-
-.sidebar a {
-  color: #5D4037;
-}
-
-.sidebar a:hover {
-  color: #5D4037;
-}
-
-.sidebar .dropdown-menu {
-  background-color: #f8c7d6;
-  /* mismo rosado pastel */
-  color: #5D4037;
-  /* texto café */
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
   border: none;
-  /* quitar borde */
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.sidebar .dropdown-menu .dropdown-item {
-  color: #5D4037;
-  /* café */
+.wishlist-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
 }
 
-.sidebar .dropdown-menu .dropdown-item:hover {
-  background-color: #ffe6f0;
-  color: #5D4037;
+.rating-stars {
+  color: #fbbf24;
 }
-/*Vista de la ubicacion*/
-/* Estilo para el wrapper del mapa y el texto */
+
+.category-badge {
+  background: #e5e7eb;
+  color: #4b5563;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.filter-group {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.color-option.selected::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px solid #2563eb;
+  border-radius: 50%;
+}
+
+.sort-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.sort-btn:hover {
+  background: #f3f4f6;
+}
+
+.cart-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  transition: all 0.2s;
+}
+
+.cart-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* ==============================
+   VISTA: UBICACIÓN
+=================================*/
+
 .map-text-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -428,7 +437,6 @@ rd ul li a:hover {
   margin-bottom: 2rem;
 }
 
-/* Estilo para el contenedor del mapa */
 .map-container {
   flex: 1 1 350px;
   min-width: 320px;
@@ -442,7 +450,6 @@ rd ul li a:hover {
   border-radius: 10px;
 }
 
-/* Estilo para la sección de información */
 .text-info {
   flex: 1 1 250px;
   min-width: 220px;
@@ -465,7 +472,6 @@ rd ul li a:hover {
   color: #333;
 }
 
-/* Esto esta chill para que sea adaptativo */
 @media (max-width: 768px) {
   .map-text-wrapper {
     flex-direction: column;
@@ -477,6 +483,3 @@ rd ul li a:hover {
     max-width: 100%;
   }
 }
-
-
-

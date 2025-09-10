@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Collection</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+
+</head>
+<body>
+    <!-- Encabezado de la pagina-->
+    <header class="header-custom  shadow-sm py-2">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="logo me-2">
+            </div>
+
+            <!-- Menú -->
+            <nav class="d-none d-md-flex gap-3">
+                <a href="index.html" class="nav-link text-dark">Inicio</a>
+                <a href="assets/page/Productos.html" class="nav-link text-dark">Producto</a>
+                <a href="assets/page/contacto.html" class="nav-link text-dark">Contacto</a>
+            </nav>
+            <div class="nav-dropdown">
+                    <a href="#" class="nav-link text-dark">Cuenta ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="assets/page/login.html">Perfil</a>
+                        <a href="assets/page/registro.html">Registrarse</a>
+                        
+                    </div>
+            </div>
+            <div class="nav-dropdown">
+                    <a href="#" class="nav-link text-dark">Carrito ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="#">Ver Carrito</a>
+                        <a href="#">Modificar Carrito</a>
+                    </div>
+            </div>
+            <!--Seach-->
+            <div class="d-flex align-items-center">
+        
+            <div class="d-none d-md-block">
+                <input type="text" class="form-control form-control-sm" placeholder="Search...">
+                </div>
+                <a href="#" class="btn text-dark d-none d-md-block">
+                <i class="ri-login-circle-line"></i>
+                </a>
+                <a href="#" class="btn text-dark d-none d-md-block">
+                <i class="ri-shopping-cart-2-line"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!--Conetenido principal de la pagina-->
+    <div class="container py-5">
+        <!-- Top Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">Productos</h4>
+            
+        </div>
+
+        <div class="row g-4">
+            <!-- Filtro de la pagina -->
+            <div class="col-lg-3">
+                <div class="filter-sidebar p-4 shadow-sm">
+                    <div class="filter-group">
+                        <h6 class="mb-3">Categories</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="electronics">
+                            <label class="form-check-label" for="electronics">
+                                Tortas
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="clothing">
+                            <label class="form-check-label" for="clothing">
+                                Pasteleria Individual
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="accessories">
+                            <label class="form-check-label" for="accessories">
+                                Galletas
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h6 class="mb-3">Precio</h6>
+                        <input type="range" class="form-range" min="0" max="1000" value="500">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">$0</span>
+                            <span class="text-muted">$1000</span>
+                        </div>
+                    </div>
+
+
+                    <div class="filter-group">
+                        <h6 class="mb-3">Reseñas</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="rating" id="rating4">
+                            <label class="form-check-label" for="rating4">
+                                <i class="bi bi-star-fill text-warning"></i> 4 mas
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="rating" id="rating3">
+                            <label class="form-check-label" for="rating3">
+                                <i class="bi bi-star-fill text-warning"></i> 3 menor
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-primary w-100">Applicar Filtro</button>
+                </div>
+            </div>
+
+            <!--Productos-->
+            <div class="col-lg-9">
+                <div class="row g-4">
+                    <!-- Product Card 1 -->
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/TortaClasica.html">
+                                    <img src="../img/tor_clasic.png" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Torta Mil Hoja</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="text-muted ms-2">(4.5)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$15,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/torta3leches.html">
+                                    <img src="../img/tortaTresleches.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Torta Tres Leches</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="text-muted ms-2">(4.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button class="btn cart-btn">
+                                        <span class="price">$17,990</span>
+                                        <i class="bi bi-cart-plus"></i>
+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/tSelvaN.html">
+                                    <img src="../img/pastelchocolate.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Torta Selva Negra</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$18,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/TCubo.html">
+                                    <img src="../img/tCuadrada.png" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Torta Cuadrada</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$19,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/tVegana.html">
+                                    <img src="../img/tVegana.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Torta Vegana</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$21,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/cupcaked.html">
+                                    <img src="../img/cupcakpe.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Cupcake Decorado</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/Cporcion.html">
+                                    <img src="../img/chesckep.jpng.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Cheesecake por Porción</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$3,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/brow.html">
+                                    <img src="../img/browney.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Brownie</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">2,500</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/tat.html">
+                                    <img src="../img/tartaleta.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Tartaleta</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$3,500</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/Alfajor.html">
+                                    <img src="../img/alfajor.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Alfajor Relleno</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/GalletasD.html">
+                                    <img src="../img/gDecoradas.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Galletas Decoradas</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/GalletasS.html">
+                                    <img src="../img/gSinazucar.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Galletas Sin Azucar</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/Macarons.html">
+                                    <img src="../img/macarons.webp" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Macarons</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/Merenguitos.html">
+                                    <img src="../img/merengcolor0.webp" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Merenguitos</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="product-card shadow-sm">
+                            <div class="position-relative">
+                                <a href="../page/TrufasB.html">
+                                    <img src="../img/trufasb.jpg" class="product-image w-100" alt="Product">
+                                </a>
+                            </div>
+                            <div class="p-3">
+                                <h6 class="mb-1">Trufas Y Bombones</h6>
+                                <div class="rating-stars mb-2">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="text-muted ms-2">(5.0)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$2,990</span>
+                                    <button class="btn cart-btn">
+                                        <i class="bi bi-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Pie de la pagina-->
+    <footer class="footer py-4 bg-pink">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
+                    <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Información</h3>
+                    <ul class="list-unstyled">
+                        <li>Teléfono: +569 27905271</li>
+                        <li>Avenida Concha y Toro...</li>
+                        <li>Correo: pasteleria100...@milsabores.cl</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Productos</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Productos</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Redes</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#" ><img src="assets/img/instagram.png" alt="IG" style="max-width:28px;"></a></li>
+                        <li><a href="#"><img src="assets/img/whatsapp.png" alt="WA" style="max-width:28px;"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
