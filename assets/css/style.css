@@ -29,24 +29,54 @@
 /* ==============================
    ESTILOS BASE
 =================================*/
+
+.navbar, .footer {
+    background-color: #FFF5E1; /* mismo color crema pastel */
+}
+
+.navbar {
+  background-color: #fff5f8;
+  /* tono pastel suave */
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  color: #6c3b64 !important;
+  /* tono vino/pastel */
+}
+
+.navbar .nav-link:hover {
+  color: #d63384 !important;
+  /* hover rosado */
+}
+
+.navbar-brand img {
+  max-height: 60px;
+}
+
+
 body {
   background: #FFF5E1;
   font-family: 'Lato', sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  background: #FFF5E1; /* Fondo pastel */
+  background: #FFF5E1;
+  /* Fondo pastel */
   font-family: 'Lato', sans-serif !important;
   color: #5D4037;
 }
 
 /* Títulos principales */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: 'Pacifico', cursive !important;
 }
 
@@ -55,7 +85,8 @@ h1, h2, h3 {
 =================================*/
 
 .header-custom {
-  background: #FFC0CB; /* Rosa suave */
+  background: #FFC0CB;
+  /* Rosa suave */
   color: black;
   padding: 10px;
   width: 100%;
@@ -74,10 +105,16 @@ h1, h2, h3 {
 }
 
 main {
-  flex: 1; /* ocupa todo el espacio disponible */
+  flex: 1;
+  /* ocupa todo el espacio disponible */
+  margin: 0;
+  /* elimina los márgenes */
+  padding: 2rem;
+  /* opcional, para mantener un poco de espacio interno */
 }
 
-main, section.noticias {
+main,
+section.noticias {
   background: #FFF5E1;
 }
 
@@ -122,7 +159,7 @@ main, section.noticias {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
   padding: 0.5rem 0;
   border-radius: 6px;
@@ -143,15 +180,18 @@ main, section.noticias {
 .nav-dropdown:hover .nav-dropdown-content {
   display: block;
 }
-.logo{
+
+.logo {
   max-width: 60px;
   height: auto;
 }
+
 /* ==============================
    FOOTER
 =================================*/
 
-footer, .footer {
+footer,
+.footer {
   background-color: #FFC0CB;
   color: #5D4037;
   padding: 2rem 1rem;
@@ -169,14 +209,16 @@ footer, .footer {
 }
 
 /* Secciones */
-.informacion, .productos {
+.informacion,
+.productos {
   flex: 0 0 300px;
   padding: 1rem;
   background-color: #fee2e2;
 }
 
 /* Títulos footer */
-.informacion h3, .productos h3 {
+.informacion h3,
+.productos h3 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
   font-family: 'Pacifico', cursive;
@@ -184,24 +226,28 @@ footer, .footer {
 }
 
 /* Listas footer */
-.informacion ul, .productos ul {
+.informacion ul,
+.productos ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-.informacion ul li, .productos ul li {
+.informacion ul li,
+.productos ul li {
   margin-bottom: 0.5rem;
 }
 
-.informacion ul li a, .productos ul li a {
+.informacion ul li a,
+.productos ul li a {
   color: #6b4c3b;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.informacion ul li a:hover, .productos ul li a:hover {
+.informacion ul li a:hover,
+.productos ul li a:hover {
   color: #d2691e;
   text-decoration: underline;
 }
@@ -212,7 +258,8 @@ footer, .footer {
 
 
 .organizacion {
-  background-color: #FFF5E1; /* mismo tono pastel del body */
+  background-color: #FFF5E1;
+  /* mismo tono pastel del body */
 }
 
 .icono-opcion {
@@ -242,7 +289,7 @@ footer, .footer {
   bottom: 20px;
   left: 20px;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .Destacados {
@@ -345,7 +392,7 @@ footer, .footer {
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
@@ -482,7 +529,7 @@ footer, .footer {
   background: whitesmoke;
   padding: 2rem 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
 }
 
 .text-info h4 {
@@ -503,6 +550,7 @@ footer, .footer {
     align-items: stretch;
     gap: 1.5rem;
   }
+
   .map-container,
   .text-info {
     max-width: 100%;
@@ -515,18 +563,21 @@ footer, .footer {
 
 /* Sidebar colores */
 .sidebar {
-  background: #FFF5E1; /* el mismo color que tus botones destacados */
+  background: #FFF5E1;
+  /* el mismo color que tus botones destacados */
   min-height: 100vh;
 }
 
 /* Links dentro de la sidebar */
 .sidebar .nav-link {
-  color: #fff; /* texto blanco */
+  color: #fff;
+  /* texto blanco */
   font-weight: 500;
 }
 
 .sidebar .nav-link:hover {
-  background: #FFF5E1; /* tono más oscuro al pasar el mouse */
+  background: #FFF5E1;
+  /* tono más oscuro al pasar el mouse */
   color: #fff;
   border-radius: 8px;
 }
@@ -536,3 +587,12 @@ footer, .footer {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
+.bg-pink {
+  background-color: #fee2e2 !important;
+  /* mismo color pastel del body */
+}
+
+body {
+  background-color: #FFF5E1;
+  /* Color crema pastel */
+}

@@ -12,59 +12,76 @@
     <!--CSS personalizado-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
+
 <body>
-    <header class="header-custom  shadow-sm py-2">
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
             <!-- Logo -->
-            <div class="d-flex align-items-center">
-                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="logo me-2">
-            </div>
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+            </a>
+
+            <!-- Botón para móvil -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <!-- Menú -->
-            <nav class="d-none d-md-flex gap-3">
-                <a href="index.html" class="nav-link text-dark">Inicio</a>
-                <a href="assets/page/Productos.html" class="nav-link text-dark">Producto</a>
-                <a href="assets/page/contacto.html" class="nav-link text-dark">Contacto</a>
-                <a href="assets/page/noticias.html" class="nav-link text-dark">Noticias</a>
-            </nav>
-            <div class="nav-dropdown">
-                    <a href="#" class="nav-link text-dark">Cuenta ▾</a>
-                    <div class="nav-dropdown-content">
-                        <a href="assets/page/login.html">Perfil</a>
-                        <a href="assets/page/registro.html">Registrarse</a>
-                        
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto"> <!-- mx-auto centra el menú -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="assets/page/Productos.html">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="assets/page/nosotros.html">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="assets/page/noticias.html">Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="assets/page/contacto.html">Contacto</a>
+                    </li>
+                </ul>
+                <!--buscar-->
+                <div class="d-flex align-items-center">
+
+                    <div class="d-none d-md-block">
+                        <input type="text" class="form-control form-control-sm" placeholder="Buscar">
                     </div>
-            </div>
-            <div class="nav-dropdown">
-                    <a href="#" class="nav-link text-dark">Carrito ▾</a>
-                    <div class="nav-dropdown-content">
-                        <a href="assets/page/carrito.html">Ver Carrito</a>
-                        <a href="#">Modificar Carrito</a>
-                    </div>
-            </div>
-            <!--Seach-->
-            <div class="d-flex align-items-center">
-        
-            <div class="d-none d-md-block">
-                <input type="text" class="form-control form-control-sm" placeholder="Buscar">
+                    <a href="#" class="btn text-dark d-none d-md-block">
+                        <i class="ri-login-circle-line"></i>
+                    </a>
+                    <a href="#" class="btn text-dark d-none d-md-block">
+                        <i class="ri-shopping-cart-2-line"></i>
+                    </a>
                 </div>
-                <a href="#" class="btn text-dark d-none d-md-block">
-                <i class="ri-login-circle-line"></i>
+                <a href="assets/page/login.html" class="btn text-dark d-none d-md-block">
+                    <i class="bi bi-person fs-3"></i> <!-- fs-5 igual que el carrito -->
                 </a>
-                <a href="#" class="btn text-dark d-none d-md-block">
-                <i class="ri-shopping-cart-2-line"></i>
+                <!-- Carrito -->
+                <a href="assets/page/carrito.html" class="btn position-relative">
+                    <i class="bi bi-cart fs-4"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
                 </a>
+
             </div>
         </div>
-    </header>
+    </nav>
+
     <!-- Contenido principal de la pagina -->
     <main>
         <section>
             <div id="carouselExampleIndicators" class="carousel slide">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                         aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
@@ -143,7 +160,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Cupcakes</h5>
                                 <p class="card-text">Mini pasteles decorados con crema y toppings, perfectos para
-                                    compartir.</p>
+                                    compartir en familia.</p>
                                 <a href="#" class="btn btn-primary stretched-link">Ver Detalle</a>
                             </div>
                         </div>
@@ -193,34 +210,35 @@
             </div>
         </section>
         <section class="organizacion py-5">
-  <div class="container">
-    <h2 class="text-center mb-4">Organízate con nosotros</h2>
-    <div class="row justify-content-center">
-      <!-- Opción 1 -->
-      <div class="col-md-4 col-sm-6 mb-4">
-        <div class="card text-center shadow-sm h-100 border-0">
-          <div class="card-body">
-            <img src="assets/img/1067602.png" alt="Tiendas" class="icono-opcion mb-3">
-            <h5 class="card-title">Tiendas</h5>
-            <p class="card-text">Encuentra nuestras sucursales cercanas y ven a visitarnos.</p>
-            <a href="assets/page/ubicacion.html" class="btn btn-primary">Ver Tiendas</a>
-          </div>
-        </div>
-      </div>
-      <!-- Opción 2 -->
-      <div class="col-md-4 col-sm-6 mb-4">
-        <div class="card text-center shadow-sm h-100 border-0">
-          <div class="card-body">
-            <img src="assets/img/16603.png" alt="Contacto" class="icono-opcion mb-3">
-            <h5 class="card-title">Contáctanos</h5>
-            <p class="card-text">¿Dudas o pedidos especiales? Escríbenos aquí.</p>
-            <a href="assets/page/contacto.html" class="btn btn-primary">Ir a Contacto</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="container">
+                <h2 class="text-center mb-4">Organízate con nosotros</h2>
+                <div class="row justify-content-center">
+                    <!-- Opción 1 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-center shadow-sm h-100 border-0">
+                            <div class="card-body">
+                                <img src="assets/img/1067602.png" alt="Tiendas" class="icono-opcion mb-3">
+                                <h5 class="card-title">Tiendas</h5>
+                                <p class="card-text">Encuentra nuestras sucursales cercanas y ven a visitarnos.</p>
+                                <a href="assets/page/ubicacion.html" class="btn btn-primary">Ver Tiendas</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Opción 2 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card text-center shadow-sm h-100 border-0">
+                            <div class="card-body">
+                                <img src="assets/img/16603.png" alt="Contacto" class="icono-opcion mb-3">
+                                <h5 class="card-title">Contáctanos</h5>
+                                <p class="card-text">¿Dudas o pedidos especiales? Escríbenos aquí para mas Información.
+                                </p>
+                                <a href="assets/page/contacto.html" class="btn btn-primary">Ir a Contacto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
     </main>
@@ -262,7 +280,11 @@
             </div>
         </div>
     </footer>
-
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/56927905271" target="_blank"
+        class="btn btn-success position-fixed bottom-0 end-0 m-3 rounded-circle d-flex align-items-center justify-content-center shadow-lg fs-3">
+        <i class="bi bi-whatsapp"></i>
+    </a>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
