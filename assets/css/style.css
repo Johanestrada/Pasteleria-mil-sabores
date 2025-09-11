@@ -30,7 +30,7 @@
    ESTILOS BASE
 =================================*/
 body {
-  background-color: var(--crema-pastel);
+  background: #FFF5E1;
   font-family: 'Lato', sans-serif;
 }
 
@@ -508,3 +508,31 @@ footer, .footer {
     max-width: 100%;
   }
 }
+
+/* ==============================
+   VISTA: admin
+=================================*/
+
+/* Sidebar colores */
+.sidebar {
+  background: #FFF5E1; /* el mismo color que tus botones destacados */
+  min-height: 100vh;
+}
+
+/* Links dentro de la sidebar */
+.sidebar .nav-link {
+  color: #fff; /* texto blanco */
+  font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+  background: #FFF5E1; /* tono más oscuro al pasar el mouse */
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Separador */
+.sidebar hr {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
