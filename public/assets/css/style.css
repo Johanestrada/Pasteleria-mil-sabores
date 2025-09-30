@@ -1,0 +1,598 @@
+/* ==============================
+   FUENTES
+=================================*/
+
+/* Lato Regular */
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Lato Bold */
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Pacifico */
+@font-face {
+  font-family: 'Pacifico';
+  src: url('../fonts/Pacifico-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==============================
+   ESTILOS BASE
+=================================*/
+
+.navbar, .footer {
+    background-color: #FFF5E1; /* mismo color crema pastel */
+}
+
+.navbar {
+  background-color: #fff5f8;
+  /* tono pastel suave */
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  color: #6c3b64 !important;
+  /* tono vino/pastel */
+}
+
+.navbar .nav-link:hover {
+  color: #d63384 !important;
+  /* hover rosado */
+}
+
+.navbar-brand img {
+  max-height: 60px;
+}
+
+
+body {
+  background: #FFF5E1;
+  font-family: 'Lato', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #FFF5E1;
+  /* Fondo pastel */
+  font-family: 'Lato', sans-serif !important;
+  color: #5D4037;
+}
+
+/* Títulos principales */
+h1,
+h2,
+h3 {
+  font-family: 'Pacifico', cursive !important;
+}
+
+/* ==============================
+   HEADER
+=================================*/
+
+.header-custom {
+  background: #FFC0CB;
+  /* Rosa suave */
+  color: black;
+  padding: 10px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo {
+  max-width: 80px;
+  height: auto;
+}
+
+main {
+  flex: 1;
+  /* ocupa todo el espacio disponible */
+  margin: 0;
+  /* elimina los márgenes */
+  padding: 2rem;
+  /* opcional, para mantener un poco de espacio interno */
+}
+
+main,
+section.noticias {
+  background: #FFF5E1;
+}
+
+.slogan {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.05rem;
+  margin: 0;
+  color: #5D4037;
+  font-weight: 600;
+}
+
+/* Navegación */
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  background: #8B4513;
+  color: #fff;
+  padding: .35rem .9rem;
+  border: 2px solid #000;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-btn:hover {
+  background: #FFC0CB;
+  color: #5D4037;
+}
+
+/* Dropdown personalizado */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 0.5rem 0;
+  border-radius: 6px;
+}
+
+.nav-dropdown-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ececec;
+}
+
+.nav-dropdown:hover .nav-dropdown-content {
+  display: block;
+}
+
+.logo {
+  max-width: 60px;
+  height: auto;
+}
+
+/* ==============================
+   FOOTER
+=================================*/
+
+footer,
+.footer {
+  background-color: #FFC0CB;
+  color: #5D4037;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  margin-top: auto;
+}
+
+/* Contenedor flexible */
+.footer-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Secciones */
+.informacion,
+.productos {
+  flex: 0 0 300px;
+  padding: 1rem;
+  background-color: #fee2e2;
+}
+
+/* Títulos footer */
+.informacion h3,
+.productos h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-family: 'Pacifico', cursive;
+  color: #6b4c3b;
+}
+
+/* Listas footer */
+.informacion ul,
+.productos ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.informacion ul li,
+.productos ul li {
+  margin-bottom: 0.5rem;
+}
+
+.informacion ul li a,
+.productos ul li a {
+  color: #6b4c3b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.informacion ul li a:hover,
+.productos ul li a:hover {
+  color: #d2691e;
+  text-decoration: underline;
+}
+
+/* ==============================
+   VISTA: INDEX
+=================================*/
+
+
+.organizacion {
+  background-color: #FFF5E1;
+  /* mismo tono pastel del body */
+}
+
+.icono-opcion {
+  border-radius: 50px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.carousel-item img {
+  height: 60vh;
+  object-fit: cover;
+}
+
+@media (max-width: 576px) {
+  .carousel-item img {
+    height: 40vh;
+  }
+
+  .pastel h1 {
+    font-size: 1.2rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+.pastel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.Destacados {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.Destacados h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  font-family: 'Pacifico', sans-serif;
+}
+
+.sobre-nosotros {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.sobre-nosotros h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.sobre-nosotros p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* ==============================
+   VISTA: PRODUCTOS DESTACADOS
+=================================*/
+
+.container.text-center.my-4 {
+  background-color: rgb(255, 228, 240);
+  border: 1px solid #333;
+  border-radius: 0;
+  padding: 1rem;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.btn.btn-primary.stretched-link {
+  position: relative;
+  z-index: 1;
+  bottom: 10px;
+  color: white;
+  background-color: pink;
+}
+
+.btn.btn-secondary {
+  color: black;
+  background-color: #fff;
+  text-align: center;
+  margin: 40px 0;
+}
+
+/* ==============================
+   VISTA: DETALLE DE PRODUCTO
+=================================*/
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnail.active {
+  border-color: #0d6efd;
+}
+
+.product-image {
+  max-height: 450px;
+  object-fit: cover;
+}
+
+/* ==============================
+   VISTA: PESTAÑA PRODUCTOS
+=================================*/
+
+.filter-sidebar {
+  background: white;
+  border-radius: 12px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+.price {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #dc2626;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wishlist-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.rating-stars {
+  color: #fbbf24;
+}
+
+.category-badge {
+  background: #e5e7eb;
+  color: #4b5563;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.filter-group {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.color-option.selected::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px solid #2563eb;
+  border-radius: 50%;
+}
+
+.sort-btn {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.sort-btn:hover {
+  background: #f3f4f6;
+}
+
+.cart-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  transition: all 0.2s;
+}
+
+.cart-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* ==============================
+   VISTA: UBICACIÓN
+=================================*/
+
+.map-text-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.map-container {
+  flex: 1 1 350px;
+  min-width: 320px;
+  max-width: 600px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  border-radius: 10px;
+}
+
+.text-info {
+  flex: 1 1 250px;
+  min-width: 220px;
+  max-width: 400px;
+  background: whitesmoke;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+}
+
+.text-info h4 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.35rem;
+  color: #c2185b;
+  font-weight: bold;
+}
+
+.text-info p {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .map-text-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .map-container,
+  .text-info {
+    max-width: 100%;
+  }
+}
+
+/* ==============================
+   VISTA: admin
+=================================*/
+
+/* Sidebar colores */
+.sidebar {
+  background: #FFF5E1;
+  /* el mismo color que tus botones destacados */
+  min-height: 100vh;
+}
+
+/* Links dentro de la sidebar */
+.sidebar .nav-link {
+  color: #fff;
+  /* texto blanco */
+  font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+  background: #FFF5E1;
+  /* tono más oscuro al pasar el mouse */
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Separador */
+.sidebar hr {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.bg-pink {
+  background-color: #fee2e2 !important;
+  /* mismo color pastel del body */
+}
+
+body {
+  background-color: #FFF5E1;
+  /* Color crema pastel */
+}

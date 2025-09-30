@@ -1,0 +1,178 @@
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wireless Headphones</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .thumbnail {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .thumbnail.active {
+            border-color: #0d6efd;
+        }
+        .product-image {
+            max-height: 450px;
+            object-fit: cover;
+        }
+    </style>
+    <!--Nuestra Hoja de estilo css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!--Header de la pagina-->
+    <header class="header-custom  shadow-sm py-2">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="logo me-2">
+            </div>
+
+            <!-- Menú -->
+            <nav class="d-none d-md-flex gap-3">
+                <a href="index.html" class="nav-link text-dark">Inicio</a>
+                <a href="assets/page/Productos.html" class="nav-link text-dark">Producto</a>
+                <a href="assets/page/contacto.html" class="nav-link text-dark">Contacto</a>
+            </nav>
+            <div class="nav-dropdown">
+                    <a href="#" class="nav-link text-dark">Cuenta ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="assets/page/login.html">Perfil</a>
+                        <a href="assets/page/registro.html">Registrarse</a>
+                        
+                    </div>
+            </div>
+            <div class="nav-dropdown">
+                    <a href="#" class="nav-link text-dark">Carrito ▾</a>
+                    <div class="nav-dropdown-content">
+                        <a href="#">Ver Carrito</a>
+                        <a href="#">Modificar Carrito</a>
+                    </div>
+            </div>
+            <!--Seach-->
+            <div class="d-flex align-items-center">
+        
+            <div class="d-none d-md-block">
+                <input type="text" class="form-control form-control-sm" placeholder="Buscar">
+                </div>
+                <a href="#" class="btn text-dark d-none d-md-block">
+                <i class="ri-login-circle-line"></i>
+                </a>
+                <a href="#" class="btn text-dark d-none d-md-block">
+                <i class="ri-shopping-cart-2-line"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Product Images -->
+                <div class="col-md-6 mb-4">
+                    <img src="../img/torta_clasica.png"
+                        alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
+                    <div class="d-flex justify-content-between">
+                        <img src="../img/tor_clasic.png"
+                            alt="Thumbnail 1" class="thumbnail rounded active" onclick="changeImage(event, this.src)">
+                        <img src="../img/torta_clasica.png"
+                            alt="Thumbnail 2" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+                        <img src="../img/tor_clasic.png"
+                            alt="Thumbnail 3" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="col-md-6">
+                    <h2 class="mb-3">Macarons</h2>
+                    <p class="text-muted mb-4">SKU:TORCCLAS1560</p>
+                    <div class="mb-3">
+                        <span class="h4 me-2">$1,800</span>
+                        <span class="text-muted"><s>$68,990</s></span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="ms-2">4.5 (120 reviews)</span>
+                    </div>
+                    <p class="mb-4">
+                        Una opción saludable y deliciosa que respeta todos los estilos de vida. Elaborada con bizcocho de cacao y harina integral, relleno de manjar de dátiles
+                    </p>
+                    
+                    <div class="mb-4">
+                        <label for="quantity" class="form-label">Cantidades:</label>
+                        <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+                    </div>
+                    <button class="btn btn-primary btn-lg mb-3 me-2">
+                        <i class="bi bi-cart-plus"></i> Agregar A Carrito
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg mb-3">
+                        <i class="bi bi-heart"></i> Add a Favoritos
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    <!---Pie de pagina-->
+    <footer class="footer py-4 bg-pink">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
+                    <img src="assets/img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Información</h3>
+                    <ul class="list-unstyled">
+                        <li>Teléfono: +569 27905271</li>
+                        <li>Avenida Concha y Toro...</li>
+                        <li>Correo: pasteleria100...@milsabores.cl</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Productos</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Productos</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h3>Redes</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><img src="assets/img/instagram.png" alt="IG" style="max-width:28px;"></a></li>
+                        <li><a href="#"><img src="assets/img/whatsapp.png" alt="WA" style="max-width:28px;"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeImage(event, src) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
