@@ -5,5 +5,4 @@ const Input  = ({label, ... props}) =>(
         
     </div>
 );
-
 export default Input;
