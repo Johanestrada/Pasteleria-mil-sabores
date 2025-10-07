@@ -51,14 +51,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Validaciones...
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) errores.push("⚠️ El correo no tiene un formato válido.");
-            if (telefono && !/^[0-9]{9}$/.test(telefono)) errores.push("⚠️ El teléfono debe tener 9 dígitos numéricos.");
-            if (password !== confirmPassword) errores.push("⚠️ Las contraseñas no coinciden.");
+            if (!emailRegex.test(email)) errores.push("El correo no tiene un formato válido.");
+            if (telefono && !/^[0-9]{9}$/.test(telefono)) errores.push("El teléfono debe tener 9 dígitos numéricos.");
+            if (password !== confirmPassword) errores.push("Las contraseñas no coinciden.");
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-            if (!passwordRegex.test(password)) errores.push("⚠️ La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
-            if (!region) errores.push("⚠️ Debes seleccionar una región.");
-            if (!comuna) errores.push("⚠️ Debes seleccionar una comuna.");
-            if (!fechaNacimiento) errores.push("⚠️ Debes ingresar tu fecha de nacimiento.");
+            if (!passwordRegex.test(password)) errores.push("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
+            if (!region) errores.push("Debes seleccionar una región.");
+            if (!comuna) errores.push("Debes seleccionar una comuna.");
+            if (!fechaNacimiento) errores.push("Debes ingresar tu fecha de nacimiento.");
 
             // Descuentos
             if (fechaNacimiento) {
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) edad--;
                 if (edad > 50) promociones.push("🎉 ¡Felicidades! Recibes un <b>50% de descuento</b> por ser mayor de 50 años.");
                 const esCumple = hoy.getDate() === nacimiento.getDate() && hoy.getMonth() === nacimiento.getMonth();
-                if (esCumple && email.endsWith("@duocuc.cl")) promociones.push("🎂 ¡Feliz cumpleaños! Como estudiante DUOC recibes una <b>torta gratis</b>.");
+                if (esCumple && email.endsWith("@duocuc.cl")) promociones.push("¡Feliz cumpleaños! Como estudiante DUOC recibes una <b>torta gratis</b>.");
             }
-            if (codigo === "FELICES50") promociones.push("✅ Obtienes un <b>10% de descuento de por vida</b> con el código FELICES50.");
+            if (codigo === "FELICES50") promociones.push("Obtienes un <b>10% de descuento de por vida</b> con el código FELICES50.");
 
             // Mostrar mensajes
             if (errores.length > 0) mensajeRegistro.innerHTML = `<span class="text-danger">${errores.join("<br>")}</span>`;
             else if (promociones.length > 0) mensajeRegistro.innerHTML = promociones.join("<br>");
-            else mensajeRegistro.innerHTML = `<span class="text-success">✅ Registro exitoso!</span>`;
+            else mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso!</span>`;
         });
     }
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             if (email === adminEmail && password === adminPassword) window.location.href = "admin.html";
-            else mensajeLogin.innerHTML = `<span class="text-danger">⚠️ Usuario o contraseña incorrectos.</span>`;
+            else mensajeLogin.innerHTML = `<span class="text-danger">Usuario o contraseña incorrectos.</span>`;
         });
     }
 });
@@ -112,27 +112,30 @@ document.addEventListener('DOMContentLoaded', function () {
             const correo = document.getElementById('correo').value.trim();
             const asunto = document.getElementById('asunto').value.trim();
             const mensaje = document.getElementById('mensaje').value.trim();
-
+            const run = document.getElementById('run').value.trim();
             let errores = [];
 
             // Validar nombre
-            if (nombre.length < 3) errores.push("⚠️ El nombre debe tener al menos 3 caracteres.");
+            if (nombre.length < 3) errores.push("El nombre debe tener al menos 3 caracteres.");
+
+            // Validar run
+            if (run.length < 3) errores.push("El run debe tener al menos 3 caracteres.");
 
             // Validar correo
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(correo)) errores.push("⚠️ El correo no tiene un formato válido.");
+            if (!emailRegex.test(correo)) errores.push("El correo no tiene un formato válido.");
 
             // Validar asunto
-            if (asunto.length < 5) errores.push("⚠️ El asunto debe tener al menos 5 caracteres.");
+            if (asunto.length < 5) errores.push("El asunto debe tener al menos 5 caracteres.");
 
             // Validar mensaje
-            if (mensaje.length < 10) errores.push("⚠️ El mensaje debe tener al menos 10 caracteres.");
+            if (mensaje.length < 10) errores.push("El mensaje debe tener al menos 10 caracteres.");
 
             // Mostrar errores o éxito
             if (errores.length > 0) {
                 mensajeContacto.innerHTML = `<span class="text-danger">${errores.join("<br>")}</span>`;
             } else {
-                mensajeContacto.innerHTML = `<span class="text-success">✅ Mensaje enviado correctamente. ¡Gracias por contactarnos!</span>`;
+                mensajeContacto.innerHTML = `<span class="text-success">Mensaje enviado correctamente. ¡Gracias por contactarnos!</span>`;
                 formContacto.reset();
             }
         });
