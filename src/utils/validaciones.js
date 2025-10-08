@@ -19,53 +19,146 @@ export function validarRegistro({
     fechaNacimiento,
     codigo
 }) {
-    let errores = [];
     let promociones = [];
 
-    // Validaciones
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) errores.push("El correo no tiene un formato válido.");
-    if (telefono && !/^[0-9]{9}$/.test(telefono)) errores.push("El teléfono debe tener 9 dígitos numéricos.");
-    if (password !== confirmPassword) errores.push("Las contraseñas no coinciden.");
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-    if (!passwordRegex.test(password)) errores.push("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
-    if (!region) errores.push("Debes seleccionar una región.");
-    if (!comuna) errores.push("Debes seleccionar una comuna.");
-    if (!fechaNacimiento) errores.push("Debes ingresar tu fecha de nacimiento.");
+    // Obtener los elementos del DOM si existen (solo si se usa en HTML tradicional)
+    const nombreInput = document.getElementById("nombre");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const telefonoInput = document.getElementById("telefono");
+    const regionInput = document.getElementById("region");
+    const comunaInput = document.getElementById("comuna");
+    const fechaInput = document.getElementById("fechaNacimiento");
 
-    // Descuentos
-    if (fechaNacimiento) {
-        const hoy = new Date();
-        const nacimiento = new Date(fechaNacimiento);
-        let edad = hoy.getFullYear() - nacimiento.getFullYear();
-        const mes = hoy.getMonth() - nacimiento.getMonth();
-        if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) edad--;
-        if (edad > 50) promociones.push("🎉 ¡Felicidades! Recibes un <b>50% de descuento</b> por ser mayor de 50 años.");
-        const esCumple = hoy.getDate() === nacimiento.getDate() && hoy.getMonth() === nacimiento.getMonth();
-        if (esCumple && email.endsWith("@duocuc.cl")) promociones.push("¡Feliz cumpleaños! Como estudiante DUOC recibes una <b>torta gratis</b>.");
+    // Limpiar mensajes previos
+    [nombreInput, emailInput, passwordInput, confirmPasswordInput, telefonoInput, regionInput, comunaInput, fechaInput].forEach(input => {
+        if (input) input.setCustomValidity("");
+    });
+
+    // Validaciones nativas con reportValidity
+    if (!nombre) {
+        nombreInput?.setCustomValidity("El nombre es obligatorio.");
+        nombreInput?.reportValidity();
+        return { errores: ["El nombre es obligatorio."], promociones };
     }
-    if (codigo && codigo.trim().toUpperCase() === "FELICES50") promociones.push("Obtienes un <b>10% de descuento de por vida</b> con el código FELICES50.");
 
-    return { errores, promociones };
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        emailInput?.setCustomValidity("El correo no tiene un formato válido.");
+        emailInput?.reportValidity();
+        return { errores: ["El correo no tiene un formato válido."], promociones };
+    }
+
+    if (telefono && !/^[0-9]{9}$/.test(telefono)) {
+        telefonoInput?.setCustomValidity("El teléfono debe tener 9 dígitos numéricos.");
+        telefonoInput?.reportValidity();
+        return { errores: ["El teléfono debe tener 9 dígitos numéricos."], promociones };
+    }
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!passwordRegex.test(password)) {
+        passwordInput?.setCustomValidity("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
+        passwordInput?.reportValidity();
+        return { errores: ["Contraseña no válida."], promociones };
+    }
+
+    if (password !== confirmPassword) {
+        confirmPasswordInput?.setCustomValidity("Las contraseñas no coinciden.");
+        confirmPasswordInput?.reportValidity();
+        return { errores: ["Las contraseñas no coinciden."], promociones };
+    }
+
+    if (!region) {
+        regionInput?.setCustomValidity("Debes seleccionar una región.");
+        regionInput?.reportValidity();
+        return { errores: ["Debes seleccionar una región."], promociones };
+    }
+
+    if (!comuna) {
+        comunaInput?.setCustomValidity("Debes seleccionar una comuna.");
+        comunaInput?.reportValidity();
+        return { errores: ["Debes seleccionar una comuna."], promociones };
+    }
+
+    if (!fechaNacimiento) {
+        fechaInput?.setCustomValidity("Debes ingresar tu fecha de nacimiento.");
+        fechaInput?.reportValidity();
+        return { errores: ["Debes ingresar tu fecha de nacimiento."], promociones };
+    }
+
+    // Cálculo de descuentos y promociones
+    const hoy = new Date();
+    const nacimiento = new Date(fechaNacimiento);
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) edad--;
+
+    if (edad > 50)
+        promociones.push("🎉 ¡Felicidades! Recibes un <b>50% de descuento</b> por ser mayor de 50 años.");
+
+    const esCumple = hoy.getDate() === nacimiento.getDate() && hoy.getMonth() === nacimiento.getMonth();
+    if (esCumple && email.endsWith("@duocuc.cl"))
+        promociones.push("¡Feliz cumpleaños! Como estudiante DUOC recibes una <b>torta gratis</b>.");
+
+    if (codigo && codigo.trim().toUpperCase() === "FELICES50")
+        promociones.push("Obtienes un <b>10% de descuento de por vida</b> con el código FELICES50.");
+
+    return { errores: [], promociones };
 }
 
 // Validación de login
 export function validarLogin({ email, password }) {
     const adminEmail = "admin@duocuc.cl";
     const adminPassword = "admin123";
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    [emailInput, passwordInput].forEach(input => input?.setCustomValidity(""));
+
     if (email === adminEmail && password === adminPassword) {
         return { esAdmin: true, error: null };
     }
+
+    passwordInput?.setCustomValidity("Usuario o contraseña incorrectos.");
+    passwordInput?.reportValidity();
     return { esAdmin: false, error: "Usuario o contraseña incorrectos." };
 }
 
 // Validación de contacto
 export function validarContacto({ nombre, correo, asunto, mensaje }) {
-    let errores = [];
-    if (nombre.length < 3) errores.push("El nombre debe tener al menos 3 caracteres.");
+    const nombreInput = document.getElementById("nombre");
+    const correoInput = document.getElementById("correo");
+    const asuntoInput = document.getElementById("asunto");
+    const mensajeInput = document.getElementById("mensaje");
+
+    [nombreInput, correoInput, asuntoInput, mensajeInput].forEach(input => input?.setCustomValidity(""));
+
+    if (nombre.length < 3) {
+        nombreInput?.setCustomValidity("El nombre debe tener al menos 3 caracteres.");
+        nombreInput?.reportValidity();
+        return ["El nombre debe tener al menos 3 caracteres."];
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(correo)) errores.push("El correo no tiene un formato válido.");
-    if (asunto.length < 5) errores.push("El asunto debe tener al menos 5 caracteres.");
-    if (mensaje.length < 10) errores.push("El mensaje debe tener al menos 10 caracteres.");
-    return errores;
+    if (!emailRegex.test(correo)) {
+        correoInput?.setCustomValidity("El correo no tiene un formato válido.");
+        correoInput?.reportValidity();
+        return ["El correo no tiene un formato válido."];
+    }
+
+    if (asunto.length < 5) {
+        asuntoInput?.setCustomValidity("El asunto debe tener al menos 5 caracteres.");
+        asuntoInput?.reportValidity();
+        return ["El asunto debe tener al menos 5 caracteres."];
+    }
+
+    if (mensaje.length < 10) {
+        mensajeInput?.setCustomValidity("El mensaje debe tener al menos 10 caracteres.");
+        mensajeInput?.reportValidity();
+        return ["El mensaje debe tener al menos 10 caracteres."];
+    }
+
+    return [];
 }
