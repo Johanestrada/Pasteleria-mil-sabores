@@ -75,8 +75,67 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Mostrar mensajes
             if (errores.length > 0) mensajeRegistro.innerHTML = `<span class="text-danger">${errores.join("<br>")}</span>`;
-            else if (promociones.length > 0) mensajeRegistro.innerHTML = promociones.join("<br>");
-            else mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso!</span>`;
+                    else if (promociones.length > 0) mensajeRegistro.innerHTML = promociones.join("<br>");
+                    else {
+                        mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! Guardando en base de datos...</span>`;
+
+                        // Configuración de Firebase (coincide con src/config/firebase.js)
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
+                            authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
+                            projectId: "tiendapasteleriamilsabor-195dc",
+                            storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
+                            messagingSenderId: "790229094599",
+                            appId: "1:790229094599:web:7abf216f776053a6dbeee2",
+                            measurementId: "G-0XMLPFPNM1"
+                        };
+
+                        try {
+                            console.log('Registro: inicializando Firebase (compat) con config:', firebaseConfig);
+                            // Inicializar Firebase (compat) si no está inicializado
+                            if (!firebase.apps || firebase.apps.length === 0) {
+                                firebase.initializeApp(firebaseConfig);
+                                console.log('Registro: Firebase inicializado');
+                            } else {
+                                console.log('Registro: Firebase ya estaba inicializado');
+                            }
+
+                            const db = firebase.firestore();
+
+                            // Crear objeto de usuario a guardar
+                            const userObj = {
+                                nombre,
+                                email,
+                                telefono,
+                                region,
+                                comuna,
+                                fechaNacimiento,
+                                codigo,
+                                createdAt: new Date()
+                            };
+
+                            console.log('Registro: guardando en Firestore usuario:', userObj);
+
+                            // Guardar en colección 'usuario'
+                            db.collection('usuario').add(userObj)
+                                .then(docRef => {
+                                    console.log('Registro: documento creado en Firestore, id=', docRef.id);
+                                    mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! ID: ${docRef.id}</span>`;
+                                    formRegistro.reset();
+                                })
+                                .catch(err => {
+                                    console.error('Error guardando en Firestore:', err);
+                                    if (err && err.code === 'permission-denied') {
+                                        mensajeRegistro.innerHTML = `<span class="text-danger">Permiso denegado: revisa las reglas de Firestore.</span>`;
+                                    } else {
+                                        mensajeRegistro.innerHTML = `<span class="text-danger">Error al guardar en la base de datos. Revisa la consola para más detalles.</span>`;
+                                    }
+                                });
+                        } catch (err) {
+                            console.error('Error inicializando Firebase o guardando:', err);
+                            mensajeRegistro.innerHTML = `<span class="text-danger">Error en la inicialización de Firebase. Revisa la consola.</span>`;
+                        }
+                    }
         });
     }
 

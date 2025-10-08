@@ -1,7 +1,6 @@
 import { addUser } from "./services/firestoreService.js";
 import { validarRegistro, comunasPorRegion } from "./utils/validaciones.js";
 
-import { db } from "./config/firebase.js";
 
 
 // Espera que el DOM esté listo
@@ -69,3 +68,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// === Prueba rápida de Firebase (solo en cliente) ===
+// Visita http://localhost:3000/?firebaseTest=1 para ejecutar
+try {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('firebaseTest') === '1') {
+      (async () => {
+        console.log('Firebase test: iniciando...');
+        try {
+          const testUser = {
+            nombre: 'Usuario de Prueba',
+            email: 'prueba+local@example.com',
+            password: 'Test1234A',
+            confirmPassword: 'Test1234A',
+            telefono: '000000000',
+            region: 'rm',
+            comuna: 'santiago',
+            fechaNacimiento: '1990-01-01',
+            codigo: 'TEST'
+          };
+          const docRef = await addUser(testUser);
+          console.log('Firebase test: resultado addUser ->', docRef && docRef.id ? docRef.id : docRef);
+          alert('Firebase test: enviado. Revisa la consola y Firestore.');
+        } catch (err) {
+          console.error('Firebase test error:', err);
+          alert('Firebase test: error. Mira la consola para más detalles.');
+        }
+      })();
+    }
+  }
+} catch (err) {
+  console.error('Error en el init de la prueba Firebase:', err);
+}

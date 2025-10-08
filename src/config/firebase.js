@@ -6,7 +6,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
   authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
   projectId: "tiendapasteleriamilsabor-195dc",
-  storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com", // CORREGIDO
+  storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
   messagingSenderId: "790229094599",
   appId: "1:790229094599:web:7abf216f776053a6dbeee2",
   measurementId: "G-0XMLPFPNM1"
@@ -14,5 +14,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-export const db = getFirestore(app); // SOLO exporta db, igual que tu profe
+// Analytics puede fallar en entornos que no soportan window; lo protegemos
+let analytics;
+try {
+  analytics = getAnalytics(app);
+} catch (err) {
+  // No crítico: solo informamos en consola si falla (ej. entorno de test o SSR)
+  // console.debug('Firebase Analytics no disponible:', err);
+}
+
+export const db = getFirestore(app);
+export default app;
