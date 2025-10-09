@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ----------- Registro -----------
+    // ----------- REGISTRO -----------
     const formRegistro = document.getElementById('form-registro');
-    const mensajeRegistro = document.getElementById('mensaje-descuento');
-
     if (formRegistro) {
+        const mensajeRegistro = document.getElementById('mensaje-descuento');
         const regionSelect = document.getElementById('region');
         const comunaSelect = document.getElementById('comuna');
 
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // Validación del formulario
+        // Validación del formulario de registro
         formRegistro.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let errores = [];
             let promociones = [];
 
-            // Validaciones...
+            // Validaciones
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) errores.push("El correo no tiene un formato válido.");
             if (telefono && !/^[0-9]{9}$/.test(telefono)) errores.push("El teléfono debe tener 9 dígitos numéricos.");
@@ -60,110 +59,171 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!comuna) errores.push("Debes seleccionar una comuna.");
             if (!fechaNacimiento) errores.push("Debes ingresar tu fecha de nacimiento.");
 
-            // Descuentos
+            // Descuentos y promociones
             if (fechaNacimiento) {
                 const hoy = new Date();
                 const nacimiento = new Date(fechaNacimiento);
                 let edad = hoy.getFullYear() - nacimiento.getFullYear();
                 const mes = hoy.getMonth() - nacimiento.getMonth();
                 if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) edad--;
+
                 if (edad > 50) promociones.push("🎉 ¡Felicidades! Recibes un <b>50% de descuento</b> por ser mayor de 50 años.");
+
                 const esCumple = hoy.getDate() === nacimiento.getDate() && hoy.getMonth() === nacimiento.getMonth();
                 if (esCumple && email.endsWith("@duocuc.cl")) promociones.push("¡Feliz cumpleaños! Como estudiante DUOC recibes una <b>torta gratis</b>.");
             }
+
             if (codigo === "FELICES50") promociones.push("Obtienes un <b>10% de descuento de por vida</b> con el código FELICES50.");
 
             // Mostrar mensajes
-            if (errores.length > 0) mensajeRegistro.innerHTML = `<span class="text-danger">${errores.join("<br>")}</span>`;
-                    else if (promociones.length > 0) mensajeRegistro.innerHTML = promociones.join("<br>");
-                    else {
-                        mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! Guardando en base de datos...</span>`;
+            if (errores.length > 0) {
+                mensajeRegistro.innerHTML = `<span class="text-danger">${errores.join("<br>")}</span>`;
+                return;
+            }
 
-                        // Configuración de Firebase (coincide con src/config/firebase.js)
-                        const firebaseConfig = {
-                            apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
-                            authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
-                            projectId: "tiendapasteleriamilsabor-195dc",
-                            storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
-                            messagingSenderId: "790229094599",
-                            appId: "1:790229094599:web:7abf216f776053a6dbeee2",
-                            measurementId: "G-0XMLPFPNM1"
-                        };
+            if (promociones.length > 0) {
+                mensajeRegistro.innerHTML = promociones.join("<br>");
+            } else {
+                mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! Guardando en base de datos...</span>`;
 
-                        try {
-                            console.log('Registro: inicializando Firebase (compat) con config:', firebaseConfig);
-                            // Inicializar Firebase (compat) si no está inicializado
-                            if (!firebase.apps || firebase.apps.length === 0) {
-                                firebase.initializeApp(firebaseConfig);
-                                console.log('Registro: Firebase inicializado');
-                            } else {
-                                console.log('Registro: Firebase ya estaba inicializado');
-                            }
+                // Configuración de Firebase
+                const firebaseConfig = {
+                    apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
+                    authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
+                    projectId: "tiendapasteleriamilsabor-195dc",
+                    storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
+                    messagingSenderId: "790229094599",
+                    appId: "1:790229094599:web:7abf216f776053a6dbeee2",
+                    measurementId: "G-0XMLPFPNM1"
+                };
 
-                            const db = firebase.firestore();
-
-                            // Crear objeto de usuario a guardar
-                            const userObj = {
-                                nombre,
-                                email,
-                                telefono,
-                                region,
-                                comuna,
-                                fechaNacimiento,
-                                codigo,
-                                createdAt: new Date()
-                            };
-
-                            console.log('Registro: guardando en Firestore usuario:', userObj);
-
-                            // Guardar en colección 'usuario'
-                            db.collection('usuario').add(userObj)
-                                .then(docRef => {
-                                    console.log('Registro: documento creado en Firestore, id=', docRef.id);
-                                    mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! ID: ${docRef.id}</span>`;
-                                    formRegistro.reset();
-                                })
-                                .catch(err => {
-                                    console.error('Error guardando en Firestore:', err);
-                                    if (err && err.code === 'permission-denied') {
-                                        mensajeRegistro.innerHTML = `<span class="text-danger">Permiso denegado: revisa las reglas de Firestore.</span>`;
-                                    } else {
-                                        mensajeRegistro.innerHTML = `<span class="text-danger">Error al guardar en la base de datos. Revisa la consola para más detalles.</span>`;
-                                    }
-                                });
-                        } catch (err) {
-                            console.error('Error inicializando Firebase o guardando:', err);
-                            mensajeRegistro.innerHTML = `<span class="text-danger">Error en la inicialización de Firebase. Revisa la consola.</span>`;
-                        }
+                try {
+                    console.log('Registro: inicializando Firebase con config:', firebaseConfig);
+                    if (!firebase.apps || firebase.apps.length === 0) {
+                        firebase.initializeApp(firebaseConfig);
                     }
+
+                    const db = firebase.firestore();
+
+                    const userObj = {
+                        nombre,
+                        email,
+                        telefono,
+                        region,
+                        comuna,
+                        fechaNacimiento,
+                        codigo,
+                        createdAt: new Date()
+                    };
+
+                    db.collection('usuario').add(userObj)
+                        .then(docRef => {
+                            mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! ID: ${docRef.id}</span>`;
+                            formRegistro.reset();
+                        })
+                        .catch(err => {
+                            console.error('Error guardando en Firestore:', err);
+                            mensajeRegistro.innerHTML = `<span class="text-danger">Error al guardar en la base de datos.</span>`;
+                        });
+
+                } catch (err) {
+                    console.error('Error inicializando Firebase o guardando:', err);
+                    mensajeRegistro.innerHTML = `<span class="text-danger">Error en la inicialización de Firebase.</span>`;
+                }
+            }
         });
     }
 
-    // ----------- Login -----------
-    const formLogin = document.getElementById('form-login');
-    const mensajeLogin = document.getElementById('mensaje-login');
-
+    // ----------- LOGIN -----------
+    const formLogin = document.getElementById("form-login");
     if (formLogin) {
-        const adminEmail = "admin@duocuc.cl";
-        const adminPassword = "admin123";
+        const correoInput = document.getElementById("correoLogin");
+        const claveInput = document.getElementById("claveLogin");
+        const mensaje = document.getElementById("mensajeLogin");
 
-        formLogin.addEventListener('submit', function (e) {
+        const firebaseConfig = {
+            apiKey: "AIzaSyBBT7jka7a-7v3vY19BlSajamiedLrBTN0",
+            authDomain: "tiendanombretienda.firebaseapp.com",
+            projectId: "tiendanombretienda",
+            storageBucket: "tiendanombretienda.appspot.com",
+            messagingSenderId: "408928911689",
+            appId: "1:408928911689:web:d8b313c7e15fc528661a98",
+            measurementId: "G-Y1DW47VEWZ"
+        };
+
+        if (!firebase.apps?.length) firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        formLogin.addEventListener("submit", async (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            if (email === adminEmail && password === adminPassword) window.location.href = "admin.html";
-            else mensajeLogin.innerHTML = `<span class="text-danger">Usuario o contraseña incorrectos.</span>`;
+            mensaje.innerText = "";
+
+            const correo = correoInput.value.trim().toLowerCase();
+            const clave = claveInput.value;
+
+            if (!correo || !clave) {
+                mensaje.style.color = "red";
+                mensaje.innerText = "Debes completar correo y clave";
+                return;
+            }
+
+            // Login administrador
+            if (correo === "admin@duoc.cl") {
+                try {
+                    await auth.signInWithEmailAndPassword(correo, clave);
+                    const usuario = { nombre: "Administrador", correo, rol: "admin" };
+                    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+                    mensaje.style.color = "green";
+                    mensaje.innerText = "Bienvenido Administrador, redirigiendo...";
+                    setTimeout(() => {
+                        window.location.href = "perfilAdmin.html";
+                    }, 1000);
+                } catch (error) {
+                    mensaje.style.color = "red";
+                    mensaje.innerText = "Credenciales incorrectas para administrador";
+                }
+                return;
+            }
+
+            // Login cliente
+            try {
+                const query = await db.collection("usuario")
+                    .where("correo", "==", correo)
+                    .where("clave", "==", clave)
+                    .get();
+
+                if (!query.empty) {
+                    const userData = query.docs[0].data();
+                    const nombre = userData.nombre || correo;
+
+                    const usuario = { nombre, correo, rol: "cliente" };
+                    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+                    mensaje.style.color = "green";
+                    mensaje.innerText = "Bienvenido cliente, redirigiendo...";
+                    setTimeout(() => {
+                        window.location.href = "perfilCliente.html";
+                    }, 1000);
+                } else {
+                    mensaje.style.color = "red";
+                    mensaje.innerText = "Correo o clave incorrectos";
+                }
+            } catch (error) {
+                console.error("Error login cliente:", error);
+                mensaje.style.color = "red";
+                mensaje.innerText = "Error al verificar usuario";
+            }
         });
     }
-});
 
-// ----------- Contacto -----------
-
-document.addEventListener('DOMContentLoaded', function () {
+    // ----------- CONTACTO -----------
     const formContacto = document.getElementById('form-contacto');
-    const mensajeContacto = document.getElementById('mensaje-contacto');
-
     if (formContacto) {
+        const mensajeContacto = document.getElementById('mensaje-contacto');
+
         formContacto.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -174,23 +234,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const run = document.getElementById('run').value.trim();
             let errores = [];
 
-            // Validar nombre
             if (nombre.length < 3) errores.push("El nombre debe tener al menos 3 caracteres.");
-
-            // Validar run
             if (run.length < 3) errores.push("El run debe tener al menos 3 caracteres.");
-
-            // Validar correo
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(correo)) errores.push("El correo no tiene un formato válido.");
-
-            // Validar asunto
             if (asunto.length < 5) errores.push("El asunto debe tener al menos 5 caracteres.");
-
-            // Validar mensaje
             if (mensaje.length < 10) errores.push("El mensaje debe tener al menos 10 caracteres.");
 
-            // Mostrar errores o éxito
             if (errores.length > 0) {
                 mensajeContacto.innerHTML = `<span class="text-danger">${errores.join("<br>")}</span>`;
             } else {
@@ -199,4 +249,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
 });
