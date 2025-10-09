@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (formLogin) {
         const correoInput = document.getElementById("correoLogin");
         const claveInput = document.getElementById("claveLogin");
-        const mensaje = document.getElementById("mensajeLogin");
+        const mensaje = document.getElementById("mensaje-login");
 
         const firebaseConfig = {
             apiKey: "AIzaSyBBT7jka7a-7v3vY19BlSajamiedLrBTN0",
@@ -159,6 +159,10 @@ document.addEventListener('DOMContentLoaded', function () {
         formLogin.addEventListener("submit", async (e) => {
             e.preventDefault();
             mensaje.innerText = "";
+            const mensajeError = document.getElementById("mensaje-error");
+            if (mensajeError) {
+                mensajeError.innerText = "Mensaje de error";
+            }
 
             const correo = correoInput.value.trim().toLowerCase();
             const clave = claveInput.value;

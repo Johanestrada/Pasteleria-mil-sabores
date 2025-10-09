@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-login");
     const correoInput = document.getElementById("correoLogin");
     const claveInput = document.getElementById("claveLogin");
-    const mensaje = document.getElementById("mensajeLogin");
+    const mensaje = document.getElementById("mensaje-login");
 
     if (!form) return console.error("No se encontró #formLogin");
 
