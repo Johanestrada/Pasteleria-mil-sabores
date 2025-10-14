@@ -2,20 +2,21 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
+ 
+// Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
-  authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
-  projectId: "tiendapasteleriamilsabor-195dc",
-  storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
-  messagingSenderId: "790229094599",
-  appId: "1:790229094599:web:7abf216f776053a6dbeee2",
-  measurementId: "G-0XMLPFPNM1"
+  apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+  authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+  projectId: "tiendapasteleriamilsabor-a193d",
+  storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
+  messagingSenderId: "1022940675339",
+  appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
+  measurementId: "G-WKZ1WX5H72"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// Analytics puede fallar en entornos que no soportan window; lo protegemos
-let analytics;
+const analytics = getAnalytics(app);
+
 try {
   analytics = getAnalytics(app);
 } catch (err) {
