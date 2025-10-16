@@ -1,0 +1,16 @@
+{
+    "spec_dir": "src",
+    "spec_files": [
+        "**/*.test.js",
+        "**/*.test.jsx",
+        "**/*.test.ts",
+        "**/*.test.tsx"
+        ],
+    "helpers": [
+        "../spec/helpers/**/*.js"
+    ],
+    "ent": {
+        "stopSpecOnExpectationFailure": false,
+        "random": true
+    }
+}
