@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! Guardando en base de datos...</span>`;
 
                 // Configuración de Firebase
-                const firebaseConfig = {
-                    apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
-                    authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
-                    projectId: "tiendapasteleriamilsabor-195dc",
-                    storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
-                    messagingSenderId: "790229094599",
-                    appId: "1:790229094599:web:7abf216f776053a6dbeee2",
-                    measurementId: "G-0XMLPFPNM1"
+               const firebaseConfig = {
+                    apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+                    authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+                    projectId: "tiendapasteleriamilsabor-a193d",
+                    storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
+                    messagingSenderId: "1022940675339",
+                    appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
+                    measurementId: "G-WKZ1WX5H72"
                 };
 
                 try {
@@ -142,13 +142,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const mensaje = document.getElementById("mensaje-login");
 
         const firebaseConfig = {
-            apiKey: "AIzaSyBBT7jka7a-7v3vY19BlSajamiedLrBTN0",
-            authDomain: "tiendanombretienda.firebaseapp.com",
-            projectId: "tiendanombretienda",
-            storageBucket: "tiendanombretienda.appspot.com",
-            messagingSenderId: "408928911689",
-            appId: "1:408928911689:web:d8b313c7e15fc528661a98",
-            measurementId: "G-Y1DW47VEWZ"
+            apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+            authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+            projectId: "tiendapasteleriamilsabor-a193d",
+            storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
+            messagingSenderId: "1022940675339",
+            appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
+            measurementId: "G-WKZ1WX5H72"
         };
 
         if (!firebase.apps?.length) firebase.initializeApp(firebaseConfig);

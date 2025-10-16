@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializar Firebase
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDcGOrjpPcVtxQutZ6R01AXhbkG9ixZitk",
-  authDomain: "tiendapasteleriamilsabor-195dc.firebaseapp.com",
-  projectId: "tiendapasteleriamilsabor-195dc",
-  storageBucket: "tiendapasteleriamilsabor-195dc.appspot.com",
-  messagingSenderId: "790229094599",
-  appId: "1:790229094599:web:7abf216f776053a6dbeee2",
-  measurementId: "G-0XMLPFPNM1"
+  apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+  authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+  projectId: "tiendapasteleriamilsabor-a193d",
+  storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
+  messagingSenderId: "1022940675339",
+  appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
+  measurementId: "G-WKZ1WX5H72"
 };
 
     if (!firebase.apps?.length) {
