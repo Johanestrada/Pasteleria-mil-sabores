@@ -4,89 +4,72 @@ document.addEventListener("DOMContentLoaded", () => {
     const claveInput = document.getElementById("claveLogin");
     const mensaje = document.getElementById("mensaje-login");
 
-    if (!form) return console.error("No se encontró #formLogin");
+    if (!form) return console.error("No se encontró #form-login");
 
-    // Inicializar Firebase
+    // Inicializar Firebase v8
+    const firebaseConfig = {
+        apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+        authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+        projectId: "tiendapasteleriamilsabor-a193d",
+        storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
+        messagingSenderId: "1022940675339",
+        appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
+        measurementId: "G-WKZ1WX5H72"
+    };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
-  authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
-  projectId: "tiendapasteleriamilsabor-a193d",
-  storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
-  messagingSenderId: "1022940675339",
-  appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
-  measurementId: "G-WKZ1WX5H72"
-};
-
-    if (!firebase.apps?.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
+    if (!firebase.apps?.length) firebase.initializeApp(firebaseConfig);
 
     const auth = firebase.auth();
     const db = firebase.firestore();
 
     form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    mensaje.innerText = "";
+        e.preventDefault();
+        mensaje.innerText = "";
 
-    const correo = correoInput.value.trim().toLowerCase();
-    const clave = claveInput.value;
+        const correo = correoInput.value.trim().toLowerCase();
+        const clave = claveInput.value;
 
-    if (!correo || !clave) {
-        mensaje.style.color = "red";
-        mensaje.innerText = "Debes completar correo y clave";
-        return;
-    }
+        if (!correo || !clave) {
+            mensaje.style.color = "red";
+            mensaje.innerText = "Debes completar correo y clave";
+            return;
+        }
 
-    // Admin: autenticar con Firebase Auth
-    if (correo === "admin@duoc.cl") {
         try {
-            await auth.signInWithEmailAndPassword(correo, clave);
-            // Guardar usuario en localStorage
-            const usuario = { nombre: "Administrador", correo, rol: "admin" };
-            localStorage.setItem("usuario", JSON.stringify(usuario));
+            // Login con Firebase Auth (admin y clientes)
+            const userCredential = await auth.signInWithEmailAndPassword(correo, clave);
+            const user = userCredential.user;
+
+            // Determinar rol
+            const rol = correo === "admin@duocuc.cl" ? "admin" : "cliente";
+
+            // Obtener datos adicionales de Firestore si es cliente
+            let nombre = correo;
+            if (rol === "cliente") {
+                const doc = await db.collection("usuario").doc(user.uid).get();
+                if (doc.exists) nombre = doc.data().nombre || correo;
+            } else {
+                nombre = "Administrador";
+            }
+
+            localStorage.setItem("usuario", JSON.stringify({ nombre, correo, rol }));
 
             mensaje.style.color = "green";
-            mensaje.innerText = "Bienvenido Administrador, redirigiendo...";
+            mensaje.innerText = "Bienvenido " + nombre + ", redirigiendo...";
             setTimeout(() => {
-                window.location.href = `perfilAdmin.html`;
+                if (rol === "admin") {
+                    window.location.href = "/assets/page/admin.html";
+                } else {
+                    window.location.href = "/assets/page/usuario.html";
+                }
             }, 1000);
+
+
+
         } catch (error) {
-            console.error("Error login admin:", error);
+            console.error("Error login:", error);
             mensaje.style.color = "red";
-            mensaje.innerText = "Credenciales incorrectas para administrador";
+            mensaje.innerText = "Correo o contraseña incorrectos";
         }
-        return;
-    }
-
-    // Cliente: validar desde Firestore
-    try {
-        const query = await db.collection("usuario")
-            .where("correo", "==", correo)
-            .where("clave", "==", clave)
-            .get();
-
-        if (!query.empty) {
-            const userData = query.docs[0].data();
-            const nombre = userData.nombre || correo;
-
-            // Guardar usuario en localStorage con rol real
-            const usuario = { nombre, correo, rol: "cliente" };
-            localStorage.setItem("usuario", JSON.stringify(usuario));
-
-            mensaje.style.color = "green";
-            mensaje.innerText = "Bienvenido cliente, redirigiendo...";
-            setTimeout(() => {
-                window.location.href = `perfilCliente.html`;
-            }, 1000);
-        } else {
-            mensaje.style.color = "red";
-            mensaje.innerText = "Correo o clave incorrectos";
-        }
-    } catch (error) {
-        console.error("Error login cliente:", error);
-        mensaje.style.color = "red";
-        mensaje.innerText = "Error al verificar usuario";
-    }
-});
+    });
 });

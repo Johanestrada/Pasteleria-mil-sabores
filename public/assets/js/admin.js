@@ -11,17 +11,14 @@ const btnLogout = document.getElementById("btn-logout");
 
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        // No logueado → volver a login
         window.location.href = "login.html";
         return;
     }
 
-    // Traer datos desde Firestore
     const docRef = doc(db, "usuarios", user.uid);
     const docSnap = await getDoc(docRef);
 
-    if (!docSnap.exists() || docSnap.data().rol !== "cliente") {
-        // No es cliente → volver a login
+    if (!docSnap.exists() || docSnap.data().rol !== "admin") {
         window.location.href = "login.html";
         return;
     }
