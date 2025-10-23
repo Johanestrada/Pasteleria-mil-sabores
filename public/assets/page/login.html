@@ -38,16 +38,16 @@
         </ul>
 
         <!-- Iconos de login y carrito -->
+        <!--buscar-->
         <div class="d-flex align-items-center ms-lg-3 gap-2">
-          <!-- Icono usuario -->
+          <a href="carrito.html" class="btn position-relative">
+            <i class="bi bi-cart fs-4"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+          </a>
+          <!-- Icono login -->
           <a href="login.html" class="btn text-dark p-0">
             <i class="bi bi-person fs-4"></i>
-          </a>
-
-          <!-- Carrito -->
-          <a href="carrito.html" class="btn position-relative p-0">
-            <i class="bi bi-cart fs-4"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
           </a>
         </div>
       </div>
@@ -130,6 +130,8 @@
   <!-- Tu JS -->
   <script src="../js/validaciones.js"></script>
   <script src="../../assets/js/login.js"></script>
+
+  <script src="../js/actualizarCarrito.js"></script>
 </body>
 
 </html>

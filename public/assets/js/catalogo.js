@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       'Hogar': '🏠', 'Deportes': '⚽', 'Zapatos': '👟',
       'Accesorios': '🕶️', 'Libros': '📚', 'Juguetes': '🧸', 'Belleza': '💄'
     };
-    return iconos[categoria] || '📦';
+    return iconos[categoria] || '🍰';
   }
 
   // ==== FILTRAR PRODUCTOS POR CATEGORÍA ====

@@ -290,12 +290,14 @@ function calcularTotal() {
  * Actualiza el header del carrito
  */
 function actualizarCarritoHeader() {
-    const total = carrito.reduce((sum, producto) => {
-        return sum + ((producto.precio || 0) * (producto.cantidad || 1));
+    const cantidadProductos = carrito.reduce((sum, producto) => {
+        return sum + (producto.cantidad || 1);
     }, 0);
-    
-    document.querySelector('.carrito-total').textContent = total.toLocaleString('es-CL');
+
+    const contador = document.querySelector('.carrito-total');
+    if (contador) contador.textContent = cantidadProductos;
 }
+
 
 /**
  * Guarda el carrito en localStorage
