@@ -50,16 +50,18 @@
                         <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                 </ul>
-                <a href="login.html" class="btn text-dark d-none d-md-block">
-                    <i class="bi bi-person fs-3"></i> <!-- fs-5 igual que el carrito -->
-                </a>
-                <!-- Carrito -->
-                <a href="carrito.html" class="btn position-relative">
-                    <i class="bi bi-cart fs-4"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        0
-                    </span>
-                </a>
+                <!--buscar-->
+                <div class="d-flex align-items-center ms-lg-3 gap-2">
+                    <a href="carrito.html" class="btn position-relative">
+                        <i class="bi bi-cart fs-4"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+                    </a>
+                    <!-- Icono login -->
+                    <a href="login.html" class="btn text-dark p-0">
+                        <i class="bi bi-person fs-4"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -165,6 +167,7 @@
             </div>
         </div>
     </footer>
+    <script src="../js/actualizarCarrito.js"></script>
 </body>
 <!-- Bootstrap JS -->
 <script src="../js/validaciones.js"></script>

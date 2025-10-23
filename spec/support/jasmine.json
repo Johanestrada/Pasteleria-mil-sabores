@@ -5,11 +5,11 @@
         "**/*.test.jsx",
         "**/*.test.ts",
         "**/*.test.tsx"
-        ],
+    ],
     "helpers": [
         "../spec/helpers/**/*.js"
     ],
-    "ent": {
+    "env": {
         "stopSpecOnExpectationFailure": false,
         "random": true
     }
