@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout - Mi Tienda</title>
   <link rel="stylesheet" href="../css/catalogo.css">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../css/carrito.css">
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -20,39 +23,35 @@
 </head>
 <body>
   <!-- HEADER -->
-  <header class="header">
-    <div class="header-top">
-      <div class="search-container">
-        <input type="text" id="buscador" placeholder="Buscar productos..." class="search-input">
-        <button id="btnBuscar" class="btn-buscar">Buscar</button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
+      <div class="container">
+          <a class="navbar-brand" href="../../index.html">
+              <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+                  <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+                  <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
+                  <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                  <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
+                  <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+              </ul>
+              <a href="carrito.html" class="btn position-relative">
+                  <i class="bi bi-cart fs-4"></i>
+                  <span
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+              </a>
+              <!-- Icono login -->
+              <a href="login.html" class="btn text-dark p-0">
+                  <i class="bi bi-person fs-4"></i>
+              </a>
+          </div>
       </div>
-      <div class="auth-buttons">
-        <button class="btn-login">Iniciar Sesión</button>
-        <button class="btn-signup">Crear Cuenta</button>
-      </div>
-    </div>
-
-    <nav class="nav-main">
-      <div class="nav-center">
-        <a href="catalogo.html" class="nav-link">Home</a>
-        <div class="dropdown">
-          <a href="#" class="nav-link">Categoría ⌄</a>
-          <div class="dropdown-content" id="dropdownCategorias"></div>
-        </div>
-        <a href="#" class="nav-link">Ofertas</a>
-        <a href="#" class="nav-link">Nosotros</a>
-        <a href="#" class="nav-link">Blog</a>
-        <a href="#" class="nav-link">Contacto</a>
-      </div>
-      
-      <div class="nav-right">
-        <button class="btn-carrito" onclick="window.location.href='carrito.html'">
-          <span class="carrito-icon">🛒</span>
-          Total: $<span class="carrito-total">0</span>
-        </button>
-      </div>
-    </nav>
-  </header>
+  </nav>
 
   <!-- MAIN CONTENT -->
   <main class="main">
@@ -158,5 +157,6 @@
   </main>
 
   <script src="../js/checkout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
