@@ -121,7 +121,7 @@
                         <label for="quantity" class="form-label">Cantidades:</label>
                         <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
                     </div>
-                    <button class="btn btn-primary btn-lg mb-3 me-2">
+                    <button class="btn btn-primary btn-lg mb-3 me-2 add-to-cart-btn">
                         <i class="bi bi-cart-plus"></i> Agregar A Carrito
                     </button>
                     <button class="btn btn-outline-secondary btn-lg mb-3">
@@ -173,6 +173,24 @@
             document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
             event.target.classList.add('active');
         }
+    </script>
+    <script>
+        // Script para verificar el login antes de agregar al carrito
+        document.addEventListener('click', function(event) {
+            const addToCartButton = event.target.closest('.add-to-cart-btn');
+
+            if (addToCartButton) {
+                // Asumimos que el estado de login se guarda en localStorage (ej: 'usuario')
+                const usuarioLogeado = localStorage.getItem('usuario'); 
+
+                if (!usuarioLogeado) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    alert('Debes iniciar sesión para agregar productos al carrito.');
+                    window.location.href = 'login.html'; // Redirigir a la página de login
+                }
+            }
+        }, true); // Usar fase de captura para que se ejecute primero.
     </script>
 </body>
 </html>
