@@ -58,9 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
             mensaje.innerText = "Bienvenido " + nombre + ", redirigiendo...";
             setTimeout(() => {
                 if (rol === "admin") {
-                    window.location.href = "/assets/page/admin.html";
+                    // Ruta relativa desde login.html a admin.html
+                    window.location.href = "admin.html";
                 } else {
-                    window.location.href = "/assets/page/usuario.html";
+                    // Ruta relativa desde login.html a index.html (subir dos niveles)
+                    window.location.href = "../../index.html";
                 }
             }, 1000);
 
