@@ -6,20 +6,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Inicializa la página de éxito con los datos de la compra
+ * Inicializa la pagina de exito con los datos de la compra
  */
 function inicializarPaginaExito() {
+    // Obtener parametros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const ordenParam = urlParams.get('orden');
     const ultimaCompra = JSON.parse(localStorage.getItem('ultimaCompra'));
     
+    // Si no hay datos de compra, redirigir al carrito
     if (!ultimaCompra && !ordenParam) {
-        // Redirigir al carrito si no hay datos de compra
         window.location.href = 'carrito.html';
         return;
     }
 
-    // Mostrar datos de la compra
+    // Mostrar los datos de la compra
     mostrarDatosCompra(ultimaCompra);
     renderizarProductosExito(ultimaCompra.productos);
     actualizarTotalExito(ultimaCompra.total);
@@ -29,16 +30,16 @@ function inicializarPaginaExito() {
  * Muestra los datos de la compra en los formularios
  */
 function mostrarDatosCompra(compra) {
-    // Actualizar números de orden y compra
+    // Actualizar numeros de orden y compra
     document.getElementById('codigoOrden').textContent = compra.numeroOrden;
     document.getElementById('numeroCompra').textContent = compra.numeroOrden;
 
-    // Datos del cliente
+    // Mostrar datos del cliente
     document.getElementById('exitoNombre').value = compra.cliente.nombre;
     document.getElementById('exitoApellidos').value = compra.cliente.apellidos;
     document.getElementById('exitoCorreo').value = compra.cliente.correo;
 
-    // Datos de dirección
+    // Mostrar datos de direccion
     document.getElementById('exitoCalle').value = compra.direccion.calle;
     document.getElementById('exitoDepartamento').value = compra.direccion.departamento;
     document.getElementById('exitoRegion').value = compra.direccion.region;
@@ -47,17 +48,18 @@ function mostrarDatosCompra(compra) {
 }
 
 /**
- * Renderiza los productos en la tabla de éxito
+ * Renderiza los productos en la tabla de exito
  */
 function renderizarProductosExito(productos) {
     const tbody = document.getElementById('tablaExitoBody');
     
+    // Generar filas de la tabla con los productos
     tbody.innerHTML = productos.map(producto => `
         <tr>
             <td>
                 <img src="${producto.imagen}" 
                      alt="${producto.nombre}" 
-                     class="imagen-tabla"
+                     class="producto-imagen-checkout"
                      onerror="this.src='https://via.placeholder.com/100x100/cccccc/969696?text=Imagen'">
             </td>
             <td>${producto.nombre}</td>
@@ -69,14 +71,14 @@ function renderizarProductosExito(productos) {
 }
 
 /**
- * Actualiza el total en la página de éxito
+ * Actualiza el total en la pagina de exito
  */
 function actualizarTotalExito(total) {
     document.getElementById('totalPagado').textContent = total.toLocaleString('es-CL');
 }
 
 /**
- * Actualiza el header del carrito (vacío después de compra exitosa)
+ * Actualiza el header del carrito (vacio despues de compra exitosa)
  */
 function actualizarCarritoHeader() {
     const carritoTotalElement = document.querySelector('.carrito-total');
@@ -112,7 +114,7 @@ function imprimirBoletaPDF() {
             </head>
             <body>
                 <div class="header">
-                    <h1>BOLETA ELECTRÓNICA</h1>
+                    <h1>BOLETA ELECTRONICA</h1>
                     <p>Orden: ${compra.numeroOrden} | Fecha: ${fecha}</p>
                 </div>
                 
@@ -120,7 +122,7 @@ function imprimirBoletaPDF() {
                     <h3>Datos del Cliente</h3>
                     <p><strong>Nombre:</strong> ${compra.cliente.nombre} ${compra.cliente.apellidos}</p>
                     <p><strong>Email:</strong> ${compra.cliente.correo}</p>
-                    <p><strong>Dirección:</strong> ${compra.direccion.calle}, ${compra.direccion.departamento}</p>
+                    <p><strong>Direccion:</strong> ${compra.direccion.calle}, ${compra.direccion.departamento}</p>
                     <p><strong>Comuna:</strong> ${compra.direccion.comuna}, ${compra.direccion.region}</p>
                     ${compra.direccion.indicaciones ? `<p><strong>Indicaciones:</strong> ${compra.direccion.indicaciones}</p>` : ''}
                 </div>
@@ -152,13 +154,13 @@ function imprimirBoletaPDF() {
                 
                 <div class="footer">
                     <p>¡Gracias por su compra!</p>
-                    <p>Este documento es una boleta electrónica generada automáticamente</p>
+                    <p>Este documento es una boleta electronica generada automaticamente</p>
                 </div>
             </body>
             </html>
         `;
 
-        // Crear ventana de impresión
+        // Crear ventana de impresion
         const ventanaImpresion = window.open('', '_blank');
         ventanaImpresion.document.write(contenidoBoleta);
         ventanaImpresion.document.close();
@@ -166,7 +168,7 @@ function imprimirBoletaPDF() {
         // Esperar a que cargue el contenido y luego imprimir
         ventanaImpresion.onload = function() {
             ventanaImpresion.print();
-            // Cerrar ventana después de imprimir
+            // Cerrar ventana despues de imprimir
             setTimeout(() => {
                 ventanaImpresion.close();
             }, 500);
@@ -179,7 +181,7 @@ function imprimirBoletaPDF() {
 }
 
 /**
- * Simula el envío de la boleta por email
+ * Simula el envio de la boleta por email
  */
 function enviarBoletaEmail() {
     try {
@@ -192,12 +194,12 @@ function enviarBoletaEmail() {
         btnEnviar.innerHTML = 'Enviando...';
         btnEnviar.disabled = true;
         
-        // Simular envío de email (en producción aquí iría una llamada a tu backend)
+        // Simular envio de email
         setTimeout(() => {
             btnEnviar.innerHTML = textoOriginal;
             btnEnviar.disabled = false;
             
-            // Mostrar confirmación
+            // Mostrar confirmacion
             Swal.fire({
                 icon: 'success',
                 title: '¡Boleta enviada!',
@@ -211,7 +213,7 @@ function enviarBoletaEmail() {
     } catch (error) {
         console.error('Error al enviar la boleta:', error);
         
-        // Restaurar botón en caso de error
+        // Restaurar boton en caso de error
         const btnEnviar = document.getElementById('btnEnviarEmail');
         btnEnviar.innerHTML = 'Enviar Boleta';
         btnEnviar.disabled = false;
@@ -226,26 +228,26 @@ function enviarBoletaEmail() {
 }
 
 /**
- * Configura los eventos de la página de éxito
+ * Configura los eventos de la pagina de exito
  */
 function configurarEventosExito() {
-    // Configurar botón de imprimir
+    // Configurar boton de imprimir
     const btnImprimir = document.getElementById('btnImprimirPDF');
     if (btnImprimir) {
         btnImprimir.addEventListener('click', imprimirBoletaPDF);
     } else {
-        console.error('Botón de imprimir no encontrado');
+        console.error('Boton de imprimir no encontrado');
     }
     
-    // Configurar botón de enviar
+    // Configurar boton de enviar
     const btnEnviar = document.getElementById('btnEnviarEmail');
     if (btnEnviar) {
         btnEnviar.addEventListener('click', enviarBoletaEmail);
     } else {
-        console.error('Botón de enviar no encontrado');
+        console.error('Boton de enviar no encontrado');
     }
     
-    // También agregar eventos para los botones si existen con diferentes IDs
+    // Tambien agregar eventos para los botones si existen con diferentes IDs
     const btnImprimirAlternativo = document.getElementById('btnImprimirBoleta');
     if (btnImprimirAlternativo) {
         btnImprimirAlternativo.addEventListener('click', imprimirBoletaPDF);

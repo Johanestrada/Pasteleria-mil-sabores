@@ -6,15 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Inicializa la página de error con los datos de la compra fallida
+ * Inicializa la pagina de error con los datos de la compra fallida
  */
 function inicializarPaginaError() {
+    // Obtener parametros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const ordenParam = urlParams.get('orden');
     const ultimaCompra = JSON.parse(localStorage.getItem('ultimaCompra'));
     
+    // Si no hay datos de compra, redirigir al carrito
     if (!ultimaCompra && !ordenParam) {
-        // Redirigir al carrito si no hay datos de compra
         window.location.href = 'carrito.html';
         return;
     }
@@ -29,15 +30,15 @@ function inicializarPaginaError() {
  * Muestra los datos de la compra fallida en los formularios
  */
 function mostrarDatosCompraError(compra) {
-    // Actualizar número de compra
+    // Actualizar numero de compra
     document.getElementById('numeroError').textContent = compra.numeroOrden;
 
-    // Datos del cliente
+    // Mostrar datos del cliente
     document.getElementById('errorNombre').value = compra.cliente.nombre;
     document.getElementById('errorApellidos').value = compra.cliente.apellidos;
     document.getElementById('errorCorreo').value = compra.cliente.correo;
 
-    // Datos de dirección
+    // Mostrar datos de direccion
     document.getElementById('errorCalle').value = compra.direccion.calle;
     document.getElementById('errorDepartamento').value = compra.direccion.departamento;
     document.getElementById('errorRegion').value = compra.direccion.region;
@@ -51,12 +52,13 @@ function mostrarDatosCompraError(compra) {
 function renderizarProductosError(productos) {
     const tbody = document.getElementById('tablaErrorBody');
     
+    // Generar filas de la tabla con los productos
     tbody.innerHTML = productos.map(producto => `
         <tr>
             <td>
                 <img src="${producto.imagen}" 
                      alt="${producto.nombre}" 
-                     class="imagen-tabla"
+                     class="producto-imagen-checkout"
                      onerror="this.src='https://via.placeholder.com/100x100/cccccc/969696?text=Imagen'">
             </td>
             <td>${producto.nombre}</td>
@@ -68,7 +70,7 @@ function renderizarProductosError(productos) {
 }
 
 /**
- * Actualiza el total en la página de error
+ * Actualiza el total en la pagina de error
  */
 function actualizarTotalError(total) {
     document.getElementById('totalError').textContent = total.toLocaleString('es-CL');
@@ -97,7 +99,7 @@ function reintentarPago() {
 }
 
 /**
- * Configura los eventos de la página de error
+ * Configura los eventos de la pagina de error
  */
 function configurarEventosError() {
     document.getElementById('btnReintentarPago').addEventListener('click', reintentarPago);

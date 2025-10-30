@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { UserProvider } from './context/UserContext';
+import { BrowserRouter as Router } from 'react-router-dom';
+import RouterConfig from './routes/RouterConfig';
 
 function App() {
   return(
@@ -14,3 +16,4 @@ function App() {
 }
 
 export default App;
+
