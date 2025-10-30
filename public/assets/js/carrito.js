@@ -110,23 +110,23 @@ function renderizarCarrito() {
 
     tbody.innerHTML = carrito.map((producto, index) => `
         <tr>
-            <td>
+            <td data-label="Imagen">
                 <img src="${producto.imagen}" 
                      alt="${producto.nombre}" 
                      class="imagen-tabla"
                      onerror="this.src='https://via.placeholder.com/100x100/cccccc/969696?text=Imagen'">
             </td>
-            <td>${producto.nombre}</td>
-            <td>$${producto.precio?.toLocaleString('es-CL')}</td>
-            <td>
+            <td data-label="Nombre">${producto.nombre}</td>
+            <td data-label="Precio">${producto.precio?.toLocaleString('es-CL')}</td>
+            <td data-label="Cantidad">
                 <div class="controles-cantidad">
                     <button class="btn-cantidad" onclick="disminuirCantidad(${index})">-</button>
                     <span class="cantidad-actual">${producto.cantidad || 1}</span>
                     <button class="btn-cantidad" onclick="aumentarCantidad(${index})">+</button>
                 </div>
             </td>
-            <td>$${((producto.precio || 0) * (producto.cantidad || 1)).toLocaleString('es-CL')}</td>
-            <td>
+            <td data-label="Subtotal">${((producto.precio || 0) * (producto.cantidad || 1)).toLocaleString('es-CL')}</td>
+            <td data-label="Acciones">
                 <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">
                     Eliminar
                 </button>
