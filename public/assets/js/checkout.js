@@ -196,7 +196,7 @@ async function procesarPago() {
                 ...compra,
                 id: docRef.id
             }));
-            window.location.href = `compraexitosa.html?orden=${compra.numeroOrden}`;
+            window.location.href = `compraExitosa.html?orden=${compra.numeroOrden}`;
         } else {
             // Actualizar estado en Firestore
             await db.collection('compras').doc(docRef.id).update({

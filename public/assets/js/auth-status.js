@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginLink = document.getElementById('login-link');
     const userDropdown = document.getElementById('user-dropdown');
     const userNameSpan = document.getElementById('user-name');
-    const logoutLink = document.getElementById('logout-link');
+    const logoutLinks = document.querySelectorAll('.logout-button');
 
     // Verificar si hay un usuario en localStorage
     const usuarioStr = localStorage.getItem("usuario");
@@ -23,22 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Configurar el botón de cerrar sesión
-    if (logoutLink) {
-        logoutLink.addEventListener('click', async (e) => {
-            e.preventDefault();
-            // Solo si Firebase está disponible, intenta cerrar sesión.
-            if (typeof firebase !== 'undefined' && firebase.auth) {
-                try {
-                    await firebase.auth().signOut();
-                } catch (error) {
-                    console.error('Error al cerrar sesión en Firebase:', error);
+    if (logoutLinks.length > 0) {
+        logoutLinks.forEach(logoutLink => {
+            logoutLink.addEventListener('click', async (e) => {
+                e.preventDefault();
+                // Solo si Firebase está disponible, intenta cerrar sesión.
+                if (typeof firebase !== 'undefined' && firebase.auth) {
+                    try {
+                        await firebase.auth().signOut();
+                    } catch (error) {
+                        console.error('Error al cerrar sesión en Firebase:', error);
+                    }
                 }
-            }
-            // Limpieza y redirección se hacen siempre.
-            localStorage.removeItem('usuario');
-            localStorage.removeItem('carrito');
-            alert('Has cerrado sesión.');
-            window.location.href = '/index.html';
+                // Limpieza y redirección se hacen siempre.
+                localStorage.removeItem('usuario');
+                localStorage.removeItem('carrito');
+                alert('Has cerrado sesión.');
+                window.location.href = '/index.html';
+            });
         });
     }
 });
