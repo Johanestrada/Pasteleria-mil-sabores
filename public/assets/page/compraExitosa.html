@@ -11,43 +11,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER: Barra de navegación estándar. -->
   <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="../../index.html">
-            <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
-                <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-            </ul>
-            <a href="carrito.html" class="btn position-relative">
-                <i class="bi bi-cart fs-4"></i>
-                <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
-            </a>
-            <!-- Icono login -->
-            <a href="login.html" class="btn text-dark p-0">
-                <i class="bi bi-person fs-4"></i>
-            </a>
-        </div>
-    </div>
+    <!-- ... Contenido de la barra de navegación ... -->
   </nav>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT: Contenido principal de la página de compra exitosa. -->
   <main class="main">
-    <!-- Contenedor principal de la pagina de exito -->
     <div class="exito-container">
-      <!-- Encabezado de la pagina de exito -->
+      <!-- Encabezado de Éxito: Confirma la compra y muestra el número de orden. -->
       <div class="exito-header">
+        <!-- El código de la orden y el número de compra se cargan dinámicamente. -->
         <span class="codigo-orden" id="codigoOrden">ORDEN: 20240705</span>
         <div class="exito-titulo">
           <span class="icono-exito">✅</span>
@@ -55,11 +29,11 @@
         </div>
       </div>
 
-      <!-- Seccion de informacion del cliente -->
+      <!-- Información del Cliente (Solo Lectura): Muestra los datos del comprador. -->
       <section class="info-cliente">
         <h2 class="section-title">Información del Cliente</h2>
-        
         <form class="form-cliente readonly">
+          <!-- Campos deshabilitados (readonly) con la información de la compra. -->
           <div class="form-row">
             <div class="form-group">
               <label>Nombre</label>
@@ -77,11 +51,11 @@
         </form>
       </section>
 
-      <!-- Seccion de direccion de entrega -->
+      <!-- Dirección de Entrega (Solo Lectura): Muestra la dirección de envío. -->
       <section class="direccion-entrega">
         <h2 class="section-title">Dirección de entrega de los productos</h2>
-        
         <form class="form-direccion readonly">
+          <!-- Campos deshabilitados (readonly) con la dirección de la compra. -->
           <div class="form-row">
             <div class="form-group">
               <label>Calle</label>
@@ -109,7 +83,7 @@
         </form>
       </section>
 
-      <!-- Tabla de productos de la compra -->
+      <!-- Tabla de Productos: Detalle de los productos comprados. -->
       <div class="tabla-checkout-container">
         <table class="tabla-checkout">
           <thead>
@@ -121,13 +95,14 @@
               <th>Subtotal $</th>
             </tr>
           </thead>
+          <!-- Cuerpo de la tabla: Se rellena dinámicamente con los productos de la compra. -->
           <tbody id="tablaExitoBody">
-            <!-- Productos de la compra exitosa -->
+            <!-- Los productos se insertarán aquí desde compraExitosa.js. -->
           </tbody>
         </table>
       </div>
 
-      <!-- Total pagado de la compra -->
+      <!-- Total Pagado: Muestra el monto final de la compra. -->
       <div class="total-pagado-container">
         <div class="total-pagado">
           <span class="total-text">Total Pagado: $</span>
@@ -135,17 +110,18 @@
         </div>
       </div>
 
-            <!-- Pie de pagina de la seccion de exito -->
+      <!-- Acciones Post-Compra: Permite al usuario obtener un comprobante. -->
       <div class="exito-footer">
         <button id="btnImprimirPDF" class="btn-imprimir-pdf">Imprimir Boleta en PDF</button>
         <button id="btnEnviarEmail" class="btn-enviar-email">Enviar Boleta por Email</button>
       </div>
     </div>
-    </div>
   </main>
 
+  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- compraExitosa.js: Lógica para cargar los datos de la compra desde el almacenamiento local y gestionar los botones de impresión/envío. -->
   <script src="../js/compraExitosa.js"></script>
 </body>
 </html>

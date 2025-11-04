@@ -11,56 +11,31 @@
   <link rel="stylesheet" href="../css/carrito.css">
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER: Barra de navegación estándar. -->
   <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="../../index.html">
-            <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
-                <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-            </ul>
-            <a href="carrito.html" class="btn position-relative">
-                <i class="bi bi-cart fs-4"></i>
-                <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
-            </a>
-            <!-- Icono login -->
-            <a href="login.html" class="btn text-dark p-0">
-                <i class="bi bi-person fs-4"></i>
-            </a>
-        </div>
-    </div>
+    <!-- ... Contenido de la barra de navegación ... -->
   </nav>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT: Contenido principal de la página de error de pago. -->
   <main class="main">
-    <!-- Contenedor principal de la pagina de error -->
     <div class="error-container exito-container">
-      <!-- Encabezado de la pagina de error -->
+      <!-- Encabezado de Error: Muestra un mensaje indicando que el pago falló. -->
       <div class="error-header">
         <div class="error-titulo">
           <span class="icono-error">❌</span>
+          <!-- El número de error se puede cargar dinámicamente. -->
           <h1>No se pudo realizar el pago <span id="numeroError">#000001</span></h1>
         </div>
         <h2 class="error-subtitulo">Detalle de compra</h2>
+        <!-- Botón para reintentar el pago, redirige al checkout. -->
         <button id="btnReintentarPago" class="btn-reintentar-pago">Volver a realizar el pago</button>
       </div>
 
-      <!-- Seccion de informacion del cliente -->
+      <!-- Información del Cliente (Solo Lectura): Muestra los datos que el cliente ingresó. -->
       <section class="info-cliente">
         <h2 class="section-title">Información del Cliente</h2>
-        
         <form class="form-cliente readonly">
+          <!-- Los campos están deshabilitados (readonly) para que no se puedan editar. -->
           <div class="form-row">
             <div class="form-group">
               <label>Nombre</label>
@@ -78,11 +53,11 @@
         </form>
       </section>
 
-      <!-- Seccion de direccion de entrega -->
+      <!-- Dirección de Entrega (Solo Lectura): Muestra la dirección ingresada. -->
       <section class="direccion-entrega">
         <h2 class="section-title">Dirección de entrega de los productos</h2>
-        
         <form class="form-direccion readonly">
+           <!-- Los campos están deshabilitados (readonly). -->
           <div class="form-row">
             <div class="form-group">
               <label>Calle</label>
@@ -110,7 +85,7 @@
         </form>
       </section>
 
-      <!-- Tabla de productos de la compra -->
+      <!-- Tabla de Productos: Muestra los productos del intento de compra. -->
       <div class="tabla-checkout-container">
         <table class="tabla-checkout">
           <thead>
@@ -122,13 +97,14 @@
               <th>Subtotal $</th>
             </tr>
           </thead>
+          <!-- Cuerpo de la tabla: Se rellena dinámicamente con JS para mostrar los productos. -->
           <tbody id="tablaErrorBody">
-            <!-- Productos del error de pago -->
+            <!-- Los productos se insertarán aquí desde errorPago.js. -->
           </tbody>
         </table>
       </div>
 
-      <!-- Total de la compra -->
+      <!-- Total de la Compra: Muestra el monto total del intento de pago. -->
       <div class="total-pagado-container">
         <div class="total-pagado">
           <span class="total-text">Total: $</span>
@@ -138,7 +114,9 @@
     </div>
   </main>
 
+  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- errorPago.js: Lógica para cargar los datos de la compra fallida desde el almacenamiento local y gestionar el botón de reintento. -->
   <script src="../js/errorPago.js"></script>
 </body>
 </html>

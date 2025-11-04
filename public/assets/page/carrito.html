@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <!-- HEADER -->
+    <!-- HEADER: Barra de navegación principal del sitio. -->
     <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="../../index.html">
@@ -43,19 +43,21 @@
                     <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                 </ul>
+                <!-- Icono de Carrito: Muestra la cantidad de productos agregados. -->
                 <a href="carrito.html" class="btn position-relative">
                     <i class="bi bi-cart fs-4"></i>
                     <span
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
                 </a>
-                <!-- Contenedor Dinámico de Usuario -->
+                
+                <!-- Contenedor Dinámico de Usuario: Cambia según si el usuario ha iniciado sesión o no. -->
                 <div id="user-status-container">
-                    <!-- Para usuarios NO logueados (visible por defecto) -->
+                    <!-- Visible si el usuario NO ha iniciado sesión. -->
                     <a href="login.html" id="login-link" class="btn text-dark p-0">
                         <i class="bi bi-person fs-4"></i>
                     </a>
                 
-                    <!-- Para usuarios logueados (oculto por defecto) -->
+                    <!-- Visible si el usuario SÍ ha iniciado sesión. Se gestiona por JS. -->
                     <div class="nav-item dropdown" id="user-dropdown" style="display: none;">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="user-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-check-fill fs-4 text-success"></i>
@@ -72,16 +74,17 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT: Contenido principal de la página del carrito. -->
     <main class="main p-4">
         <div class="carrito-container">
-            <!-- Lista de Productos con Ofertas -->
+            <!-- Sección de Ofertas: Muestra productos recomendados o en oferta. -->
             <section class="ofertas-section">
                 <h2 class="section-title">Productos en Oferta</h2>
+                <!-- Contenedor para productos en oferta: Se rellena dinámicamente con JavaScript. -->
                 <div id="productosOferta" class="productos-grid"></div>
             </section>
 
-            <!-- Resumen del Carrito -->
+            <!-- Resumen del Carrito: Muestra los productos que el usuario ha agregado. -->
             <section class="resumen-carrito">
                 <h2 class="section-title">Resumen del Carrito</h2>
                 <div class="tabla-carrito-container">
@@ -96,18 +99,21 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
+                        <!-- Cuerpo de la tabla del carrito: Se rellena dinámicamente con los productos del localStorage. -->
                         <tbody id="tablaCarritoBody">
-                            <!-- Los productos del carrito se insertarán aquí -->
+                            <!-- Las filas de productos (<tr>) se insertarán aquí mediante JavaScript. -->
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Total y Botones -->
+                <!-- Footer del Carrito: Muestra el total y los botones de acción. -->
                 <div class="carrito-footer d-flex justify-content-between align-items-center mt-3">
+                    <!-- Total del Carrito: El valor se calcula y actualiza con JavaScript. -->
                     <div class="total-container">
                         <span class="total-text">Total: $</span>
                         <span id="totalCarrito" class="total-precio">0</span>
                     </div>
+                    <!-- Botones de Acción: Permiten limpiar el carrito o proceder al pago. -->
                     <div class="botones-carrito">
                         <button id="btnLimpiarCarrito" class="btn-limpiar btn btn-danger me-2">Limpiar Carrito</button>
                         <button id="btnComprarAhora" class="btn-comprar-ahora btn btn-primary">Comprar Ahora</button>
@@ -117,6 +123,7 @@
         </div>
     </main>
 
+    <!-- FOOTER: Pie de página con información de contacto y enlaces. -->
     <footer class="footer py-4 bg-pink">
         <div class="container-fluid">
             <div class="row">
@@ -155,10 +162,13 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- SCRIPTS: Archivos de JavaScript para la funcionalidad de la página. -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- auth-status.js: Gestiona el estado de autenticación del usuario en la barra de navegación. -->
     <script src="../js/auth-status.js"></script>
+    <!-- actualizarCarrito.js: Actualiza el contador de productos en el ícono del carrito. -->
     <script src="../js/actualizarCarrito.js"></script>
+    <!-- carrito.js: Lógica principal para mostrar productos, calcular total y gestionar acciones del carrito. -->
     <script src="../js/carrito.js"></script>
 </body>
 
