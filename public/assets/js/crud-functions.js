@@ -4,40 +4,81 @@
 
 class CRUDFunctionsSafe {
 	constructor() {
-		this.db = (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) ? firebase.firestore() : null;
+		this.db = null;
+		// Exponer la instancia en globales para compatibilidad con scripts existentes
+		window.crudFunctionsSafe = this;
+		if (!window.crudFunctions) window.crudFunctions = this;
+		
+		// Estas funciones no dependen de Firebase, se pueden ejecutar de inmediato
+		this.cargarDatosPerfil();
+		this.ocultarModalesAlInicio();
+		console.log('CRUDFunctionsSafe: Instancia creada, esperando DB...');
+	}
+
+	// Método para inyectar la dependencia de Firestore desde fuera
+	setDb(db) {
+		this.db = db;
+		console.log('CRUDFunctionsSafe: Instancia de Firestore recibida y configurada.');
+	}
+
+	ocultarModalesAlInicio() {
+		const modales = ['modalProducto', 'modalCategoria', 'modalUsuario'];
+		modales.forEach(id => {
+			const el = document.getElementById(id);
+			if (el) el.style.display = 'none';
+		});
+	}
+
+	cargarDatosPerfil() {
+		try {
+			const usuarioStr = localStorage.getItem('usuario');
+			if (!usuarioStr) return;
+			const usuario = JSON.parse(usuarioStr);
+			const profileNombre = document.getElementById('profileNombre');
+			const profileCorreo = document.getElementById('profileEmail') || document.getElementById('profileCorreo');
+			if (profileNombre) profileNombre.value = usuario.nombre || '';
+			if (profileCorreo) profileCorreo.value = usuario.email || usuario.correo || '';
+		} catch (e) {
+			// no crítico
+		}
 	}
 
 	verificarFirebase() {
-		if (!this.db && typeof window.crudManager === 'undefined') {
-			console.warn('Firebase no inicializado y window.crudManager no disponible');
-			return false;
+		if (this.db) {
+			return true;
 		}
-		return true;
+		
+		if (typeof window.crudManager !== 'undefined') {
+			console.warn('verificarFirebase: this.db es nulo, pero se encontró window.crudManager.');
+			return true;
+		}
+
+		console.error('CRUDFunctionsSafe: Firebase DB no ha sido configurado. La función setDb(db) nunca fue llamada.');
+		return false;
 	}
 
-	mostrarLoading(elementId) {
+	mostrarLoading(elementId, colspan) {
 		const elemento = document.getElementById(elementId);
-		if (elemento) elemento.innerHTML = '<tr><td colspan="10" class="loading">Cargando...</td></tr>';
+		if (elemento) elemento.innerHTML = `<tr><td colspan="${colspan}" class="loading">Cargando...</td></tr>`;
 	}
 
-	mostrarError(elementId, mensaje) {
+	mostrarError(elementId, mensaje, colspan) {
 		const elemento = document.getElementById(elementId);
-		if (elemento) elemento.innerHTML = `<tr><td colspan="10" class="error">${mensaje}</td></tr>`;
+		if (elemento) elemento.innerHTML = `<tr><td colspan="${colspan}" class="error">${mensaje}</td></tr>`;
 	}
 
 	async cargarUsuarios() {
 		try {
-			this.mostrarLoading('usuarios-tbody');
+			this.mostrarLoading('usuarios-tbody', 11);
 
 			if (typeof window.crudManager?.obtenerDatosUsuarios === 'function') {
-				console.log('Usando window.crudManager para obtener usuarios');
 				const usuarios = await window.crudManager.obtenerDatosUsuarios();
 				this.mostrarUsuarios(usuarios);
 				return usuarios;
 			}
 
 			if (!this.verificarFirebase()) {
-				this.mostrarError('usuarios-tbody', 'Firebase no inicializado');
+				this.mostrarError('usuarios-tbody', 'Firebase no inicializado', 11);
 				return [];
 			}
 
@@ -47,17 +88,16 @@ class CRUDFunctionsSafe {
 			return usuarios;
 		} catch (err) {
 			console.error('Error cargando usuarios (safe):', err);
-			this.mostrarError('usuarios-tbody', 'Error al cargar usuarios');
+			this.mostrarError('usuarios-tbody', 'Error al cargar usuarios', 11);
 			return [];
 		}
 	}
 
 	async cargarCategorias() {
 		try {
-			this.mostrarLoading('categorias-tbody');
+			this.mostrarLoading('categorias-tbody', 5);
 
 			if (typeof window.crudManager?.obtenerDatosProductos === 'function') {
-				console.log('Usando window.crudManager para obtener productos y extraer categorías');
 				const productos = await window.crudManager.obtenerDatosProductos();
 				const categorias = this.extraerCategoriasDeProductos(productos);
 				this.mostrarCategorias(categorias);
@@ -65,7 +105,7 @@ class CRUDFunctionsSafe {
 			}
 
 			if (!this.verificarFirebase()) {
-				this.mostrarError('categorias-tbody', 'Firebase no inicializado');
+				this.mostrarError('categorias-tbody', 'Firebase no inicializado', 5);
 				return [];
 			}
 
@@ -75,7 +115,7 @@ class CRUDFunctionsSafe {
 			return categorias;
 		} catch (err) {
 			console.error('Error cargando categorías (safe):', err);
-			this.mostrarError('categorias-tbody', 'Error al cargar categorías');
+			this.mostrarError('categorias-tbody', 'Error al cargar categorías', 5);
 			return [];
 		}
 	}
@@ -106,24 +146,33 @@ class CRUDFunctionsSafe {
 		if (!tbody) return;
 
 		if (!usuarios || usuarios.length === 0) {
-			tbody.innerHTML = '<tr><td colspan="8" class="no-data">No hay usuarios registrados</td></tr>';
+			tbody.innerHTML = '<tr><td colspan="11" class="no-data">No hay usuarios registrados</td></tr>';
 			return;
 		}
 
-		tbody.innerHTML = usuarios.map(usuario => `\\
-			<tr>\\
-				<td>${usuario.nombre || 'N/A'}</td>\\
-				<td>${usuario.email || 'N/A'}</td>\\
-				<td>${usuario.telefono || 'N/A'}</td>\\
-				<td>${usuario.ciudad || 'N/A'}</td>\\
-				<td>${usuario.rol || 'cliente'}</td>\\
-				<td>${usuario.createdAt?.toLocaleDateString?.() || 'N/A'}</td>\\
-				<td>\\
-					<button onclick="crudFunctionsSafe.editarUsuario('${usuario.id}')" class="btn-edit">Editar</button>\\
-					<button onclick="crudFunctionsSafe.eliminarUsuario('${usuario.id}')" class="btn-delete">Eliminar</button>\\
-				</td>\\
-			</tr>\\
-		`).join('');
+		tbody.innerHTML = usuarios.map(usuario => {
+			const fechaRegistro = (usuario.createdAt && usuario.createdAt.toDate) ? usuario.createdAt.toDate().toLocaleDateString() : 'N/A';
+			const estado = usuario.activo === false ? '<span class="badge inactivo">Inactivo</span>' : '<span class="badge activo">Activo</span>';
+			const rolClass = usuario.rol || 'cliente';
+			return `
+				<tr>
+					<td>${usuario.run || 'N/A'}</td>
+					<td>${usuario.nombre || 'N/A'}</td>
+					<td>${usuario.email || 'N/A'}</td>
+					<td>******</td>
+					<td>${(usuario.fecha && usuario.fecha.toDate) ? usuario.fecha.toDate().toLocaleDateString() : 'N/A'}</td>
+					<td>${usuario.telefono || 'N/A'}</td>
+					<td>${usuario.direccion || 'N/A'}</td>
+					<td><span class="badge ${rolClass}">${rolClass}</span></td>
+					<td>${estado}</td>
+					<td>${fechaRegistro}</td>
+					<td class="acciones">
+						<button onclick="crudFunctions.editarUsuario('${usuario.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+						<button onclick="crudFunctions.eliminarUsuario('${usuario.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+					</td>
+				</tr>
+			`;
+		}).join('');
 	}
 
 	mostrarCategorias(categorias) {
@@ -131,29 +180,200 @@ class CRUDFunctionsSafe {
 		if (!tbody) return;
 
 		if (!categorias || categorias.length === 0) {
-			tbody.innerHTML = '<tr><td colspan="4" class="no-data">No hay categorías registradas</td></tr>';
+			tbody.innerHTML = '<tr><td colspan="5" class="no-data"><i class="bi bi-inbox"></i><p>No hay categorías para mostrar.</p></td></tr>';
 			return;
 		}
 
-		tbody.innerHTML = categorias.map(categoria => `\\
-			<tr>\\
-				<td>${categoria.nombre}</td>\\
-				<td>${categoria.cantidad}</td>\\
-				<td>\\
-					<button onclick="crudFunctionsSafe.editarCategoria('${categoria.id || categoria.nombre}')" class="btn-edit">Editar</button>\\
-					<button onclick="crudFunctionsSafe.eliminarCategoria('${categoria.id || categoria.nombre}')" class="btn-delete">Eliminar</button>\\
-				</td>\\
-			</tr>\\
+		tbody.innerHTML = categorias.map(categoria => `
+			<tr>
+				<td>${categoria.nombre}</td>
+				<td>${categoria.descripcion || 'Descripción no disponible'}</td>
+				<td><span class="badge auto-generada">Auto-generada</span></td>
+				<td>${categoria.cantidad}</td>
+				<td class="acciones">
+					<button onclick="crudFunctions.editarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+					<button onclick="crudFunctions.eliminarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+				</td>
+			</tr>
 		`).join('');
 	}
 
-	editarUsuario(id) { console.log('editarUsuario', id); }
-	eliminarUsuario(id) { console.log('eliminarUsuario', id); }
-	editarCategoria(id) { console.log('editarCategoria', id); }
-	eliminarCategoria(id) { console.log('eliminarCategoria', id); }
+	// Stubs for actions
+	editarUsuario(id) { console.log('Editar usuario:', id); alert('Función no implementada: Editar usuario ' + id); }
+	eliminarUsuario(id) { console.log('Eliminar usuario:', id); alert('Función no implementada: Eliminar usuario ' + id); }
+	editarCategoria(id) { console.log('Editar categoría:', id); alert('Función no implementada: Editar categoría ' + id); }
+	eliminarCategoria(id) { console.log('Eliminar categoría:', id); alert('Función no implementada: Eliminar categoría ' + id); }
+    editarProducto(id) { console.log('Editar producto:', id); alert('Función no implementada: Editar producto ' + id); }
+    eliminarProducto(id) { console.log('Eliminar producto:', id); alert('Función no implementada: Eliminar producto ' + id); }
+    verOrden(id) { console.log('Ver orden:', id); alert('Función no implementada: Ver orden ' + id); }
+    editarOrden(id) { console.log('Editar orden:', id); alert('Función no implementada: Editar orden ' + id); }
 }
 
-window.crudFunctionsSafe = new CRUDFunctionsSafe();
+// Instanciar la versión segura (si no fue instanciada desde el constructor)
+window.crudFunctionsSafe = window.crudFunctionsSafe || new CRUDFunctionsSafe();
+// Mantener la compatibilidad con el global antiguo
+if (!window.crudFunctions) window.crudFunctions = window.crudFunctionsSafe;
+
+// Auto-carga segura al DOMContentLoaded para restaurar el comportamiento antiguo
+document.addEventListener('DOMContentLoaded', () => {
+	setTimeout(() => {
+		try {
+			if (document.getElementById('usuarios-tbody')) {
+				console.log('Cargando usuarios automaticamente (auto)...');
+				window.cargarUsuarios();
+			}
+			if (document.getElementById('categorias-tbody')) {
+				console.log('Cargando categorias automaticamente (auto)...');
+				window.cargarCategorias();
+			}
+		} catch (e) {
+			console.warn('Auto carga inicial falló:', e);
+		}
+
+		// Ajuste de fechas para reportes si los inputs existen
+		const hoy = new Date().toISOString().split('T')[0];
+		const primerDiaMes = new Date(); primerDiaMes.setDate(1);
+		const primerDiaStr = primerDiaMes.toISOString().split('T')[0];
+		const fechaInicio = document.getElementById('fechaInicio');
+		const fechaFin = document.getElementById('fechaFin');
+		if (fechaInicio) fechaInicio.value = primerDiaStr;
+		if (fechaFin) fechaFin.value = hoy;
+	}, 1000);
+});
+
+// --- Shims globales para compatibilidad con admin.html (botones onclick) ---
+function cerrarModal(id) {
+	const el = document.getElementById(id);
+	if (el) el.style.display = 'none';
+}
+
+function mostrarModalProducto() {
+	const el = document.getElementById('modalProducto');
+	if (el) {
+		document.getElementById('modalProductoTitulo').textContent = 'Nuevo Producto';
+		el.style.display = 'block';
+	}
+}
+
+function mostrarModalCategoria() {
+	const el = document.getElementById('modalCategoria');
+	if (el) {
+		document.getElementById('modalCategoriaTitulo').textContent = 'Nueva Categoría';
+		el.style.display = 'block';
+	}
+}
+
+function mostrarModalUsuario() {
+	const el = document.getElementById('modalUsuario');
+	if (el) {
+		document.getElementById('modalUsuarioTitulo').textContent = 'Nuevo Usuario';
+		el.style.display = 'block';
+	}
+}
+
+async function cargarUsuarios() {
+	if (window.crudFunctionsSafe) {
+		await window.crudFunctionsSafe.cargarUsuarios();
+	} else if (window.crudManager?.getUsuarios) {
+		const usuarios = await window.crudManager.getUsuarios();
+		if (window.crudFunctionsSafe) window.crudFunctionsSafe.mostrarUsuarios(usuarios || []);
+	}
+}
+
+async function cargarCategorias() {
+	if (window.crudFunctionsSafe) {
+		await window.crudFunctionsSafe.cargarCategorias();
+	} else if (window.crudManager?.getCategorias) {
+		const categorias = await window.crudManager.getCategorias();
+		if (window.crudFunctionsSafe) window.crudFunctionsSafe.mostrarCategorias(categorias || []);
+	}
+}
+
+async function cargarProductos() {
+	try {
+		let productos = [];
+		if (window.crudManager?.getProductos) {
+			productos = await window.crudManager.getProductos();
+		} else if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+			const snapshot = await window.crudFunctionsSafe.db.collection('producto').get();
+			productos = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+		}
+		
+		const tbody = document.getElementById('productos-tbody');
+		if (!tbody) return;
+		if (!productos || productos.length === 0) {
+			tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay productos registrados</td></tr>';
+			return;
+		}
+		tbody.innerHTML = productos.map(producto => {
+            const estado = (producto.stock || producto.cantidad || 0) > 0 ? '<span class="badge activo">En Stock</span>' : '<span class="badge inactivo">Agotado</span>';
+            return `
+			<tr>
+				<td>${producto.nombre || 'Sin nombre'}</td>
+				<td>$${(producto.precio || 0).toFixed(2)}</td>
+				<td>${producto.stock || producto.cantidad || 0}</td>
+                <td>${producto.categoria || 'N/A'}</td>
+				<td>${estado}</td>
+				<td class="acciones">
+					<button onclick="crudFunctions.editarProducto('${producto.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+					<button onclick="crudFunctions.eliminarProducto('${producto.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+				</td>
+			</tr>
+		`}).join('');
+	} catch (err) {
+		console.error('Error en cargarProductos shim:', err);
+        const tbody = document.getElementById('productos-tbody');
+        if(tbody) tbody.innerHTML = '<tr><td colspan="6" class="error-state">Error al cargar productos.</td></tr>';
+	}
+}
+
+async function cargarOrdenes() {
+	try {
+		let ordenes = [];
+		if (window.crudManager?.getOrdenes) {
+			ordenes = await window.crudManager.getOrdenes();
+		} else if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+			const snapshot = await window.crudFunctionsSafe.db.collection('compras').get();
+			ordenes = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+		}
+		const tbody = document.getElementById('ordenes-tbody');
+		if (!tbody) return;
+		if (!ordenes || ordenes.length === 0) {
+			tbody.innerHTML = '<tr><td colspan="6" class="no-data">No hay órdenes registradas</td></tr>';
+			return;
+		}
+		tbody.innerHTML = ordenes.map(o => {
+            const fecha = o.fecha && o.fecha.toDate ? o.fecha.toDate().toLocaleDateString() : (o.fecha ? new Date(o.fecha).toLocaleDateString() : 'N/A');
+            const estado = `<span class="badge ${o.estado || 'pendiente'}">${o.estado || 'pendiente'}</span>`;
+            return `
+			<tr>
+				<td>${o.id}</td>
+				<td>${o.usuario || o.cliente || 'N/A'}</td>
+				<td>$${(o.total || 0).toFixed(2)}</td>
+				<td>${estado}</td>
+				<td>${fecha}</td>
+				<td class="acciones">
+                    <button onclick="crudFunctions.verOrden('${o.id}')" class="btn btn-sm btn-info" title="Ver"><i class="bi bi-eye"></i></button>
+					<button onclick="crudFunctions.editarOrden('${o.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+				</td>
+			</tr>
+		`}).join('');
+	} catch (err) {
+		console.error('Error en cargarOrdenes shim:', err);
+        const tbody = document.getElementById('ordenes-tbody');
+        if(tbody) tbody.innerHTML = '<tr><td colspan="6" class="error-state">Error al cargar órdenes.</td></tr>';
+	}
+}
+
+// Exportar funciones globales para compatibilidad si son requeridas por otros scripts
+window.cargarUsuarios = window.cargarUsuarios || cargarUsuarios;
+window.cargarCategorias = window.cargarCategorias || cargarCategorias;
+window.cargarProductos = window.cargarProductos || cargarProductos;
+window.cargarOrdenes = window.cargarOrdenes || cargarOrdenes;
+window.mostrarModalProducto = window.mostrarModalProducto || mostrarModalProducto;
+window.mostrarModalCategoria = window.mostrarModalCategoria || mostrarModalCategoria;
+window.mostrarModalUsuario = window.mostrarModalUsuario || mostrarModalUsuario;
+window.cerrarModal = window.cerrarModal || cerrarModal;
 
 // Adaptador mínimo para compatibilidad con CrudManager y código existente
 window.crudManager = window.crudManager || {

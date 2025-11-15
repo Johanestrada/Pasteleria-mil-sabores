@@ -77,6 +77,14 @@ class DashboardManager {
             
             this.db = firebase.firestore();
             console.log('Firebase inicializado correctamente (TU proyecto: tiendapasteleriamilsabor-a193d)');
+            
+            // Inyectar la instancia de DB en el módulo CRUD
+            if (window.crudFunctionsSafe && typeof window.crudFunctionsSafe.setDb === 'function') {
+                window.crudFunctionsSafe.setDb(this.db);
+            } else {
+                console.warn('DashboardManager: No se pudo inyectar DB en crudFunctionsSafe. Puede que no esté cargado aún.');
+            }
+            
             return true;
             
         } catch (error) {
