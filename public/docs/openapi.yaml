@@ -1,0 +1,10 @@
+# Reemplaza este archivo por tu especificación OpenAPI completa.
+# Este es un placeholder mínimo válido para que Swagger UI cargue.
+openapi: 3.0.0
+info:
+  title: API - Placeholder
+  description: "Coloca aquí tu archivo OpenAPI (reemplaza este YAML por el tuyo)."
+  version: "1.0.0"
+servers:
+  - url: "/"
+paths: {}

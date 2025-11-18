@@ -200,11 +200,111 @@ class CRUDFunctionsSafe {
 
 	// Stubs for actions
 	editarUsuario(id) { console.log('Editar usuario:', id); alert('Función no implementada: Editar usuario ' + id); }
-	eliminarUsuario(id) { console.log('Eliminar usuario:', id); alert('Función no implementada: Eliminar usuario ' + id); }
+	async eliminarUsuario(id) {
+		console.log('Eliminar usuario solicitado:', id);
+		if (!id) return alert('ID de usuario inválido');
+
+		if (!confirm('¿Estás seguro de eliminar este usuario? Esta acción no se puede deshacer.')) return;
+
+		// Primero intentar usar una API/manager si está disponible (React / crudManager)
+		if (window.crudManager && typeof window.crudManager.deleteUsuario === 'function') {
+			window.crudManager.deleteUsuario(id)
+				.then(res => {
+					alert('Usuario eliminado correctamente (vía CrudManager).');
+					this.cargarUsuarios();
+				})
+				.catch(err => {
+					console.error('Error eliminando usuario via CrudManager:', err);
+					alert('Error eliminando usuario: ' + (err?.message || err));
+				});
+			return;
+		}
+
+		// Fallback: usar Firestore directamente (v8 style) si la DB fue inyectada
+		if (!this.verificarFirebase()) {
+			alert('No se puede eliminar: Firebase no inicializado.');
+			return;
+		}
+
+		try {
+			await this.db.collection('usuario').doc(id).delete();
+			alert('Usuario eliminado correctamente.');
+			// Refrescar lista
+			this.cargarUsuarios();
+		} catch (err) {
+			console.error('Error eliminando usuario (direct DB):', err);
+			alert('Error eliminando usuario: ' + (err?.message || err));
+		}
+	}
 	editarCategoria(id) { console.log('Editar categoría:', id); alert('Función no implementada: Editar categoría ' + id); }
-	eliminarCategoria(id) { console.log('Eliminar categoría:', id); alert('Función no implementada: Eliminar categoría ' + id); }
-    editarProducto(id) { console.log('Editar producto:', id); alert('Función no implementada: Editar producto ' + id); }
-    eliminarProducto(id) { console.log('Eliminar producto:', id); alert('Función no implementada: Eliminar producto ' + id); }
+
+	async eliminarCategoria(id) {
+		console.log('Eliminar categoría solicitado:', id);
+		if (!id) return alert('ID de categoría inválido');
+		if (!confirm('¿Estás seguro de eliminar esta categoría?')) return;
+
+		if (window.crudManager && typeof window.crudManager.deleteCategoria === 'function') {
+			window.crudManager.deleteCategoria(id)
+				.then(res => {
+					alert('Categoría eliminada correctamente.');
+					this.cargarCategorias();
+				})
+				.catch(err => {
+					console.error('Error eliminando categoría via CrudManager:', err);
+					alert('Error eliminando categoría: ' + (err?.message || err));
+				});
+			return;
+		}
+
+		if (!this.verificarFirebase()) {
+			alert('No se puede eliminar: Firebase no inicializado.');
+			return;
+		}
+
+		try {
+			await this.db.collection('categorias').doc(id).delete();
+			alert('Categoría eliminada correctamente.');
+			this.cargarCategorias();
+		} catch (err) {
+			console.error('Error eliminando categoría (direct DB):', err);
+			alert('Error eliminando categoría: ' + (err?.message || err));
+		}
+	}
+
+	editarProducto(id) { console.log('Editar producto:', id); alert('Función no implementada: Editar producto ' + id); }
+
+	async eliminarProducto(id) {
+		console.log('Eliminar producto solicitado:', id);
+		if (!id) return alert('ID de producto inválido');
+		if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+
+		if (window.crudManager && typeof window.crudManager.deleteProducto === 'function') {
+			window.crudManager.deleteProducto(id)
+				.then(res => {
+					alert('Producto eliminado correctamente.');
+					if (typeof window.cargarProductos === 'function') window.cargarProductos();
+				})
+				.catch(err => {
+					console.error('Error eliminando producto via CrudManager:', err);
+					alert('Error eliminando producto: ' + (err?.message || err));
+				});
+			return;
+		}
+
+		if (!this.verificarFirebase()) {
+			alert('No se puede eliminar: Firebase no inicializado.');
+			return;
+		}
+
+		try {
+			await this.db.collection('producto').doc(id).delete();
+			alert('Producto eliminado correctamente.');
+			if (typeof window.cargarProductos === 'function') window.cargarProductos();
+		} catch (err) {
+			console.error('Error eliminando producto (direct DB):', err);
+			alert('Error eliminando producto: ' + (err?.message || err));
+		}
+	}
     verOrden(id) { console.log('Ver orden:', id); alert('Función no implementada: Ver orden ' + id); }
     editarOrden(id) { console.log('Editar orden:', id); alert('Función no implementada: Editar orden ' + id); }
 }
@@ -406,5 +506,37 @@ window.crudManager = window.crudManager || {
 	getProductosMasVendidos: async () => {
 		// Implementación simple: retornar lista vacía (mejorar según requerimientos)
 		return [];
+	}
+	,
+	// Métodos para eliminar - compatibles con Manager/React o con Firestore directo
+	deleteUsuario: async (id) => {
+		if (typeof window.crudManagerInstance?.deleteUsuario === 'function') {
+			return await window.crudManagerInstance.deleteUsuario(id);
+		}
+		if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+			await window.crudFunctionsSafe.db.collection('usuario').doc(id).delete();
+			return true;
+		}
+		return false;
+	},
+	deleteProducto: async (id) => {
+		if (typeof window.crudManagerInstance?.deleteProducto === 'function') {
+			return await window.crudManagerInstance.deleteProducto(id);
+		}
+		if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+			await window.crudFunctionsSafe.db.collection('producto').doc(id).delete();
+			return true;
+		}
+		return false;
+	},
+	deleteCategoria: async (id) => {
+		if (typeof window.crudManagerInstance?.deleteCategoria === 'function') {
+			return await window.crudManagerInstance.deleteCategoria(id);
+		}
+		if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+			await window.crudFunctionsSafe.db.collection('categorias').doc(id).delete();
+			return true;
+		}
+		return false;
 	}
 };

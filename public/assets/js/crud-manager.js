@@ -136,6 +136,51 @@ class CrudManager {
         return html;
     }
 
+    async deleteUsuario(id) {
+        try {
+            if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+                await window.crudFunctionsSafe.db.collection('usuario').doc(id).delete();
+                this.cargarModulo('usuarios');
+                return true;
+            }
+            console.warn('deleteUsuario: Firebase no inicializado');
+            return false;
+        } catch (err) {
+            console.error('Error en CrudManager.deleteUsuario:', err);
+            return false;
+        }
+    }
+
+    async deleteProducto(id) {
+        try {
+            if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+                await window.crudFunctionsSafe.db.collection('producto').doc(id).delete();
+                this.cargarModulo('productos');
+                return true;
+            }
+            console.warn('deleteProducto: Firebase no inicializado');
+            return false;
+        } catch (err) {
+            console.error('Error en CrudManager.deleteProducto:', err);
+            return false;
+        }
+    }
+
+    async deleteCategoria(id) {
+        try {
+            if (window.crudFunctionsSafe && window.crudFunctionsSafe.verificarFirebase()) {
+                await window.crudFunctionsSafe.db.collection('categorias').doc(id).delete();
+                this.cargarModulo('categorias');
+                return true;
+            }
+            console.warn('deleteCategoria: Firebase no inicializado');
+            return false;
+        } catch (err) {
+            console.error('Error en CrudManager.deleteCategoria:', err);
+            return false;
+        }
+    }
+
     mostrarError(modulo) {
         const containerId = `crud-container-${modulo}`;
         const container = document.getElementById(containerId);

@@ -234,6 +234,16 @@ export class CrudService {
     }
   }
 
+  static async deleteUsuario(id) {
+    try {
+      await deleteDoc(doc(db, 'usuario', id));
+      return true;
+    } catch (error) {
+      console.error('Error eliminando usuario:', error);
+      return false;
+    }
+  }
+
   // ==================== REPORTES ====================
   static async getReporteVentas(fechaInicio, fechaFin) {
     try {
