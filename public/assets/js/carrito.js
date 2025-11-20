@@ -260,18 +260,26 @@ function disminuirCantidad(index) {
 /**
  * Elimina un producto del carrito
  */
-function eliminarDelCarrito(index) {
+async function eliminarDelCarrito(index) {
     const producto = carrito[index];
+    if (!producto) return;
     const cantidadEliminada = producto.cantidad || 1;
-    
+
+    // Eliminar del arreglo local primero
     carrito.splice(index, 1);
     guardarCarrito();
     renderizarCarrito();
     calcularTotal();
     mostrarNotificacion(`"${producto.nombre}" eliminado del carrito`);
 
-    // Llamar a esta función para restaurar stock - CORREGIDO
-    restaurarStockFirebase(producto.id, cantidadEliminada);
+    // Intentar restaurar stock en Firebase y manejar errores
+    try {
+        console.log(`Restaurando stock en Firebase para id=${producto.id}, cantidad=${cantidadEliminada}`);
+        await restaurarStockFirebase(producto.id, cantidadEliminada);
+    } catch (err) {
+        console.error('Error al restaurar stock al eliminar del carrito:', err);
+        mostrarNotificacion('No se pudo restaurar el stock en el servidor (ver consola)', 'error');
+    }
 }
 
 /**
@@ -309,19 +317,33 @@ function guardarCarrito() {
 /**
  * Limpia todo el carrito
  */
-function limpiarCarrito() {
+async function limpiarCarrito() {
     if (carrito.length === 0) {
         alert('El carrito ya está vacío');
         return;
     }
-    
-    if (confirm('¿Estás seguro de que quieres limpiar todo el carrito?')) {
-        carrito = [];
-        guardarCarrito();
-        renderizarCarrito();
-        calcularTotal();
-        mostrarNotificacion('Carrito limpiado correctamente');
-    }
+
+    if (!confirm('¿Estás seguro de que quieres limpiar todo el carrito?')) return;
+
+    // Restaurar stock para todos los productos en el carrito antes de vaciarlo
+    const restauraciones = carrito.map(item => {
+        const cantidad = item.cantidad || 1;
+        console.log(`Restaurar stock (limpiar): id=${item.id} cantidad=${cantidad}`);
+        return restaurarStockFirebase(item.id, cantidad).catch(err => {
+            console.error(`Error restaurando stock para ${item.id}:`, err);
+            return { error: true, id: item.id };
+        });
+    });
+
+    // Esperar todas las restauraciones (no bloqueamos si alguna falla)
+    await Promise.all(restauraciones);
+
+    // Vaciar carrito local
+    carrito = [];
+    guardarCarrito();
+    renderizarCarrito();
+    calcularTotal();
+    mostrarNotificacion('Carrito limpiado correctamente');
 }
 
 /**
