@@ -1,56 +1,69 @@
 openapi: 3.0.0
 info:
-  title: API Panel de Administración - Tienda Online
-  description: Documentación de servicios Firebase Firestore - Los ejemplos son estáticos
+  title: API Panel de Administración - Pastelería Mil Sabores
+  description: |
+    Documentación de servicios Firebase Firestore - Pastelería Mil Sabores
+    
+    **NOTA IMPORTANTE:** Esta documentación describe la arquitectura actual de la aplicación.
+    Los datos se obtienen directamente desde Firebase Firestore mediante servicios JavaScript del lado del cliente.
+    Los endpoints definidos aquí representan la estructura de datos y operaciones disponibles.
+    
+    Para realizar pruebas funcionales, utiliza la aplicación web en: https://tiendapasteleriamilsabor-a193d.web.app
   version: 1.0.0
   contact:
     name: Soporte Técnico
     email: soporte@tiendaonline.com
 
 servers:
-  - url: https://firestore.googleapis.com/v1
-    description: Firebase Firestore API
+  - url: https://tiendapasteleriamilsabor-a193d.web.app
+    description: Aplicación web Pastelería Mil Sabores (Frontend con Firebase)
 
 tags:
   - name: Dashboard
-    description: Operaciones del panel de control
+    description: Estadísticas del panel de administración
   - name: Productos
-    description: Gestión de productos
-  - name: Órdenes
+    description: Gestión de productos de pastelería
+  - name: Compras
     description: Gestión de órdenes de compra
   - name: Usuarios
-    description: Gestión de usuarios
+    description: Gestión de clientes y administradores
   - name: Categorías
-    description: Gestión de categorías
+    description: Categorías de productos de pastelería
 
 paths:
-  /api/dashboard/estadisticas:
+  /dashboard/estadisticas:
     get:
       tags:
         - Dashboard
       summary: Obtener estadísticas del dashboard
-      description: Servicio Firebase - DashboardService.getEstadisticasCompletas()
+      description: |
+        Recupera las estadísticas principales del negocio de pastelería desde Firestore.
+        Servicio: DashboardService.getEstadisticasCompletas()
+        Colecciones Firestore utilizadas: compras, producto, usuario
       responses:
         '200':
-          description: Estadísticas obtenidas correctamente
+          description: Estadísticas obtenidas correctamente desde Firestore
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EstadisticasDashboard'
               example:
-                totalCompras: 24
-                proyeccionCompras: 15
-                totalProductos: 156
-                inventarioTotal: 1248
-                totalUsuarios: 89
-                nuevosUsuariosMes: 12
+                totalCompras: 42
+                proyeccionCompras: 28
+                totalProductos: 87
+                inventarioTotal: 2156
+                totalUsuarios: 145
+                nuevosUsuariosMes: 18
 
-  /api/productos:
+  /productos:
     get:
       tags:
         - Productos
-      summary: Obtener lista de productos
-      description: Servicio Firebase - CrudService.getProductos()
+      summary: Obtener lista de productos de pastelería
+      description: |
+        Recupera todos los productos disponibles en la tienda.
+        Servicio: CrudService.getProductos()
+        Colección Firestore: producto
       responses:
         '200':
           description: Lista de productos obtenida correctamente
@@ -61,32 +74,38 @@ paths:
                 items:
                   $ref: '#/components/schemas/Producto'
               example:
-                - id: "prod123"
-                  nombre: "Laptop Gaming"
-                  precio: 1299.99
-                  stock: 15
-                  categoria: "Tecnología"
-                  imagen: "https://ejemplo.com/laptop.jpg"
+                - id: "alfajores_001"
+                  nombre: "Alfajores Tradicionales"
+                  precio: 15000
+                  stock: 45
+                  categoria: "Alfajores"
+                  imagen: "alfajores-tradicionales.jpg"
                   activo: true
-                - id: "prod456"
-                  nombre: "Mouse Inalámbrico"
-                  precio: 49.99
-                  stock: 30
-                  categoria: "Accesorios"
-                  imagen: "https://ejemplo.com/mouse.jpg"
+                  descripcion: "Deliciosos alfajores rellenos de dulce de leche"
+                - id: "torta_chocolate_001"
+                  nombre: "Torta de Chocolate"
+                  precio: 35000
+                  stock: 12
+                  categoria: "Tortas"
+                  imagen: "torta-chocolate.jpg"
                   activo: true
-                - id: "prod789"
-                  nombre: "Teclado Mecánico"
-                  precio: 89.99
-                  stock: 25
-                  categoria: "Accesorios"
+                  descripcion: "Torta de chocolate derretido con cobertura de ganache"
+                - id: "cupcakes_vanilla_001"
+                  nombre: "Cupcakes de Vainilla"
+                  precio: 8000
+                  stock: 60
+                  categoria: "Cupcakes"
+                  imagen: "cupcakes-vanilla.jpg"
                   activo: true
 
     post:
       tags:
         - Productos
       summary: Crear un nuevo producto
-      description: Servicio Firebase - CrudService.createProducto()
+      description: |
+        Crea un nuevo producto en el catálogo.
+        Servicio: CrudService.createProducto()
+        Colección Firestore: producto
       requestBody:
         required: true
         content:
@@ -94,14 +113,15 @@ paths:
             schema:
               $ref: '#/components/schemas/ProductoInput'
             example:
-              nombre: "Tablet Android 10''"
-              precio: 299.99
-              stock: 25
-              categoria: "Tecnología"
-              imagen: "https://ejemplo.com/tablet.jpg"
+              nombre: "Macarons de Frambuesa"
+              precio: 12000
+              stock: 30
+              categoria: "Macarons"
+              imagen: "macarons-frambuesa.jpg"
+              descripcion: "Macarons franceses sabor frambuesa"
       responses:
         '201':
-          description: Producto creado correctamente
+          description: Producto creado correctamente en Firestore
           content:
             application/json:
               schema:
@@ -110,21 +130,24 @@ paths:
                   id:
                     type: string
               example:
-                id: "nuevoIdGeneradoPorFirestore123"
+                id: "macarons_frambuesa_001"
 
-  /api/productos/{id}:
+  /productos/{id}:
     get:
       tags:
         - Productos
       summary: Obtener producto por ID
-      description: Servicio Firebase - CrudService.getProductoById()
+      description: |
+        Obtiene los detalles de un producto específico.
+        Servicio: CrudService.getProductoById()
+        Colección Firestore: producto
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "prod123"
+          example: "alfajores_001"
       responses:
         '200':
           description: Producto encontrado
@@ -133,33 +156,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/Producto'
               example:
-                id: "prod123"
-                nombre: "Laptop Gaming"
-                precio: 1299.99
-                stock: 15
-                categoria: "Tecnología"
-                imagen: "https://ejemplo.com/laptop.jpg"
+                id: "alfajores_001"
+                nombre: "Alfajores Tradicionales"
+                precio: 15000
+                stock: 45
+                categoria: "Alfajores"
+                imagen: "alfajores-tradicionales.jpg"
                 activo: true
+                descripcion: "Deliciosos alfajores rellenos de dulce de leche"
         '404':
           description: Producto no encontrado
           content:
             application/json:
               example:
                 error: "Producto no encontrado"
-                message: "El producto con ID prod123 no existe"
+                message: "El producto con ID alfajores_001 no existe en Firestore"
 
     put:
       tags:
         - Productos
       summary: Actualizar producto existente
-      description: Servicio Firebase - CrudService.updateProducto()
+      description: |
+        Actualiza los datos de un producto.
+        Servicio: CrudService.updateProducto()
+        Colección Firestore: producto
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "prod123"
+          example: "alfajores_001"
       requestBody:
         required: true
         content:
@@ -167,10 +194,10 @@ paths:
             schema:
               $ref: '#/components/schemas/ProductoInput'
             example:
-              nombre: "Laptop Gaming Pro"
-              precio: 1399.99
-              stock: 10
-              categoria: "Tecnología Premium"
+              nombre: "Alfajores Premium"
+              precio: 18000
+              stock: 40
+              categoria: "Alfajores"
       responses:
         '200':
           description: Producto actualizado correctamente
@@ -178,7 +205,7 @@ paths:
             application/json:
               example:
                 success: true
-                message: "Producto actualizado correctamente"
+                message: "Producto actualizado correctamente en Firestore"
         '404':
           description: Producto no encontrado
 
@@ -186,14 +213,17 @@ paths:
       tags:
         - Productos
       summary: Eliminar producto del sistema
-      description: Servicio Firebase - CrudService.deleteProducto()
+      description: |
+        Elimina un producto del catálogo.
+        Servicio: CrudService.deleteProducto()
+        Colección Firestore: producto
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "prod123"
+          example: "alfajores_001"
       responses:
         '200':
           description: Producto eliminado correctamente
@@ -201,102 +231,110 @@ paths:
             application/json:
               example:
                 success: true
-                message: "Producto eliminado correctamente"
+                message: "Producto eliminado correctamente de Firestore"
         '404':
           description: Producto no encontrado
 
-  /api/ordenes:
+  /compras:
     get:
       tags:
-        - Órdenes
-      summary: Obtener lista de órdenes
-      description: Servicio Firebase - CrudService.getOrdenes()
+        - Compras
+      summary: Obtener lista de órdenes de compra
+      description: |
+        Recupera todas las órdenes/compras registradas.
+        Servicio: CrudService.getOrdenes()
+        Colección Firestore: compras
       responses:
         '200':
-          description: Lista de órdenes obtenida correctamente
+          description: Lista de compras obtenida correctamente
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Orden'
+                  $ref: '#/components/schemas/Compra'
               example:
-                - id: "orden123"
-                  clienteNombre: "Juan Pérez"
-                  total: 199.99
-                  estado: "completado"
-                  fecha: "2024-01-15T10:30:00Z"
-                  productos:
-                    - id: "prod123"
-                      nombre: "Laptop Gaming"
-                      cantidad: 1
-                      precio: 1299.99
-                    - id: "prod456"
-                      nombre: "Mouse Inalámbrico"
-                      cantidad: 1
-                      precio: 49.99
-                - id: "orden124"
+                - id: "compra_001"
                   clienteNombre: "María García"
-                  total: 299.99
-                  estado: "procesando"
-                  fecha: "2024-01-14T15:45:00Z"
+                  clienteEmail: "maria@email.com"
+                  total: 45000
+                  estado: "completado"
+                  fecha: "2025-11-20T14:30:00Z"
                   productos:
-                    - id: "prod789"
-                      nombre: "Teclado Mecánico"
+                    - id: "alfajores_001"
+                      nombre: "Alfajores Tradicionales"
                       cantidad: 2
-                      precio: 89.99
+                      precio: 15000
+                    - id: "torta_chocolate_001"
+                      nombre: "Torta de Chocolate"
+                      cantidad: 1
+                      precio: 35000
+                - id: "compra_002"
+                  clienteNombre: "Juan Rodríguez"
+                  clienteEmail: "juan@email.com"
+                  total: 32000
+                  estado: "procesando"
+                  fecha: "2025-11-22T10:15:00Z"
+                  productos:
+                    - id: "cupcakes_vanilla_001"
+                      nombre: "Cupcakes de Vainilla"
+                      cantidad: 4
+                      precio: 8000
 
-  /api/ordenes/{id}:
+  /compras/{id}:
     get:
       tags:
-        - Órdenes
-      summary: Obtener orden por ID
-      description: Servicio Firebase - CrudService.getOrdenById()
+        - Compras
+      summary: Obtener orden de compra por ID
+      description: |
+        Obtiene los detalles de una orden específica.
+        Servicio: CrudService.getOrdenById()
+        Colección Firestore: compras
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "orden123"
+          example: "compra_001"
       responses:
         '200':
           description: Orden encontrada
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Orden'
+                $ref: '#/components/schemas/Compra'
               example:
-                id: "orden123"
-                clienteNombre: "Juan Pérez"
-                total: 199.99
+                id: "compra_001"
+                clienteNombre: "María García"
+                clienteEmail: "maria@email.com"
+                total: 45000
                 estado: "completado"
-                fecha: "2024-01-15T10:30:00Z"
+                fecha: "2025-11-20T14:30:00Z"
                 productos:
-                  - id: "prod123"
-                    nombre: "Laptop Gaming"
-                    cantidad: 1
-                    precio: 1299.99
-                  - id: "prod456"
-                    nombre: "Mouse Inalámbrico"
-                    cantidad: 1
-                    precio: 49.99
+                  - id: "alfajores_001"
+                    nombre: "Alfajores Tradicionales"
+                    cantidad: 2
+                    precio: 15000
         '404':
-          description: Orden no encontrada
+          description: Compra no encontrada
 
-  /api/ordenes/{id}/estado:
+  /compras/{id}/estado:
     put:
       tags:
-        - Órdenes
-      summary: Actualizar estado de orden
-      description: Servicio Firebase - CrudService.updateOrdenEstado()
+        - Compras
+      summary: Actualizar estado de compra
+      description: |
+        Actualiza el estado de una orden (pendiente, procesando, completado, cancelado).
+        Servicio: CrudService.updateOrdenEstado()
+        Colección Firestore: compras
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "orden123"
+          example: "compra_001"
       requestBody:
         required: true
         content:
@@ -318,14 +356,17 @@ paths:
                 success: true
                 message: "Estado actualizado a completado"
         '404':
-          description: Orden no encontrada
+          description: Compra no encontrada
 
-  /api/usuarios:
+  /usuarios:
     get:
       tags:
         - Usuarios
       summary: Obtener lista de usuarios
-      description: Servicio Firebase - CrudService.getUsuarios()
+      description: |
+        Recupera todos los usuarios (clientes y administradores).
+        Servicio: CrudService.getUsuarios()
+        Colección Firestore: usuario
       responses:
         '200':
           description: Lista de usuarios obtenida correctamente
@@ -336,38 +377,42 @@ paths:
                 items:
                   $ref: '#/components/schemas/Usuario'
               example:
-                - id: "user123"
-                  nombre: "Ana López"
-                  email: "ana@ejemplo.com"
+                - id: "user_admin_001"
+                  nombre: "Carlos Mendez"
+                  email: "carlos@pasteleriamilsabores.com"
                   rol: "admin"
                   activo: true
                   telefono: "+56912345678"
-                  direccion: "Av. Principal 123"
-                - id: "user124"
-                  nombre: "Carlos Ruiz"
-                  email: "carlos@ejemplo.com"
+                  direccion: "Av. Principal 123, Santiago"
+                - id: "user_cliente_001"
+                  nombre: "Ana López"
+                  email: "ana.lopez@email.com"
                   rol: "cliente"
                   activo: true
                   telefono: "+56987654321"
-                - id: "user125"
-                  nombre: "María González"
-                  email: "maria@ejemplo.com"
+                  direccion: "Calle Secundaria 456, Ñuñoa"
+                - id: "user_cliente_002"
+                  nombre: "Roberto Silva"
+                  email: "roberto@email.com"
                   rol: "cliente"
-                  activo: false
+                  activo: true
 
-  /api/usuarios/{id}:
+  /usuarios/{id}:
     get:
       tags:
         - Usuarios
       summary: Obtener usuario por ID
-      description: Servicio Firebase - CrudService.getUsuarioById()
+      description: |
+        Obtiene los detalles de un usuario específico.
+        Servicio: CrudService.getUsuarioById()
+        Colección Firestore: usuario
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "user123"
+          example: "user_admin_001"
       responses:
         '200':
           description: Usuario encontrado
@@ -376,23 +421,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/Usuario'
               example:
-                id: "user123"
-                nombre: "Ana López"
-                email: "ana@ejemplo.com"
+                id: "user_admin_001"
+                nombre: "Carlos Mendez"
+                email: "carlos@pasteleriamilsabores.com"
                 rol: "admin"
                 activo: true
                 telefono: "+56912345678"
-                direccion: "Av. Principal 123"
+                direccion: "Av. Principal 123, Santiago"
                 createdAt: "2024-01-01T00:00:00Z"
         '404':
           description: Usuario no encontrado
 
-  /api/categorias:
+  /categorias:
     get:
       tags:
         - Categorías
-      summary: Obtener lista de categorías
-      description: Servicio Firebase - CrudService.getCategorias()
+      summary: Obtener lista de categorías de productos
+      description: |
+        Recupera todas las categorías disponibles de productos de pastelería.
+        Servicio: CrudService.getCategorias()
+        Colección Firestore: categorias
       responses:
         '200':
           description: Lista de categorías obtenida correctamente
@@ -403,71 +451,107 @@ paths:
                 items:
                   $ref: '#/components/schemas/Categoria'
               example:
-                - id: "cat123"
-                  nombre: "Electrónicos"
-                  descripcion: "Dispositivos electrónicos y tecnológicos"
-                  productosCount: 45
+                - id: "cat_alfajores"
+                  nombre: "Alfajores"
+                  descripcion: "Alfajores rellenos de dulce de leche, manjar y otros sabores"
+                  productosCount: 8
                   activa: true
-                - id: "cat124"
-                  nombre: "Hogar"
-                  descripcion: "Productos para el hogar"
-                  productosCount: 32
+                - id: "cat_tortas"
+                  nombre: "Tortas"
+                  descripcion: "Tortas y tartas de diversos sabores y rellenos"
+                  productosCount: 12
                   activa: true
-                - id: "cat125"
-                  nombre: "Ropa"
-                  descripcion: "Ropa y accesorios"
-                  productosCount: 28
-                  activa: false
+                - id: "cat_cupcakes"
+                  nombre: "Cupcakes"
+                  descripcion: "Cupcakes decorados y personalizados"
+                  productosCount: 15
+                  activa: true
+                - id: "cat_galletas"
+                  nombre: "Galletas"
+                  descripcion: "Galletas caseras de diferentes tipos"
+                  productosCount: 10
+                  activa: true
+                - id: "cat_macarons"
+                  nombre: "Macarons"
+                  descripcion: "Macarons franceses de sabores variados"
+                  productosCount: 6
+                  activa: true
 
 components:
   schemas:
     EstadisticasDashboard:
       type: object
+      description: Estadísticas principales del panel de administración
       properties:
         totalCompras:
           type: integer
-          example: 24
+          description: Total de órdenes procesadas
+          example: 42
         proyeccionCompras:
           type: integer
-          example: 15
+          description: Proyección porcentual de crecimiento en compras
+          example: 28
         totalProductos:
           type: integer
-          example: 156
+          description: Cantidad total de productos en catálogo
+          example: 87
         inventarioTotal:
           type: integer
-          example: 1248
+          description: Suma total de unidades en inventario
+          example: 2156
         totalUsuarios:
           type: integer
-          example: 89
+          description: Cantidad total de usuarios registrados
+          example: 145
         nuevosUsuariosMes:
           type: integer
-          example: 12
+          description: Nuevos usuarios registrados en el mes actual
+          example: 18
 
     Producto:
       type: object
+      description: Producto de pastelería
       properties:
         id:
           type: string
+          description: ID único del producto en Firestore
+          example: "alfajores_001"
         nombre:
           type: string
-          example: "Laptop Gaming"
+          description: Nombre del producto
+          example: "Alfajores Tradicionales"
         precio:
           type: number
-          example: 1299.99
+          description: Precio en pesos chilenos
+          example: 15000
         stock:
           type: integer
-          example: 15
+          description: Cantidad disponible
+          example: 45
         categoria:
           type: string
-          example: "Tecnología"
+          description: Categoría a la que pertenece
+          example: "Alfajores"
         imagen:
           type: string
+          description: Nombre del archivo de imagen
+          example: "alfajores-tradicionales.jpg"
+        descripcion:
+          type: string
+          description: Descripción del producto
+          example: "Deliciosos alfajores rellenos de dulce de leche"
         activo:
           type: boolean
+          description: Si el producto está disponible
           example: true
+        createdAt:
+          type: string
+          format: date-time
+          description: Fecha de creación
 
     ProductoInput:
       type: object
+      description: Datos para crear o actualizar un producto
       required:
         - nombre
         - precio
@@ -475,31 +559,56 @@ components:
       properties:
         nombre:
           type: string
+          example: "Macarons de Frambuesa"
         precio:
           type: number
+          example: 12000
         stock:
           type: integer
+          example: 30
         categoria:
           type: string
+          example: "Macarons"
         imagen:
           type: string
+          example: "macarons-frambuesa.jpg"
+        descripcion:
+          type: string
+          example: "Macarons franceses sabor frambuesa"
 
-    Orden:
+    Compra:
       type: object
+      description: Orden de compra / transacción
       properties:
         id:
           type: string
+          description: ID único de la compra
+          example: "compra_001"
         clienteNombre:
           type: string
+          description: Nombre del cliente
+          example: "María García"
+        clienteEmail:
+          type: string
+          description: Email del cliente
+          example: "maria@email.com"
         total:
           type: number
+          description: Monto total en pesos chilenos
+          example: 45000
         estado:
           type: string
+          enum: [pendiente, procesando, completado, cancelado]
+          description: Estado de la compra
+          example: "completado"
         fecha:
           type: string
           format: date-time
+          description: Fecha de la compra
+          example: "2025-11-20T14:30:00Z"
         productos:
           type: array
+          description: Productos incluidos en la compra
           items:
             type: object
             properties:
@@ -514,35 +623,64 @@ components:
 
     Usuario:
       type: object
+      description: Usuario del sistema (cliente o administrador)
       properties:
         id:
           type: string
+          description: ID único del usuario
+          example: "user_admin_001"
         nombre:
           type: string
+          description: Nombre completo
+          example: "Carlos Mendez"
         email:
           type: string
+          format: email
+          description: Correo electrónico
+          example: "carlos@pasteleriamilsabores.com"
         rol:
           type: string
+          enum: [admin, cliente]
+          description: Rol del usuario
+          example: "admin"
         activo:
           type: boolean
+          description: Si la cuenta está activa
+          example: true
         telefono:
           type: string
+          description: Número de teléfono
+          example: "+56912345678"
         direccion:
           type: string
+          description: Dirección del usuario
+          example: "Av. Principal 123, Santiago"
         createdAt:
           type: string
           format: date-time
+          description: Fecha de registro
 
     Categoria:
       type: object
+      description: Categoría de productos
       properties:
         id:
           type: string
+          description: ID único de la categoría
+          example: "cat_alfajores"
         nombre:
           type: string
+          description: Nombre de la categoría
+          example: "Alfajores"
         descripcion:
           type: string
+          description: Descripción de la categoría
+          example: "Alfajores rellenos de dulce de leche, manjar y otros sabores"
         productosCount:
           type: integer
+          description: Cantidad de productos en esta categoría
+          example: 8
         activa:
           type: boolean
+          description: Si la categoría está activa
+          example: true
