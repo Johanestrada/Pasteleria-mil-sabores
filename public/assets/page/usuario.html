@@ -1,111 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perfil de Usuario</title>
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome 6 -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Tu hoja de estilos -->
-  <!--Hoja css de del caso-->
-  <link rel="stylesheet" href="../css/style.css">
-
-
-  <link rel="stylesheet" href="../css/usuario.css">
-</head>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <!--CSS y boostrap-->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+      <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      <link rel="stylesheet" href="../css/style.css">
+  </head>
+  
 
 <body>
-  <!-- Headeer cliente-->
+  <!-- Header cliente-->
   <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="../../index.html">
+        <!-- Logo -->
+        <a class="navbar-brand" href="index.html">
             <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+
+        <!-- Botón para móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
-                <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra el menú -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="../../index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="catalogo.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="nosotros.html">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="noticias.html">Noticias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
             </ul>
+            <!--buscar-->
             <div class="d-flex align-items-center ms-lg-3 gap-2">
-                <a href="carrito.html" class="btn position-relative p-0">
+                <a href="carrito.html" class="btn position-relative">
                     <i class="bi bi-cart fs-4"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
                 </a>
-                <!-- Contenedor Dinámico de Usuario -->
-                <div id="user-status-container">
-                    <a href="/assets/page/login.html" id="login-link" class="btn text-dark p-0">
-                        <i class="bi bi-person fs-4"></i>
-                    </a>
-                
-                    <!-- Para usuarios logueados (oculto por defecto) -->
-                    <div class="nav-item dropdown" id="user-dropdown" style="display: none;">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="user-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-check-fill fs-4 text-success"></i>
-                            <span id="user-name" class="ms-2 d-none d-lg-inline"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu">
-                            <li><a class="dropdown-item active" href="usuario.html">Ver Perfil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logout-link">Cerrar Sesión</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Icono login -->
+                <a href="login.html" class="btn text-dark p-0">
+                    <i class="bi bi-person fs-4"></i>
+                </a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
-  <main class="container my-5">
+  <main class="container my-3 my-md-5">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10 col-xl-8">
         
         <!-- Encabezado del Perfil -->
-        <div class="text-center mb-4">
+        <div class="text-center mb-3 mb-md-4">
           <h2 class="fw-bold">Mi Perfil</h2>
           <p class="text-muted">Administra tu información personal y configuración.</p>
         </div>
 
         <!-- Tarjeta de Perfil -->
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mb-3 mb-md-4">
           <div class="card-header bg-light py-3">
             <h5 class="mb-0">Información Personal</h5>
           </div>
-          <div class="card-body p-4">
+          <div class="card-body p-3 p-md-4">
             <form id="form-perfil">
               <div class="row g-3">
                 <!-- Nombre -->
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="profile-nombre" class="form-label">Nombre</label>
                   <input type="text" id="profile-nombre" class="form-control" value="Cargando...">
                 </div>
                 <!-- Apellido -->
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="profile-apellido" class="form-label">Apellido</label>
                   <input type="text" id="profile-apellido" class="form-control" placeholder="Aún no ingresado">
                 </div>
                 <!-- Correo (solo lectura) -->
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="profile-email" class="form-label">Correo Electrónico</label>
                   <input type="email" id="profile-email" class="form-control" value="Cargando..." readonly>
                 </div>
                 <!-- Teléfono -->
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="profile-telefono" class="form-label">Teléfono</label>
                   <input type="tel" id="profile-telefono" class="form-control" placeholder="+56912345678">
                 </div>
               </div>
-              <hr class="my-4">
+              <hr class="my-3 my-md-4">
               <!-- Botones de acción -->
-              <div class="d-flex justify-content-end gap-2">
+              <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Dirección -->
+        <div class="card shadow-sm">
+          <div class="card-header bg-light py-3">
+            <h5 class="mb-0">Dirección de Envío</h5>
+          </div>
+          <div class="card-body p-3 p-md-4">
+            <form id="form-direccion">
+              <div class="row g-3">
+                <!-- Calle y Número -->
+                <div class="col-12 col-md-8">
+                  <label for="profile-calle" class="form-label">Calle y Número</label>
+                  <input type="text" id="profile-calle" class="form-control" placeholder="Ej: Av. Siempre Viva 123">
+                </div>
+                <!-- Departamento/Casa -->
+                <div class="col-12 col-md-4">
+                  <label for="profile-depto" class="form-label">Depto/Casa (Opcional)</label>
+                  <input type="text" id="profile-depto" class="form-control" placeholder="Ej: Depto 4B">
+                </div>
+                <!-- Comuna -->
+                <div class="col-12 col-md-6">
+                  <label for="profile-comuna" class="form-label">Comuna</label>
+                  <input type="text" id="profile-comuna" class="form-control" placeholder="Ej: Santiago">
+                </div>
+                <!-- Ciudad -->
+                <div class="col-12 col-md-6">
+                  <label for="profile-ciudad" class="form-label">Ciudad</label>
+                  <input type="text" id="profile-ciudad" class="form-control" placeholder="Ej: Santiago">
+                </div>
+              </div>
+              <hr class="my-3 my-md-4">
+              <!-- Botones de acción -->
+              <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
+                <button type="submit" class="btn btn-primary">Guardar Dirección</button>
               </div>
             </form>
           </div>
@@ -116,55 +155,54 @@
   </main>
 
   <!-- Footer -->
-   <footer class="footer py-4 bg-pink">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
-                    <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
-                </div>
-                <div class="col-12 col-md-3">
-                    <h3>Información</h3>
-                    <ul class="list-unstyled">
-                        <li>Teléfono: +569 27905271</li>
-                        <li>Avenida Concha y Toro...</li>
-                        <li>Correo: pasteleria100...@milsabores.cl</li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-3">
-                    <h3>Productos</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="../../index.html">Inicio</a></li>
-                        <li><a href="catalogo.html">Productos</a></li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-3">
-                    <h3>Redes</h3>
-                    <ul class="list-unstyled d-flex gap-3">
-                        <li>
-                            <a href="#">
-                                <i class="bi bi-instagram" style="font-size: 28px; color: #5D4037;"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <i class="bi bi-whatsapp" style="font-size: 28px; color: #5D4037;"></i>
-                        </li>
-                    </ul>
-                </div>
+  <footer class="footer py-4 bg-pink">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
+                <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+            </div>
+            <div class="col-12 col-md-3">
+                <h3>Información</h3>
+                <ul class="list-unstyled">
+                    <li>Teléfono: +569 27905271</li>
+                    <li>Avenida Concha y Toro...</li>
+                    <li>Correo: pasteleria100...@milsabores.cl</li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-3">
+                <h3>Productos</h3>
+                <ul class="list-unstyled">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-3">
+                <h3>Redes</h3>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-instagram" style="font-size: 28px; color: #5D4037;"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <i class="bi bi-whatsapp" style="font-size: 28px; color: #5D4037;"></i>
+                    </li>
+                </ul>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Firebase (Asegúrate de que tu config esté aquí o antes) -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <!-- <script src="../js/firebase-config.js"></script> -->
 
-  <!-- Tu script personalizado -->
+  <!-- Scripts personalizados -->
   <script src="../js/auth-status.js"></script>
   <script src="../js/usuario.js"></script>
 </body>
