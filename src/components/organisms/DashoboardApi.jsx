@@ -40,6 +40,10 @@ const DashboardAPI = () => {
           getUsuarios: () => CrudService.getUsuarios(),
           getUsuarioById: (id) => CrudService.getUsuarioById(id),
           updateUsuario: (id, datos) => CrudService.updateUsuario(id, datos),
+          deleteUsuario: (id) => CrudService.deleteUsuario(id),
+          createUsuario: (usuario) => CrudService.createUsuario(usuario),
+          // Crear usuario en Firebase Auth y guardar perfil en Firestore (sin guardar contraseña en Firestore)
+          createUsuarioConContrasena: (email, password, perfil) => CrudService.createUsuarioConContrasena(email, password, perfil),
           
           // Reportes
           getReporteVentas: (fechaInicio, fechaFin) => CrudService.getReporteVentas(fechaInicio, fechaFin),

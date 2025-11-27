@@ -63,6 +63,16 @@
     object-fit: cover;
     border-radius: 8px;
   }
+
+  /* Imagen pequeña para páginas de checkout/éxito
+     Alineamos con .imagen-tabla para que las miniaturas se vean consistentes */
+  .producto-imagen-checkout {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
   
   /* Controles de cantidad */
   .controles-cantidad {

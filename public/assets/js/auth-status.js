@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginLink = document.getElementById('login-link');
     const userDropdown = document.getElementById('user-dropdown');
     const userNameSpan = document.getElementById('user-name');
-    const logoutLinks = document.querySelectorAll('.logout-button');
+    const logoutLinks = document.querySelectorAll('.logout-button, #logout-link');
 
     // Verificar si hay un usuario en localStorage
     const usuarioStr = localStorage.getItem("usuario");

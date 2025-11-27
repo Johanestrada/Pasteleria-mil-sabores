@@ -84,6 +84,43 @@ class DashboardManager {
             } else {
                 console.warn('DashboardManager: No se pudo inyectar DB en crudFunctionsSafe. Puede que no esté cargado aún.');
             }
+
+            // Exponer una función mínima createUsuarioConContrasena para compatibilidad
+            try {
+                window.crudManager = window.crudManager || {};
+                window.crudManager.createUsuarioConContrasena = async (email, password, perfil) => {
+                    if (typeof firebase === 'undefined') throw new Error('Firebase no inicializado');
+                    // Asegurar que el módulo auth esté disponible
+                    if (typeof firebase.auth !== 'function') {
+                        // Intentar cargar auth v8 dinámicamente
+                        await new Promise(resolve => {
+                            const s = document.createElement('script');
+                            s.src = 'https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js';
+                            s.onload = () => resolve(true);
+                            s.onerror = () => resolve(false);
+                            document.head.appendChild(s);
+                        });
+                        if (typeof firebase.auth !== 'function') throw new Error('Firebase Auth no disponible');
+                    }
+
+                    // Crear usuario en Firebase Auth
+                    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+                    const uid = userCredential.user.uid;
+
+                    // Guardar perfil en Firestore sin contraseña
+                    const perfilDoc = {
+                        ...perfil,
+                        email: perfil.email || email,
+                        createdAt: firebase.firestore.FieldValue ? firebase.firestore.FieldValue.serverTimestamp() : new Date(),
+                        activo: true
+                    };
+
+                    await firebase.firestore().collection('usuario').doc(uid).set(perfilDoc);
+                    return uid;
+                };
+            } catch (err) {
+                console.warn('No se pudo exponer createUsuarioConContrasena en dashboard.js:', err);
+            }
             
             return true;
             

@@ -13,7 +13,9 @@
     <div class="admin-container">
         <!-- Header -->
         <header class="admin-header">
-            <a href="#" class="logo">Tienda Online</a>
+            <a href="#" class="logo">
+                <img src="../img/Logo_Pasteleria_mil.png" alt="Pastelería Mil Sabores" class="logo-img" style="max-height:48px;">
+            </a>
         </header>
 
         <!-- Sidebar -->
@@ -402,13 +404,9 @@
                         <table class="crud-table">
                             <thead>
                                 <tr>
-                                    <th>RUN</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Clave</th>
-                                    <th>Fecha</th>
                                     <th>Teléfono</th>
-                                    <th>Dirección</th>
                                     <th>Rol</th>
                                     <th>Estado</th>
                                     <th>Fecha Registro</th>
@@ -417,7 +415,7 @@
                             </thead>
                             <tbody id="usuarios-tbody">
                                 <tr>
-                                    <td colspan="11" class="no-data">Haz clic en Actualizar para cargar los usuarios</td>
+                                    <td colspan="7" class="no-data">Haz clic en Actualizar para cargar los usuarios</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -557,11 +555,6 @@
                 <input type="hidden" id="usuarioId">
                 
                 <div class="form-group">
-                    <label for="usuarioRun">RUN *</label>
-                    <input type="text" id="usuarioRun" required>
-                </div>
-                
-                <div class="form-group">
                     <label for="usuarioNombre">Nombre Completo *</label>
                     <input type="text" id="usuarioNombre" required>
                 </div>
@@ -572,24 +565,14 @@
                 </div>
                 
                 <div class="form-group" id="passwordField">
-                    <label for="usuarioClave">Clave *</label>
+                    <label for="usuarioClave">Contraseña *</label>
                     <input type="password" id="usuarioClave" required>
-                    <small class="text-muted">La clave solo se puede establecer al crear un nuevo usuario</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="usuarioFecha">Fecha</label>
-                    <input type="date" id="usuarioFecha">
+                    <small class="text-muted">Mínimo 8 caracteres, debe incluir mayúscula, minúscula y número</small>
                 </div>
                 
                 <div class="form-group">
                     <label for="usuarioTelefono">Teléfono</label>
                     <input type="tel" id="usuarioTelefono">
-                </div>
-                
-                <div class="form-group">
-                    <label for="usuarioDireccion">Dirección</label>
-                    <textarea id="usuarioDireccion" rows="2"></textarea>
                 </div>
                 
                 <div class="form-group">

@@ -40,31 +40,54 @@ document.addEventListener("DOMContentLoaded", () => {
             const userCredential = await auth.signInWithEmailAndPassword(correo, clave);
             const user = userCredential.user;
 
-            // Determinar rol
-            const rol = correo === "admin@duocuc.cl" ? "admin" : "cliente";
-
-            // Obtener datos adicionales de Firestore si es cliente
-            let nombre = correo;
-            if (rol === "cliente") {
-                const doc = await db.collection("usuario").doc(user.uid).get();
-                if (doc.exists) nombre = doc.data().nombre || correo;
-            } else {
-                nombre = "Administrador";
+            // Obtener perfil del usuario en Firestore para determinar rol y estado
+            let perfil = null;
+            try {
+                const snap = await db.collection('usuario').doc(user.uid).get();
+                if (snap.exists) perfil = snap.data();
+            } catch (err) {
+                console.warn('No se pudo leer perfil de Firestore:', err);
             }
 
-            localStorage.setItem("usuario", JSON.stringify({ nombre, correo, rol }));
+            const rol = perfil?.rol || 'cliente';
+            const nombre = perfil?.nombre || correo;
 
+            // Si no existe perfil, crearlo
+            if (!perfil) {
+                try {
+                    console.log('Creando perfil en Firestore para:', correo);
+                    await db.collection('usuario').doc(user.uid).set({
+                        nombre: nombre,
+                        email: correo,
+                        rol: rol,
+                        activo: true,
+                        createdAt: new Date()
+                    });
+                } catch (err) {
+                    console.warn('No se pudo crear perfil en Firestore:', err);
+                }
+            }
+
+            // Verificar estado activo: si el perfil existe y activo === false, no permitir login
+            if (perfil && perfil.activo === false) {
+                // Cerrar sesión inmediatamente
+                await auth.signOut();
+                mensaje.style.color = 'red';
+                mensaje.innerText = 'Cuenta desactivada. Contacta con el administrador.';
+                return;
+            }
+
+            // Guardar en localStorage y redirigir según rol
+            localStorage.setItem("usuario", JSON.stringify({ uid: user.uid, nombre, correo, rol }));
             mensaje.style.color = "green";
             mensaje.innerText = "Bienvenido " + nombre + ", redirigiendo...";
             setTimeout(() => {
                 if (rol === "admin") {
-                    // Ruta relativa desde login.html a admin.html
                     window.location.href = "admin.html";
                 } else {
-                    // Ruta relativa desde login.html a index.html (subir dos niveles)
                     window.location.href = "../../index.html";
                 }
-            }, 1000);
+            }, 800);
 
 
 

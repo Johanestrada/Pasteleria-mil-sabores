@@ -1,13 +1,23 @@
-// Configuración de Firebase
+// Configuración de Firebase (usar la del proyecto Pastelería Mil Sabores)
 const firebaseConfig = {
-    apiKey: "AIzaSyBBT7jka7a-7v3vY19BlSajamiedLrBTN0",
-    authDomain: "tiendanombretienda.firebaseapp.com",
-    projectId: "tiendanombretienda",
+    apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+    authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+    projectId: "tiendapasteleriamilsabor-a193d",
+    storageBucket: "tiendapasteleriamilsabor-a193d.appspot.com",
+    messagingSenderId: "1022940675339",
+    appId: "1:1022940675339:web:e347b3abbbe1e35615360e",
+    measurementId: "G-WKZ1WX5H72"
 };
 
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
+// Inicializar Firebase (solo si no está ya inicializado)
+if (!firebase.apps?.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 const db = firebase.firestore();
+
+// Control de simulación de pagos: por defecto simula (útil para desarrollo).
+// Para desactivar la simulación y forzar éxito pase `?simulatePayment=false` en la URL.
+const SIMULAR_PAGO = (new URLSearchParams(window.location.search).get('simulatePayment') !== 'false');
 
 // Variables globales
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -32,12 +42,19 @@ const regionesComunas = {
     "Magallanes": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
 };
 
-// Inicializar checkout cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
+// Inicializar checkout cuando el DOM esté listo (robusto si el script se carga al final)
+function _initCheckoutOnce() {
     inicializarCheckout();
     configurarEventosCheckout();
     cargarRegiones(); // Cargar las regiones al iniciar
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _initCheckoutOnce);
+} else {
+    // Si el DOM ya está listo (script incluido al final), ejecutar inmediatamente
+    _initCheckoutOnce();
+}
 
 /**
  * Carga las regiones en el select correspondiente
@@ -141,8 +158,9 @@ function actualizarCarritoHeader() {
     const total = carrito.reduce((sum, producto) => {
         return sum + ((producto.precio || 0) * (producto.cantidad || 1));
     }, 0);
-    
-    document.querySelector('.carrito-total').textContent = total.toLocaleString('es-CL');
+    // Actualizar solo si el elemento existe en la página
+    const el = document.querySelector('.carrito-total');
+    if (el) el.textContent = total.toLocaleString('es-CL');
 }
 
 /**
@@ -169,7 +187,8 @@ async function procesarPago() {
 
         // Crear objeto de compra
         const compra = {
-            fecha: new Date(),
+            // Usar serverTimestamp cuando sea posible para compatibilidad con queries por fecha
+            fecha: (firebase.firestore && firebase.firestore.FieldValue) ? firebase.firestore.FieldValue.serverTimestamp() : new Date(),
             cliente: datosCliente,
             direccion: datosDireccion,
             productos: [...carrito], // Copia del carrito
@@ -179,11 +198,20 @@ async function procesarPago() {
         };
 
         // Guardar en Firestore
+        console.log('Guardando compra en Firestore (proyecto):', firebase.app().options.projectId, compra);
         const docRef = await db.collection('compras').add(compra);
+        console.log('Compra guardada con ID:', docRef.id);
         
-        // Simular procesamiento de pago (50% de éxito)
-        const pagoExitoso = Math.random() > 0.5;
-        
+        // Procesamiento de pago (simulado en desarrollo)
+        let pagoExitoso;
+        if (SIMULAR_PAGO) {
+            pagoExitoso = Math.random() > 0.5; // comportamiento antiguo, aleatorio
+        } else {
+            // En entorno de pruebas/producción forzamos éxito para evitar falsos negativos
+            pagoExitoso = true;
+        }
+        console.log('Proceso de pago - simulatePayment=', SIMULAR_PAGO, 'resultado=', pagoExitoso);
+
         if (pagoExitoso) {
             // Actualizar estado en Firestore
             await db.collection('compras').doc(docRef.id).update({
@@ -203,12 +231,35 @@ async function procesarPago() {
                 estado: 'error_pago'
             });
             
-            // Redirigir a error
+            // Guardar compra para mostrar detalles en pantalla de error y ofrecer reintento
             localStorage.setItem('ultimaCompra', JSON.stringify({
                 ...compra,
                 id: docRef.id
             }));
-            window.location.href = `errorPago.html?orden=${compra.numeroOrden}`;
+            console.warn('Pago fallido (simulado). ID compra:', docRef.id);
+
+            // Mostrar modal de error con opción de reintentar
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'error',
+                    title: `No se pudo realizar el pago ${compra.numeroOrden}`,
+                    html: `Detalle de compra<br><strong>Total:</strong> $ ${total.toLocaleString('es-CL')}`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Volver a intentar',
+                    cancelButtonText: 'Cancelar'
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        // Intentar el pago de nuevo (vuelve a llamar al procesamiento)
+                        procesarPago();
+                    } else {
+                        // Redirigir a una página de error para mostrar detalles
+                        window.location.href = `errorPago.html?orden=${compra.numeroOrden}`;
+                    }
+                });
+            } else {
+                // Si no hay SweetAlert, usar redirect directo
+                window.location.href = `errorPago.html?orden=${compra.numeroOrden}`;
+            }
         }
 
     } catch (error) {
@@ -264,20 +315,26 @@ function generarNumeroOrden() {
  * Configura los eventos del checkout
  */
 function configurarEventosCheckout() {
-    document.getElementById('btnPagarAhora').addEventListener('click', procesarPago);
-    
+    const btnPagar = document.getElementById('btnPagarAhora');
+    if (btnPagar) btnPagar.addEventListener('click', procesarPago);
+
     // Evento para cargar comunas cuando se selecciona una región
-    document.getElementById('region').addEventListener('change', function() {
-        if (this.value) {
-            cargarComunas(this.value);
-        } else {
-            // Si no hay región seleccionada, deshabilitar comuna
-            const selectComuna = document.getElementById('comuna');
-            selectComuna.innerHTML = '<option value="">Primero selecciona una región</option>';
-            selectComuna.disabled = true;
-        }
-    });
-    
+    const selectRegion = document.getElementById('region');
+    if (selectRegion) {
+        selectRegion.addEventListener('change', function() {
+            if (this.value) {
+                cargarComunas(this.value);
+            } else {
+                // Si no hay región seleccionada, deshabilitar comuna
+                const selectComuna = document.getElementById('comuna');
+                if (selectComuna) {
+                    selectComuna.innerHTML = '<option value="">Primero selecciona una región</option>';
+                    selectComuna.disabled = true;
+                }
+            }
+        });
+    }
+
     // Validación en tiempo real
     const inputs = document.querySelectorAll('input[required], select[required]');
     inputs.forEach(input => {

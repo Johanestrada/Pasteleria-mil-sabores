@@ -1,10 +1,12 @@
-import { db } from "../config/firebase";
+import { db, auth } from "../config/firebase";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { 
   collection, 
   addDoc,
   updateDoc,
   deleteDoc,
   doc,
+  setDoc,
   getDocs,
   getDoc,
   query,
@@ -217,6 +219,43 @@ export class CrudService {
     } catch (error) {
       console.error("Error obteniendo usuario:", error);
       return null;
+    }
+  }
+
+  static async createUsuario(usuario) {
+    try {
+      const docRef = await addDoc(collection(db, "usuario"), {
+        ...usuario,
+        createdAt: Timestamp.now(),
+        activo: true
+      });
+      return docRef.id;
+    } catch (error) {
+      console.error("Error creando usuario:", error);
+      return null;
+    }
+  }
+
+  // Crear usuario en Firebase Auth y guardar perfil en Firestore SIN contraseña
+  static async createUsuarioConContrasena(email, password, perfil) {
+    try {
+      // Crear usuario en Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      // Guardar perfil en Firestore con el UID como id del documento
+      const perfilDoc = {
+        ...perfil,
+        email: perfil.email || email,
+        createdAt: Timestamp.now(),
+        activo: true
+      };
+
+      await setDoc(doc(db, 'usuario', uid), perfilDoc);
+      return uid;
+    } catch (error) {
+      console.error('Error creando usuario con contraseña:', error);
+      throw error;
     }
   }
 
