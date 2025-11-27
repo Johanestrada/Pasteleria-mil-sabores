@@ -220,6 +220,31 @@ export class CrudService {
     }
   }
 
+  // Buscar usuario por email o campo 'correo'
+  static async findUsuarioByEmail(email) {
+    try {
+      const usuariosRef = collection(db, "usuario");
+      // Primero buscar por 'email'
+      let q = query(usuariosRef, where("email", "==", email));
+      let querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        // Intentar por 'correo'
+        q = query(usuariosRef, where("correo", "==", email));
+        querySnapshot = await getDocs(q);
+      }
+      if (!querySnapshot.empty) {
+        // Devolver el primer match
+        const docSnap = querySnapshot.docs[0];
+        const data = docSnap.data();
+        return { id: docSnap.id, ...data };
+      }
+      return null;
+    } catch (error) {
+      console.error("Error buscando usuario por email:", error);
+      return null;
+    }
+  }
+
   static async updateUsuario(id, datos) {
     try {
       const usuarioRef = doc(db, "usuario", id);

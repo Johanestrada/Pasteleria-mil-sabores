@@ -164,7 +164,16 @@ section.noticias {
   padding: 0.5rem 0;
   border-radius: 6px;
 }
-
+main.container.my-5,
+.container.my-5 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #FFF5E1;
+  border-radius: 12px;       /* bordes redondeados */
+  padding: 1.25rem;          /* espacio interior (ajusta si quieres) */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* sombra sutil opcional */
+  overflow: hidden;          /* evita que contenido sobresalga de las esquinas */
+}
 .nav-dropdown-content a {
   display: block;
   padding: 0.5rem 1rem;
