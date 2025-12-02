@@ -4,141 +4,184 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout - Mi Tienda</title>
-  <link rel="stylesheet" href="../css/catalogo.css">
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="../css/catalogo.css">
   <link rel="stylesheet" href="../css/carrito.css">
+
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
   <script>
-    // VERIFICACIÓN DE LOGIN: Se ejecuta al cargar para asegurar que el usuario haya iniciado sesión.
     if (!localStorage.getItem('usuario')) {
-      // Si no hay un usuario en localStorage, se le impide continuar con la compra.
       alert('Debes iniciar sesión para poder realizar una compra.');
-      window.location.href = 'login.html'; // Redirige a la página de login.
+      window.location.href = 'login.html';
     }
   </script>
 </head>
 <body>
-  <!-- HEADER: Barra de navegación estándar. -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
-      <!-- ... Contenido de la barra de navegación ... -->
-  </nav>
 
-  <!-- MAIN CONTENT: Contenedor principal del proceso de pago. -->
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="index.html">
+            <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+        </a>
+
+        <!-- Botón para móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra el menú -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="../../index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="catalogo.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="nosotros.html">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="noticias.html">Noticias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                </li>
+            </ul>
+            <!--buscar-->
+            <div class="d-flex align-items-center ms-lg-3 gap-2">
+                <a href="carrito.html" class="btn position-relative">
+                    <i class="bi bi-cart fs-4"></i>
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+                </a>
+                <!-- Icono login -->
+                <a href="login.html" class="btn text-dark p-0">
+                    <i class="bi bi-person fs-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="main">
     <div class="checkout-container">
-      <!-- Encabezado del Checkout: Muestra el título y el total a pagar. -->
+
+      <!-- ENCABEZADO -->
       <div class="checkout-header">
-        <div class="checkout-titulos">
+        <div>
           <h1 class="checkout-titulo">Carrito de Compra</h1>
-          <p class="checkout-subtitulo">Completa la siguiente información</p>
+          <p class="text-muted">Completa la siguiente información</p>
         </div>
-        <!-- El total se actualiza dinámicamente con JavaScript. -->
+
         <button class="btn-total-pagar" id="btnTotalPagar">
           Total a Pagar: $<span id="totalPagar">0</span>
         </button>
       </div>
 
-      <!-- Tabla de Productos: Resume los artículos en el carrito. -->
-      <div class="tabla-checkout-container">
+      <!-- TABLA -->
+      <div class="table-responsive mb-4">
         <table class="tabla-checkout">
           <thead>
             <tr>
               <th>Imagen</th>
               <th>Nombre</th>
-              <th>Precio $</th>
+              <th>Precio</th>
               <th>Cantidad</th>
               <th>Subtotal</th>
             </tr>
           </thead>
-          <!-- Cuerpo de la tabla: Se rellena dinámicamente con los productos desde checkout.js. -->
           <tbody id="tablaCheckoutBody">
-            <!-- Las filas de productos se insertarán aquí. -->
           </tbody>
         </table>
       </div>
 
-      <!-- Formulario de Información del Cliente -->
-      <section class="info-cliente">
+      <!-- INFO CLIENTE -->
+      <section>
         <h2 class="section-title">Información del Cliente</h2>
-        <form id="formCliente" class="form-cliente">
-          <!-- Campos para nombre, apellidos y correo. La información se puede autocompletar si el usuario está logueado. -->
+        <form id="formCliente">
+
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre *</label>
-              <input type="text" id="nombre" name="nombre" required>
+              <input type="text" id="nombre" required>
             </div>
+
             <div class="form-group">
               <label for="apellidos">Apellidos *</label>
-              <input type="text" id="apellidos" name="apellidos" required>
+              <input type="text" id="apellidos" required>
             </div>
           </div>
+
           <div class="form-group full-width">
             <label for="correo">Correo Electrónico *</label>
-            <input type="email" id="correo" name="correo" required>
+            <input type="email" id="correo" required>
           </div>
+
         </form>
       </section>
 
-      <!-- Formulario de Dirección de Entrega -->
-      <section class="direccion-entrega">
-        <h2 class="section-title">Dirección de entrega de los productos</h2>
-        <form id="formDireccion" class="form-direccion">
-            <!-- Campos para la dirección. -->
+      <!-- DIRECCIÓN -->
+      <section>
+        <h2 class="section-title">Dirección de Entrega</h2>
+        <form id="formDireccion">
+
           <div class="form-row">
             <div class="form-group">
               <label for="calle">Calle *</label>
-              <input type="text" id="calle" name="calle" required>
+              <input type="text" id="calle" required>
             </div>
             <div class="form-group">
               <label for="departamento">Departamento (Opcional)</label>
-              <input type="text" id="departamento" name="departamento">
+              <input type="text" id="departamento">
             </div>
           </div>
+
           <div class="form-row">
-            <!-- Selectores de Región y Comuna: Se cargan dinámicamente con JS para mejorar la usabilidad. -->
             <div class="form-group">
               <label for="region">Región *</label>
-              <select id="region" name="region" required>
-                <option value="">Selecciona una región</option>
-                <!-- Las regiones se cargarán aquí. -->
-              </select>
+              <select id="region" required></select>
             </div>
             <div class="form-group">
               <label for="comuna">Comuna *</label>
-              <select id="comuna" name="comuna" required disabled>
-                <option value="">Primero selecciona una región</option>
-                <!-- Las comunas se cargarán aquí. -->
-              </select>
+              <select id="comuna" disabled required></select>
             </div>
           </div>
+
           <div class="form-group full-width">
-            <label for="indicaciones">Indicaciones para la entrega (Opcional)</label>
-            <textarea id="indicaciones" name="indicaciones" rows="3" placeholder="Ej: Timbre azul, dejar con conserje..."></textarea>
+            <label for="indicaciones">Indicaciones para la entrega</label>
+            <textarea id="indicaciones" rows="3"></textarea>
           </div>
+
         </form>
       </section>
 
-      <!-- Botón de Pago Final: Inicia el proceso de pago. -->
-      <div class="checkout-footer">
-        <button id="btnPagarAhora" class="btn-pagar-ahora">
-          Pagar Ahora: $<span id="montoPagar">0</span>
-        </button>
-      </div>
+      <!-- BOTÓN PAGAR -->
+      <button id="btnPagarAhora" class="btn-pagar-ahora">
+        Pagar Ahora: $<span id="montoPagar">0</span>
+      </button>
+
     </div>
   </main>
 
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- auth-status.js: Gestiona la visualización del estado de login del usuario. -->
   <script src="../js/auth-status.js"></script>
-  <!-- actualizarCarrito.js: Actualiza el contador del ícono del carrito. -->
   <script src="../js/actualizarCarrito.js"></script>
-  <!-- checkout.js: Lógica principal de esta página. Carga productos, gestiona formularios, y procesa el pago. -->
   <script src="../js/checkout.js"></script>
+
 </body>
 </html>
