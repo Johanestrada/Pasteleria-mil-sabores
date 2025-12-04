@@ -224,7 +224,7 @@ class CRUDFunctionsSafe {
 			return;
 		}
 
-			body.innerHTML = categorias.map(categoria => {
+			tbody.innerHTML = categorias.map(categoria => {
 				const accionesAdmin = `
 					<td class="acciones">
 						<button onclick="crudFunctions.editarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>

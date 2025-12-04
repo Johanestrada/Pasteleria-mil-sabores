@@ -397,7 +397,6 @@ paths:
                   rol: "cliente"
                   activo: true
 
-  /usuarios/{id}:
     get:
       tags:
         - Usuarios
@@ -429,6 +428,32 @@ paths:
                 telefono: "+56912345678"
                 direccion: "Av. Principal 123, Santiago"
                 createdAt: "2024-01-01T00:00:00Z"
+        '404':
+          description: Usuario no encontrado
+
+    delete:
+      tags:
+        - Usuarios
+      summary: Eliminar usuario del sistema
+      description: |
+        Elimina un usuario del sistema.
+        Servicio: CrudService.deleteUsuario()
+        Colección Firestore: usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "user_admin_001"
+      responses:
+        '200':
+          description: Usuario eliminado correctamente
+          content:
+            application/json:
+              example:
+                success: true
+                message: "Usuario eliminado correctamente de Firestore"
         '404':
           description: Usuario no encontrado
 
