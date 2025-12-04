@@ -29,7 +29,7 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
-    <div class="container">
+    <div class="container-fluid px-2 px-md-3 px-lg-4">
         <!-- Logo -->
         <a class="navbar-brand" href="index.html">
             <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
@@ -61,15 +61,15 @@
                 </li>
             </ul>
             <!--buscar-->
-            <div class="d-flex align-items-center ms-lg-3 gap-2">
-                <a href="carrito.html" class="btn position-relative">
-                    <i class="bi bi-cart fs-4"></i>
+            <div class="d-flex align-items-center ms-lg-3 gap-2 flex-shrink-0">
+                <a href="carrito.html" class="btn position-relative p-1 p-md-2">
+                    <i class="bi bi-cart fs-5 fs-md-4"></i>
                     <span
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
                 </a>
                 <!-- Icono login -->
-                <a href="login.html" class="btn text-dark p-0">
-                    <i class="bi bi-person fs-4"></i>
+                <a href="login.html" class="btn text-dark p-1 p-md-2">
+                    <i class="bi bi-person fs-5 fs-md-4"></i>
                 </a>
             </div>
         </div>
@@ -117,18 +117,18 @@
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre *</label>
-              <input type="text" id="nombre" required>
+              <input type="text" id="nombre" class="form-control" required>
             </div>
 
             <div class="form-group">
               <label for="apellidos">Apellidos *</label>
-              <input type="text" id="apellidos" required>
+              <input type="text" id="apellidos" class="form-control" required>
             </div>
           </div>
 
           <div class="form-group full-width">
             <label for="correo">Correo Electrónico *</label>
-            <input type="email" id="correo" required>
+            <input type="email" id="correo" class="form-control" required>
           </div>
 
         </form>
@@ -142,28 +142,28 @@
           <div class="form-row">
             <div class="form-group">
               <label for="calle">Calle *</label>
-              <input type="text" id="calle" required>
+              <input type="text" id="calle" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="departamento">Departamento (Opcional)</label>
-              <input type="text" id="departamento">
+              <input type="text" id="departamento" class="form-control">
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="region">Región *</label>
-              <select id="region" required></select>
+              <select id="region" class="form-select" required></select>
             </div>
             <div class="form-group">
               <label for="comuna">Comuna *</label>
-              <select id="comuna" disabled required></select>
+              <select id="comuna" class="form-select" disabled required></select>
             </div>
           </div>
 
           <div class="form-group full-width">
             <label for="indicaciones">Indicaciones para la entrega</label>
-            <textarea id="indicaciones" rows="3"></textarea>
+            <textarea id="indicaciones" class="form-control" rows="3"></textarea>
           </div>
 
         </form>

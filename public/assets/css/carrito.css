@@ -756,3 +756,286 @@
     margin-bottom: 8px;
   }
 }
+
+/* --- RESPONSIVE CHECKOUT --- */
+/* Estilos específicos para mejorar responsividad del checkout en móvil */
+
+@media (max-width: 768px) {
+  /* Contenedor principal */
+  .checkout-container {
+    max-width: 100%;
+    padding: 12px;
+    margin: 0;
+  }
+
+  /* Header del checkout */
+  .checkout-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+    margin-bottom: 20px;
+  }
+
+  .checkout-header > div {
+    width: 100%;
+  }
+
+  .checkout-header .checkout-titulo {
+    font-size: 24px !important;
+    margin-bottom: 5px;
+  }
+
+  /* Botón total a pagar */
+  .btn-total-pagar {
+    width: 100%;
+    padding: 12px 15px !important;
+    font-size: 16px !important;
+    text-align: center;
+  }
+
+  /* Tabla checkout responsiva */
+  .tabla-checkout {
+    font-size: 14px;
+  }
+
+  .tabla-checkout th,
+  .tabla-checkout td {
+    padding: 10px 6px !important;
+  }
+
+  .tabla-checkout th {
+    font-size: 12px;
+  }
+
+  .producto-imagen-checkout {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  /* Secciones de formulario */
+  section {
+    padding: 12px 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .section-title {
+    font-size: 18px !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Filas de formulario */
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .form-row .form-group {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 12px !important;
+    font-size: 16px !important; /* Evita zoom automático en iOS */
+    border-radius: 6px !important;
+  }
+
+  .form-group textarea {
+    min-height: 60px;
+  }
+
+  /* Botón pagar ahora */
+  .btn-pagar-ahora {
+    width: 100%;
+    padding: 14px 20px !important;
+    font-size: 16px !important;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustes adicionales para pantallas muy pequeñas */
+  .checkout-container {
+    padding: 8px;
+  }
+
+  .checkout-header {
+    gap: 10px;
+  }
+
+  .checkout-titulo {
+    font-size: 20px !important;
+  }
+
+  .btn-total-pagar {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  /* Tabla más compacta */
+  .tabla-checkout th,
+  .tabla-checkout td {
+    padding: 8px 4px !important;
+    font-size: 11px !important;
+  }
+
+  .tabla-checkout th {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .producto-imagen-checkout {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .section-title {
+    font-size: 16px !important;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 10px !important;
+    font-size: 14px !important;
+  }
+
+  .btn-pagar-ahora {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* --- NAVBAR RESPONSIVO MEJORADO --- */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-brand img {
+    max-width: 70px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+
+  .navbar .d-flex {
+    gap: 8px !important;
+  }
+
+  .btn i {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand img {
+    max-width: 60px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  .navbar .d-flex {
+    gap: 6px !important;
+  }
+
+  .btn i {
+    font-size: 1.1rem !important;
+  }
+
+  .badge {
+    font-size: 10px !important;
+    padding: 2px 5px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    padding: 0.3rem 0;
+  }
+
+  .navbar-brand img {
+    max-width: 50px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 0.3rem 0.3rem !important;
+  }
+
+  .navbar .d-flex {
+    gap: 4px !important;
+  }
+
+  .btn i {
+    font-size: 1rem !important;
+  }
+
+  .badge {
+    font-size: 8px !important;
+    padding: 1px 4px !important;
+  }
+
+  .navbar-toggler {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .navbar-toggler-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+/* --- ESTILOS COMPLEMENTARIOS PARA INPUTS BOOTSTRAP --- */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #f48fb1;
+  box-shadow: 0 0 0 0.2rem rgba(244, 143, 177, 0.25);
+}
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%235D4037' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}
+
+/* Ajuste para select deshabilitado */
+.form-select:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  opacity: 1;
+}

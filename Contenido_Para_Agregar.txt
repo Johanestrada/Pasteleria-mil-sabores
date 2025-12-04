@@ -1,0 +1,1048 @@
+================================================================================
+CONTENIDO PARA AGREGAR AL MANUAL DE USUARIO - PASTELERÍA MIL SABORES
+Documento generado: 04/12/2025
+================================================================================
+
+NOTA: Este documento contiene secciones adicionales y mejoras que puedes 
+agregar a tu Manual_Usuario_Cliente.md para completarlo y enriquecerlo.
+
+================================================================================
+SECCIÓN 1: MEJORAS A LA INTRODUCCIÓN
+================================================================================
+
+[TÍTULO ALTERNATIVO O COMPLEMENTARIO:]
+### Características Destacadas de la Plataforma
+
+Pastelería Mil Sabores ofrece las siguientes ventajas para hacer tu experiencia 
+única:
+
+- **Catálogo Completo:** Más de 50 productos disponibles
+- **Personalización Ilimitada:** Customiza tus compras según tus preferencias
+- **Descuentos Automáticos:** Sistema inteligente que detecta tu perfil
+- **Seguridad Garantizada:** Encriptación de datos y privacidad protegida
+- **Seguimiento en Tiempo Real:** Conoce el estado de tu pedido siempre
+- **Interfaz Amigable:** Diseño intuitivo para todos los niveles de usuario
+- **Soporte 24/7:** Equipo listo para ayudarte
+- **Múltiples Métodos de Pago:** Elige la forma que prefieres
+
+
+================================================================================
+SECCIÓN 2: NUEVA SECCIÓN - GUÍA RÁPIDA (ANTES DE COMENZANDO)
+================================================================================
+
+[AGREGAR DESPUÉS DE "Requisitos del Sistema"]
+
+## Guía Rápida (5 Minutos)
+
+### Para Usuarios Nuevos - Quick Start
+
+Si tienes prisa, sigue estos pasos rápidos:
+
+#### Paso 1: Crear Cuenta (2 minutos)
+1. Ve a https://pasteleria-mil-sabores.web.app
+2. Haz clic en "Registrarse"
+3. Ingresa: email, contraseña, nombre, fecha de nacimiento, teléfono
+4. Marca "Acepto términos"
+5. Haz clic en "Crear Cuenta"
+6. Verifica tu email
+
+#### Paso 2: Explorar Catálogo (1 minuto)
+1. Haz clic en "Catálogo"
+2. Usa filtros para ver categorías
+3. Haz clic en productos que te interesen
+
+#### Paso 3: Comprar (2 minutos)
+1. Selecciona un producto
+2. Agrega al carrito (✓ confirma cantidad)
+3. Haz clic en "Carrito"
+4. Haz clic en "Proceder a Checkout"
+5. Ingresa dirección de envío
+6. Selecciona método de pago
+7. Confirma compra
+8. ¡Listo! Recibirás confirmación por email
+
+**Tiempo total: ~5 minutos**
+
+
+================================================================================
+SECCIÓN 3: NUEVA SECCIÓN - DESCUENTOS Y BENEFICIOS
+================================================================================
+
+[AGREGAR DESPUÉS DE "Aprovecha tus Beneficios Automáticos"]
+
+## Descuentos y Beneficios Especiales
+
+### Descuentos Automáticos por Perfil
+
+El sistema detecta automáticamente tu perfil y aplica descuentos sin necesidad 
+de códigos:
+
+#### Descuento Adulto Mayor (50+)
+- **Código Automático:** FELICES50
+- **Descuento:** 10% sobre el total
+- **Cómo se activa:** Al registrarte con fecha de nacimiento de 50+ años
+- **Válido:** En todas las compras
+- **Verificación:** Por sistema, no requiere documento
+
+#### Descuento Estudiante DUOC
+- **Activación:** Automática si tu email termina en @duocmail.cl
+- **Descuento:** 15% sobre el total (verificar porcentaje actual)
+- **Válido:** Todo el año mientras estudies
+- **Requisito:** Usar email institucional al registrarte
+- **Renovación:** Automática anualmente
+
+#### Descuento Cliente Frecuente
+- **Requisito:** 5 compras realizadas
+- **Descuento:** 5% en todas las compras futuras
+- **Acumulable:** Sí, se suma a otros beneficios
+- **Válido:** Indefinidamente mientras sigas comprando
+
+### Códigos Promocionales Temporales
+
+Pastelería Mil Sabores lanza códigos promocionales especiales:
+
+#### Cómo Usar un Código Promocional
+1. Realiza tus compras normalmente
+2. En el paso "Seleccionar Método de Pago" verás campo "Código Promocional"
+3. Ingresa el código (ej: NAVIDAD2025)
+4. Haz clic en "Aplicar"
+5. Se calculará automáticamente el descuento
+6. El monto final se actualizará
+
+#### Códigos Activos (Diciembre 2025)
+- NAVIDAD2025: 20% descuento en todo
+- DICIEMBRE10: 10% en compras mayores a $30.000
+- REFERIDO: $3.000 de descuento (si fuiste referido)
+
+#### Dónde Encontrar Códigos
+- Blog de Pastelería Mil Sabores
+- Email de promociones (suscribete en tu perfil)
+- Redes sociales (Instagram, Facebook)
+- Newsletter mensual
+- Ofertas de la sección "Ofertas"
+
+#### Validez de Códigos
+- Cada código tiene fecha de vencimiento
+- Al ingresar código vencido, no se aplica
+- Se mostrará mensaje: "Este código ha expirado"
+- Algunos códigos son de una sola compra
+- Otros son válidos múltiples veces
+
+#### Combinación de Beneficios
+- ✓ Descuentos automáticos + Código promocional: SÍ se combinan
+- ✓ Múltiples beneficios automáticos: Se aplica el mayor
+- Ejemplo: Si tienes FELICES50 (10%) + NAVIDAD2025 (20%) = 30% descuento
+
+### Programa de Referidos (Próximamente)
+
+Invita amigos y gana beneficios:
+- Comparte tu código de referido
+- Tu amigo recibe $2.000 en su primer compra
+- Tú recibes $3.000 en descuento en tu próxima compra
+- Sin límite de referidos
+
+
+================================================================================
+SECCIÓN 4: NUEVA SECCIÓN - CUIDADO Y ALMACENAMIENTO DE PRODUCTOS
+================================================================================
+
+[AGREGAR DESPUÉS DE "Otras Secciones Importantes"]
+
+## Cuidado de tus Productos
+
+### Cuidados Generales de Almacenamiento
+
+Después de recibir tu pedido, sigue estas recomendaciones:
+
+#### Tortas
+- **Almacenamiento:** Refrigerador a 4°C
+- **Duración:** 5-7 días en refrigerador
+- **Antes de servir:** Saca 15 minutos antes del refrigerador
+- **Congelación:** Puedes congelar hasta 1 mes (sin cobertura de crema)
+- **¡OJO!:** No congeles con cobertura de fondant
+- **Transporte:** Coloca en caja rígida, nivel con el suelo
+- **Señal de frescura:** Debe oler a ingredientes frescos
+
+#### Cupcakes
+- **Almacenamiento:** Caja hermética a temperatura ambiente
+- **Duración:** 3-4 días sin refrigeración
+- **Si tienen cobertura de crema:** Refrigerar y consumir en 2-3 días
+- **Congelación:** Puedes congelar sin cobertura hasta 2 meses
+- **Tip:** Mantén en caja original para mejor conservación
+
+#### Macarons
+- **Almacenamiento:** Caja hermética a temperatura ambiente
+- **Duración:** 5-7 días sin abrir
+- **Una vez abierta la caja:** Consume en 3 días
+- **Refrigeración:** No es necesaria pero puedes hacerlo
+- **Congelación:** Puedes congelar hasta 1 mes
+- **Humedad:** Protege de la humedad, son delicados
+
+#### Trufas
+- **Almacenamiento:** Caja original en lugar fresco
+- **Temperatura ideal:** 16-20°C (no al sol)
+- **Duración:** 2-3 semanas sin refrigeración
+- **Refrigeración:** Puedes refrigerar si clima es muy cálido
+- **¡IMPORTANTE!:** No congelar (se daña el chocolate)
+- **Cuidado:** Evita golpes, son frágiles
+
+#### Galletas
+- **Almacenamiento:** Caja hermética a temperatura ambiente
+- **Duración:** 1-2 semanas sin refrigeración
+- **Humedad:** Protege de la humedad
+- **Congelación:** Puedes congelar hasta 2 meses
+- **Tip:** Si se ablanda, coloca en el refrigerador 30 minutos
+
+### Si Recibiste tu Producto Dañado
+
+**Paso 1: Verificación Inmediata**
+- Abre la caja cuando llegue el repartidor
+- Verifica estado del producto
+- Si está dañado, cuéntale al repartidor
+
+**Paso 2: Documentación**
+- Toma fotos claras del daño
+- Incluyendo embalaje y producto
+- Guarda toda la caja de embalaje
+
+**Paso 3: Contacto Urgente**
+- Envía fotos a: soporte@pasteleriamilsabores.cl
+- Incluye número de pedido
+- Sé específico describiendo el daño
+
+**Paso 4: Reemplazo**
+- Ofreceremos reemplazo sin costo
+- O reembolso del producto
+- Tú eliges la opción
+
+**Plazo:** Tienes hasta 12 horas para reportar
+
+
+================================================================================
+SECCIÓN 5: NUEVA SECCIÓN - PERSONALIZACIÓN AVANZADA
+================================================================================
+
+[AGREGAR COMO SUBSECCIÓN DENTRO DE "Personalizar tus Productos"]
+
+### Opciones de Personalización Detalladas
+
+#### Personalizaciones Disponibles por Producto
+
+##### Tortas - Personalización Completa
+
+**Tamaño:**
+- Pequeño (15 cm): Para 4-6 personas
+- Mediano (20 cm): Para 8-12 personas
+- Grande (25 cm): Para 14-20 personas
+- Precio: Varía según tamaño (ver en carrito)
+
+**Mensaje Personalizado:**
+- Máximo 50 caracteres
+- Puede incluir: letras, números, ñ, espacios, puntos, comas
+- Ejemplos válidos:
+  - "¡Feliz Cumpleaños María!"
+  - "Para mi amor, 10.12.2025"
+  - "¡Que cumplas 25 años!"
+- Se escribirá en cobertura comestible
+
+**Sabor Principal:**
+- Vainilla clásica
+- Chocolate (blanco, con leche, negro)
+- Frutas (fresa, frambuesa, limón)
+- Otros sabores (consulta disponibilidad)
+
+**Relleno:**
+- Crema pastelera
+- Dulce de leche
+- Mermelada
+- Crema de chocolate
+- Mousse de frutas
+
+**Decoración:**
+- Flores comestibles
+- Frutas frescas
+- Sprinkles (bolitas de colores)
+- Fondant personalizado
+- Velas de cumpleaños
+
+**Aditivos:**
+- Sin azúcar refinada
+- Sin gluten
+- Apto para celíacos
+- Apto para veganos
+- Otras restricciones (indicar en notas)
+
+**Tiempo de Preparación:**
+- Estándar: 24-48 horas
+- Con mensaje personalizado: 24-48 horas
+- Con diseño especial: 48-72 horas (consultar disponibilidad)
+
+##### Cupcakes - Opciones Disponibles
+
+**Cantidad:**
+- 6 cupcakes
+- 12 cupcakes
+- 24 cupcakes
+
+**Sabores Individuales:**
+- Puedes mezclar sabores
+- Cada cupcake diferente si deseas
+- Ejemplo: 3 vainilla, 2 chocolate, 1 fresa
+
+**Cobertura:**
+- Buttercream (colores variados)
+- Fondant personalizado
+- Chocolate ganache
+- Frutas frescas
+
+**Decoración:**
+- Sprinkles
+- Flores comestibles
+- Caramelos
+- Choco-chips
+- Personalizados con nombre
+
+##### Macarons - Personalización
+
+**Colores:**
+- Disponibles: Rojo, azul, verde, rosa, amarillo, lila, blanco, negro
+- Combinaciones: Puedes pedir colores específicos
+
+**Sabores:**
+- Fresa, limón, frambuesa, chocolate, vainilla, café, pistacho, menta
+
+**Cantidad:**
+- 6 macarons
+- 12 macarons
+- 24 macarons
+
+**Relleno:**
+- Ganache de chocolate
+- Crema de mantequilla
+- Mermelada
+- Crema de café
+- Mousse de frutas
+
+##### Trufas - Opciones
+
+**Cobertura:**
+- Chocolate oscuro
+- Chocolate con leche
+- Chocolate blanco
+
+**Interior:**
+- Ganache de chocolate oscuro
+- Ganache de chocolate con leche
+- Crema de frambuesa
+- Crema de licor
+- Crema de café
+
+**Cantidad:**
+- 6 trufas
+- 12 trufas
+- 20 trufas
+
+**Presentación:**
+- Caja de regalo estándar
+- Caja de regalo premium
+- Bolsitas individuales
+
+#### Restricciones y Alergia
+
+**Importante:**
+- Todos nuestros productos se preparan en cocina donde hay gluten, frutos secos
+- Si tienes alergia severa, indica en "Notas Especiales"
+- Podemos ofrecer opciones seguras según disponibilidad
+- Consulta con soporte si tienes duda
+
+**Indicar en Personalización:**
+- Alérgico a frutos secos
+- Intolerante a la lactosa
+- Celíaco (sin gluten)
+- Vegano/Vegetariano
+- Otras restricciones
+
+#### Visualización de Cambios
+
+**Preview en Vivo:**
+- Al cambiar opciones, verás vista previa del producto
+- Se actualiza en tiempo real
+- Muestra colores, mensajes, tamaño aproximado
+- No es 100% exacta, solo referencia
+
+**Confirmación Final:**
+- Antes de comprar, verifica bien el preview
+- Revisa: Colores, mensaje, tamaño, opciones especiales
+- Asegúrate de que dice "Agregar al Carrito"
+- Una vez en carrito, aún puedes modificar
+
+
+================================================================================
+SECCIÓN 6: NUEVA SECCIÓN - INTEGRACIÓN CON REDES SOCIALES
+================================================================================
+
+[AGREGAR DESPUÉS DE "Nosotros"]
+
+## Síguenos en Redes Sociales
+
+Mantente actualizado con las últimas noticias, promociones y contenido:
+
+### Nuestras Redes Sociales
+
+**Instagram: @PasteleriaMillSabores**
+- Fotos de nuevos productos
+- Tutorials de repostería
+- Behind the scenes de la tienda
+- Promociones exclusivas
+- Historias diarias
+- Concursos y sorteos
+
+**Facebook: Pastelería Mil Sabores Oficial**
+- Eventos especiales
+- Promociones semanales
+- Interacción con clientes
+- Respuesta a preguntas
+- Horarios de atención
+- Noticias de la empresa
+
+**TikTok: @pasteleriamilsabores**
+- Videos cortos de recetas
+- Preparación de productos
+- Trends y contenido divertido
+- Desafíos de followers
+
+**YouTube: Pastelería Mil Sabores**
+- Tutoriales completos de repostería
+- Procesos de elaboración
+- Testimonios de clientes
+- Videos informativos
+
+### Beneficios de Seguirnos
+
+✓ Códigos promocionales exclusivos para seguidores
+✓ Acceso anticipado a nuevos productos
+✓ Concursos y sorteos semanales
+✓ Descuentos flash anunciados en redes
+✓ Tips de repostería casera
+✓ Comunidad de amantes de la repostería
+
+### Políticas de Interacción
+
+- Respondemos mensajes en máximo 24 horas
+- Respetamos opiniones y críticas constructivas
+- Tenemos política de privacidad en redes
+- No compartimos datos personales públicamente
+- Moderamos comentarios inapropiados
+
+
+================================================================================
+SECCIÓN 7: NUEVA SECCIÓN - COMPRA CORPORATIVA Y EVENTOS
+================================================================================
+
+[AGREGAR COMO NUEVA SECCIÓN PRINCIPAL]
+
+## Compras Corporativas y Eventos
+
+### Para Empresas y Eventos
+
+¿Necesitas productos para tu evento, reunión corporativa o celebración especial? 
+Pastelería Mil Sabores ofrece soluciones personalizadas.
+
+#### Servicios Disponibles
+
+**Catering para Eventos:**
+- Cumpleaños
+- Bodas
+- Graduaciones
+- Reuniones corporativas
+- Aniversarios
+- Otros eventos
+
+**Cantidad Mínima:**
+- 20 personas para eventos
+- Consultar disponibilidad para cantidades mayores
+
+**Opciones de Entrega:**
+- Entrega a domicilio
+- Retiro en local
+- Envío a ubicación del evento
+
+**Personalización para Eventos:**
+- Temas específicos
+- Colores corporativos
+- Logos de empresas
+- Embalaje especial
+- Decoración personalizada
+
+#### Proceso para Compra Corporativa
+
+**Paso 1: Consulta Inicial**
+- Contacta a: eventos@pasteleriamilsabores.cl
+- Teléfono: +56 9 8765 4321
+- Proporciona: Tipo de evento, cantidad, fecha, presupuesto
+
+**Paso 2: Cotización**
+- Te enviaremos opciones y precios
+- Propuestas personalizadas
+- Incluye diseño sugerido
+
+**Paso 3: Confirmación**
+- Acepta propuesta
+- Realiza seña (según monto)
+- Firma contrato de servicios
+
+**Paso 4: Planificación**
+- Reunión de coordinación si es necesario
+- Definir detalles finales
+- Confirmar horario de entrega
+
+**Paso 5: Ejecución**
+- Preparación de productos
+- Entrega en fecha acordada
+- Soporte durante evento
+
+#### Descuentos por Volumen
+
+- De 20 a 50 unidades: 5% descuento
+- De 51 a 100 unidades: 10% descuento
+- De 101 a 200 unidades: 15% descuento
+- Más de 200 unidades: Consultar precio especial
+
+#### Términos de Pago Corporativo
+
+- Seña: 50% al confirmar
+- Resto: Al recibir (o con anticipación de 48 horas)
+- Métodos: Transferencia bancaria, cheque, efectivo
+- Facturable según requieran
+
+#### Políticas de Cancelación
+
+- Cancelación con 7 días anticipación: Reembolso 100%
+- Cancelación con 3-7 días: Reembolso 50%
+- Cancelación con menos de 48 horas: Sin reembolso
+- Cambios de fecha: Sin costo (máximo 1 cambio)
+
+
+================================================================================
+SECCIÓN 8: NUEVA SECCIÓN - SEGURIDAD Y PRIVACIDAD
+================================================================================
+
+[AGREGAR DESPUÉS DE "Solución de Problemas"]
+
+## Seguridad y Privacidad
+
+### Tu Privacidad es Importante
+
+Pastelería Mil Sabores se compromete a proteger tu información personal.
+
+#### Datos que Recopilamos
+
+**Al Registrarte:**
+- Email
+- Nombre completo
+- Teléfono
+- Dirección
+- Fecha de nacimiento
+
+**Durante Compras:**
+- Historial de compras
+- Preferencias de producto
+- Métodos de pago (solo últimos 4 dígitos)
+
+**Automáticamente:**
+- Dirección IP
+- Tipo de navegador
+- Cookies de sesión
+- Actividad en el sitio
+
+#### Cómo Protegemos tus Datos
+
+**Encriptación:**
+- Todos los datos se envían con encriptación SSL/TLS
+- Los datos bancarios se encriptan con estándar PCI-DSS
+- Tu contraseña se guarda con hash, nunca en texto plano
+
+**Almacenamiento Seguro:**
+- Base de datos en Firebase (Google)
+- Servidor de seguridad multinivel
+- Backups automáticos diarios
+- Acceso restringido al personal autorizado
+
+**Protección de Contraseña:**
+- Mínimo 8 caracteres
+- Debe contener números y mayúsculas
+- Cambia regularmente (recomendado cada 90 días)
+- Sistema de recuperación automática
+
+#### Uso de Cookies
+
+**Cookies de Sesión:**
+- Permiten mantener tu sesión abierta
+- Necesarias para tu carrito
+- Se eliminan al cerrar el navegador
+
+**Cookies de Preferencia:**
+- Recuerdan tus selecciones
+- Mejoran tu experiencia
+- Puedes deshabilitarlas en navegador
+
+**Cookies Analíticas:**
+- Información de Google Analytics
+- Solo datos agregados, no personales
+- Nos ayudan a mejorar el sitio
+
+#### Cómo Administrar Cookies
+
+**En Chrome:**
+- Menú > Configuración > Privacidad > Cookies
+- Personaliza según prefieras
+
+**En Firefox:**
+- Menú > Preferencias > Privacidad > Cookies
+- Elige opciones de seguridad
+
+**En Edge:**
+- Configuración > Privacidad > Cookies
+- Administra cookies por sitio
+
+#### Derechos sobre tus Datos
+
+Tienes derecho a:
+
+✓ **Acceso:** Solicitar ver todos tus datos guardados
+✓ **Rectificación:** Corregir datos inexactos
+✓ **Eliminación:** Pedir que eliminen tus datos ("derecho al olvido")
+✓ **Portabilidad:** Recibir tus datos en formato exportable
+✓ **Oposición:** Rechazar ciertos usos de tus datos
+
+**Para ejercer estos derechos:** privacidad@pasteleriamilsabores.cl
+
+#### Seguridad Contra Fraude
+
+**Medidas de Protección:**
+- Verificación en dos pasos para cuentas nuevas
+- Detección automática de transacciones sospechosas
+- Notificaciones en intentos de login desde nuevas ubicaciones
+- Confirmación de identidad para cambios de contraseña
+
+**Si tu Cuenta es Comprometida:**
+1. Cambia contraseña inmediatamente
+2. Contacta a soporte
+3. Revisa tu historial de compras
+4. Notifica a tu banco si hubo pagos fraudulentos
+
+#### Política de Menores de Edad
+
+- Usuarios menores de 13 años: Requieren consentimiento parental
+- Menores 13-18 años: Requieren email parental verificado
+- Nunca vendemos información de menores
+- Protección especial de datos infantiles
+
+
+================================================================================
+SECCIÓN 9: NUEVA SECCIÓN - TÉRMINOS Y CONDICIONES (RESUMEN)
+================================================================================
+
+[AGREGAR DESPUÉS DE "Seguridad y Privacidad"]
+
+## Términos y Condiciones - Resumen
+
+### Resumen Ejecutivo
+
+Al usar Pastelería Mil Sabores, aceptas estos términos. Te recomendamos 
+leerlos completamente en el sitio web. Aquí va el resumen:
+
+#### Servicio
+
+- Pastelería Mil Sabores ofrece venta de productos de repostería en línea
+- El servicio es para mayores de 13 años
+- Nos reservamos derecho de rechazar pedidos
+- Disponibilidad según stock
+
+#### Cuenta de Usuario
+
+- Eres responsable de tu contraseña
+- No compartas tu cuenta con otros
+- Responsable de todas las compras en tu cuenta
+- Pueden cerrarse cuentas por incumplimiento
+
+#### Compras
+
+- Los precios incluyen IVA (cuando aplica)
+- Cambios de precio sin previo aviso
+- Las ofertas tienen fecha de vencimiento
+- Cancelación posible dentro de 1 hora de compra
+
+#### Envíos
+
+- Hacemos esfuerzos por entregar en fecha
+- Entregas dentro del horario especificado
+- No somos responsables por demoras de terceros (correos)
+- Productos deben ser recibidos en buen estado
+- El cliente puede rechazar pedido si llega muy dañado
+
+#### Garantía y Devoluciones
+
+- Productos defectuosos: Se reemplazan dentro de 12 horas
+- Productos dañados en envío: Se reemplazan sin costo
+- No hay devoluciones de dinero (solo reemplazo)
+- Cambios solo si no se ha iniciado preparación
+
+#### Limitación de Responsabilidad
+
+- No somos responsables por pérdida de disfrute del evento
+- No somos responsables por reacciones alérgicas
+- Indica claramente si tienes alergias
+- Información proporcionada sin garantía exactitud
+
+#### Cambios a Términos
+
+- Podemos modificar términos en cualquier momento
+- Te notificaremos de cambios importantes
+- Continuar usando = aceptas cambios
+
+#### Ley Aplicable
+
+- Estos términos se rigen por leyes de Chile
+- Disputas se resuelven en tribunales de Santiago
+
+### Enlaces a Documentos Completos
+
+- Política de Privacidad completa: [enlace]
+- Términos y Condiciones completos: [enlace]
+- Política de Cancelación: [enlace]
+- Política de Envíos: [enlace]
+
+
+================================================================================
+SECCIÓN 10: MEJORAS A LA SECCIÓN DE CONTACTO
+================================================================================
+
+[MEJORAR LA ACTUAL SECCIÓN "Contactar a Soporte"]
+
+### Canales de Contacto Expandidos
+
+**Email - Para Consultas Generales:**
+- soporte@pasteleriamilsabores.cl
+- Respuesta: 24 horas
+
+**Email - Para Eventos Corporativos:**
+- eventos@pasteleriamilsabores.cl
+- Respuesta: 48 horas
+
+**Email - Para Privacidad y Datos:**
+- privacidad@pasteleriamilsabores.cl
+- Respuesta: 72 horas
+
+**Teléfono - Atención Inmediata:**
+- +56 9 8765 4321
+- Horario: Lunes-Viernes 09:00-18:00
+- Sábado: 10:00-14:00
+- Domingo/Festivos: Cerrado
+
+**Chat en Vivo (Cuando está disponible):**
+- En el sitio web
+- Horario: Lunes-Viernes 10:00-17:00
+
+**Formulario en Línea:**
+- Disponible en sección "Contacto"
+- Respuesta: 48 horas
+
+**Redes Sociales:**
+- Instagram: @PasteleriaMillSabores
+- Facebook: Pastelería Mil Sabores Oficial
+- Respuesta: 24 horas
+
+**Ubicación Física:**
+- Calle [Dirección], Santiago
+- Horario: Lunes-Viernes 09:00-18:00
+- Sábado: 10:00-15:00
+
+### Tipo de Consulta - Recomendación de Canal
+
+| Tipo de Consulta | Canal Recomendado | Tiempo Respuesta |
+|------------------|-------------------|-----------------|
+| Problema de compra urgente | Teléfono | Inmediato |
+| Producto dañado | Email o Chat | 12 horas |
+| Evento corporativo | Email eventos | 48 horas |
+| Pregunta general | Chat o Email | 24 horas |
+| Tema de privacidad | Email privacidad | 72 horas |
+| Sugerencia/Feedback | Formulario | 48 horas |
+| Problema técnico | Chat o Email | 12 horas |
+
+### Información a Proporcionar
+
+Para resolver tu consulta más rápido, proporciona:
+
+✓ Nombre completo
+✓ Email registrado
+✓ Número de pedido (si aplica)
+✓ Descripción detallada del problema
+✓ Captura de pantalla (si aplica)
+✓ Navegador y dispositivo que usas
+✓ Número de teléfono de contacto
+
+
+================================================================================
+SECCIÓN 11: NUEVA SECCIÓN - EVALUACIONES Y OPINIONES
+================================================================================
+
+[AGREGAR COMO NUEVA SECCIÓN]
+
+## Dejar Evaluaciones y Opiniones
+
+### Por Qué tu Opinión Importa
+
+Tus comentarios nos ayudan a mejorar y a otros clientes a tomar decisiones.
+
+### Cómo Dejar una Evaluación
+
+**Paso 1: Acceder a tu Historial**
+1. Ve a "Mi Perfil"
+2. Haz clic en "Mis Compras"
+3. Selecciona el pedido que deseas evaluar
+
+**Paso 2: Calificar**
+1. Haz clic en "Dejar Opinión"
+2. Selecciona puntuación: ⭐⭐⭐⭐⭐
+3. Escriba comentario (opcional, máximo 500 caracteres)
+
+**Paso 3: Enviar**
+1. Haz clic en "Enviar Evaluación"
+2. Tu opinión se publica inmediatamente
+3. Aparecerá en la página del producto
+
+### Qué Calificar
+
+- **Calidad del Producto:** ¿Se vea y sabe bien?
+- **Empaque:** ¿Llegó bien protegido?
+- **Tiempo de Entrega:** ¿Fue puntual?
+- **Cumplimiento de Personalización:** ¿Se hizo como pediste?
+- **Atención:** ¿El repartidor fue amable?
+
+### Ejemplos de Buenas Opiniones
+
+❌ MALA:
+"Muy bueno" - Muy corta, sin detalles
+
+✅ BUENA:
+"La torta de chocolate llegó perfecta. Muy moist, con el mensaje impecable. 
+El embalaje fue excelente, llegó sin problemas. La entrega fue puntual. 
+¡Vuelvo a comprar!"
+
+### Políticas de Evaluaciones
+
+- Puedes editar tu evaluación dentro de 7 días
+- Evaluaciones inapropiadas serán eliminadas
+- No permitimos lenguaje ofensivo o spam
+- Evaluaciones ayudan a otros clientes
+- Tus fotos pueden ser compartidas (con permiso)
+
+### Incluir Fotos en tu Evaluación
+
+- Opcional pero muy útil
+- Muestra foto del producto
+- Máximo 3 imágenes
+- Formatos: JPG, PNG
+- Tamaño máximo: 5 MB cada una
+
+### Beneficios de Evaluar
+
+- Tu opinión ayuda a otros
+- Ganas puntos de recompensa (próximamente)
+- Posible descuento en próxima compra
+- Tu feedback nos ayuda a mejorar
+
+
+================================================================================
+SECCIÓN 12: TABLA COMPARATIVA DE PRODUCTOS
+================================================================================
+
+[AGREGAR COMO NUEVA SECCIÓN COMPLEMENTARIA]
+
+## Comparación de Productos - Guía de Selección
+
+### Comparativa Rápida
+
+| Producto | Tamaño | Personas | Precio | Tiempo Prep | Personalizción | Mejor Para |
+|----------|--------|----------|--------|-------------|-----------------|-----------|
+| Torta Clásica | 20 cm | 8-12 | $25k | 24h | Alta | Cumpleaños |
+| Cupcakes | 6 un | 4-6 | $8k | 24h | Media | Oficina |
+| Macarons | 12 un | 6-8 | $12k | 24h | Media | Regalo |
+| Trufas | 12 un | 8-10 | $10k | 24h | Baja | Postre |
+| Galletas | 12 un | 6-8 | $6k | 24h | Media | Picoteo |
+
+### Recomendaciones según Evento
+
+**Para Cumpleaños:**
+→ Torta Personalizada + Cupcakes
+→ Motivo: Impactante, personalizable, abundante
+
+**Para Reunión de Oficina:**
+→ Cupcakes + Galletas + Trufas
+→ Motivo: Portáción, no ensucia, variedad
+
+**Para Regalo/Obsequio:**
+→ Macarons + Trufas en Caja de Regalo
+→ Motivo: Elegante, presentación, pequeño
+
+**Para Fiesta pequeña (4-6 personas):**
+→ Cupcakes Variados
+→ Motivo: Económico, individual, variedad sabores
+
+**Para Fiesta grande (20+ personas):**
+→ Torta Grande + Cupcakes Complementarios
+→ Motivo: Alcanza para todos, opciones
+
+**Para Postre especial:**
+→ Trufas Premium o Macarons Especiales
+→ Motivo: Sofisticado, calidad, pequeña porción
+
+
+================================================================================
+SECCIÓN 13: GLOSARIO EXPANDIDO
+================================================================================
+
+[EXPANDIR TABLA ACTUAL CON NUEVOS TÉRMINOS]
+
+Términos Adicionales a Agregar:
+
+| Término | Definición |
+|---------|-----------|
+| **Apto Celíaco** | Producto libre de gluten, seguro para celíacos |
+| **Backend** | Sistema detrás de escenas que procesa datos |
+| **Buttercream** | Cobertura cremosa hecha de mantequilla y azúcar |
+| **Caché** | Datos temporales guardados en tu navegador |
+| **Fondant** | Cobertura de azúcar para tortas, permite dibujar |
+| **Ganache** | Mezcla de chocolate y crema, usada como cobertura |
+| **Incógnito** | Modo de navegación sin guardar historial |
+| **Método de Pago** | Forma elegida para pagar (tarjeta, transferencia, etc.) |
+| **Mousse** | Postre ligero y esponjoso |
+| **Pedido** | Compra realizada, número único asignado |
+| **Repartidor** | Persona que entrega tu pedido |
+| **Seña** | Pago inicial/anticipo para confirmar pedido |
+| **Sprinkles** | Pequeños adornos de colores en forma de bolas o líneas |
+| **Token** | Código de seguridad temporal para transacciones |
+| **Transacción** | Movimiento de dinero completado |
+| **URL** | Dirección web del sitio |
+| **Vegano** | Sin productos de origen animal |
+
+
+================================================================================
+SECCIÓN 14: PREGUNTAS FRECUENTES EXPANDIDAS
+================================================================================
+
+[EXPANDIR SECCIÓN ACTUAL DE FAQ]
+
+**¿Ofrecen descuento por compra grande?**
+Sí, ver sección "Descuentos por Volumen" o contacta directamente con:
+eventos@pasteleriamilsabores.cl
+
+**¿Puedo elegir el repartidor?**
+No, el sistema asigna automáticamente según zona.
+Puedes dejar instrucciones especiales en dirección.
+
+**¿Qué pasa si no estoy en casa cuando llegan?**
+Contacta al repartidor con instrucciones de dónde dejar.
+Si hay problema, comunica a soporte en las próximas 2 horas.
+
+**¿Hay opciones sin gluten?**
+Sí, consultanos disponibilidad. Algunos productos pueden ser gluten-free.
+Escribe en "Restricciones" al personalizar.
+
+**¿Puedo regalar un producto sin que vea el precio?**
+Sí, puedes pedir embalaje de regalo sin etiqueta de precio.
+Indica en "Notas Especiales": "Embalaje regalo sin precio"
+
+**¿Hacen entregas al extranjero?**
+Actualmente solo Chile. Próximamente consideraremos.
+Suscríbete a newsletter para novedades.
+
+**¿Es seguro usar mi tarjeta en el sitio?**
+Totalmente. Usamos encriptación SSL y cumplimos estándar PCI-DSS.
+Nunca guardamos número completo de tu tarjeta.
+
+**¿Cuál es tu mejor producto?**
+Nuestros clientes más aman: Torta 3 Leches y Macarons.
+Pero todos son deliciosos, ¡prueba tus favoritos!
+
+**¿Ofrecen muestras?**
+No vendemos muestras, pero puedes pedir cantidades pequeñas (ej: 1 cupcake).
+
+**¿Pueden hacer productos con alérgenos específicos?**
+Sí, pero con precaución. Consulta con soporte primero.
+Nuestro local tiene trazas de frutos secos y gluten.
+
+
+================================================================================
+SECCIÓN 15: RECOMENDACIONES PARA INTEGRACIÓN EN EL MANUAL
+================================================================================
+
+Sugerencias de dónde insertar cada sección:
+
+1. Guía Rápida (5 Minutos) 
+   → INSERTAR DESPUÉS DE: "Requisitos del Sistema"
+   → ANTES DE: "Instalación y Configuración"
+
+2. Descuentos y Beneficios
+   → INSERTAR DENTRO DE: "Configuración Inicial" 
+   → DESPUÉS DE: "Aprovecha tus Beneficios Automáticos"
+
+3. Cuidado de Productos
+   → INSERTAR DESPUÉS DE: "Seguimiento Post-Compra"
+   → ANTES DE: "Solución de Problemas"
+
+4. Personalización Avanzada
+   → INSERTAR DENTRO DE: "Personalizar tus Productos"
+   → COMO SUBSECCIÓN EXPANDIDA
+
+5. Redes Sociales
+   → INSERTAR DESPUÉS DE: "Otras Secciones Importantes (Ubicación)"
+
+6. Compras Corporativas
+   → INSERTAR COMO NUEVA SECCIÓN PRINCIPAL
+   → DESPUÉS DE: "Uso del Software"
+   → ANTES DE: "Tu Perfil de Cliente"
+
+7. Seguridad y Privacidad
+   → INSERTAR DESPUÉS DE: "Solución de Problemas"
+   → ANTES DE: "Glosario de Términos"
+
+8. Términos - Resumen
+   → INSERTAR DESPUÉS DE: "Seguridad y Privacidad"
+
+9. Canales de Contacto Expandidos
+   → REEMPLAZAR LA ACTUAL SECCIÓN "Contactar a Soporte"
+
+10. Evaluaciones y Opiniones
+    → INSERTAR DESPUÉS DE: "Términos - Resumen"
+
+11. Comparativa de Productos
+    → INSERTAR DESPUÉS DE: "Personalización Avanzada"
+    → ANTES DE: "Tu Perfil de Cliente"
+
+12. Glosario Expandido
+    → EXPANDIR LA TABLA ACTUAL
+
+13. FAQ Expandidas
+    → EXPANDIR LA SECCIÓN ACTUAL
+
+
+================================================================================
+NOTAS FINALES
+================================================================================
+
+✓ Este documento contiene SUGERENCIAS Y CONTENIDO COMPLEMENTARIO
+✓ Adapta el texto según necesidades de tu negocio
+✓ Verifica que todos los datos (teléfono, email, direcciones) sean correctos
+✓ Actualiza precios si cambian
+✓ Revisa la ortografía antes de publicar
+✓ Mantén consistencia de formato con el resto del manual
+
+Para más ayuda, consulta con tu equipo o contacta soporte.
+
+================================================================================
+DOCUMENTO GENERADO: 04/12/2025
+VERSIÓN: 1.0
+PASTELERÍA MIL SABORES
+================================================================================
