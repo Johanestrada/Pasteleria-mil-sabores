@@ -5,6 +5,7 @@
 class CRUDFunctionsSafe {
 	constructor() {
 		this.db = null;
+		this.role = this._getRoleFromLocalStorage();
 		// Exponer la instancia en globales para compatibilidad con scripts existentes
 		window.crudFunctionsSafe = this;
 		if (!window.crudFunctions) window.crudFunctions = this;
@@ -12,7 +13,39 @@ class CRUDFunctionsSafe {
 		// Estas funciones no dependen de Firebase, se pueden ejecutar de inmediato
 		this.cargarDatosPerfil();
 		this.ocultarModalesAlInicio();
+		this._applyRoleUiRestrictions();
 		console.log('CRUDFunctionsSafe: Instancia creada, esperando DB...');
+	}
+
+	_applyRoleUiRestrictions() {
+		try {
+			if (this._isVendedor()) {
+				// ocultar controles con clase 'admin-only'
+				document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+			}
+		} catch (e) {
+			// ignore
+		}
+	}
+
+	_getRoleFromLocalStorage() {
+		try {
+			const usuarioStr = localStorage.getItem('usuario');
+			if (!usuarioStr) return null;
+			const usuario = JSON.parse(usuarioStr);
+			// puede venir como usuario.rol, usuario.role, o claims
+			return usuario.rol || usuario.role || (usuario.claims ? (usuario.claims.admin ? 'admin' : (usuario.claims.vendedor ? 'vendedor' : null)) : null);
+		} catch (e) {
+			return null;
+		}
+	}
+
+	_isAdmin() {
+		return this.role === 'admin';
+	}
+
+	_isVendedor() {
+		return this.role === 'vendedor';
 	}
 
 	// Método para inyectar la dependencia de Firestore desde fuera
@@ -157,6 +190,17 @@ class CRUDFunctionsSafe {
 			const fechaRegistro = (usuario.createdAt && usuario.createdAt.toDate) ? usuario.createdAt.toDate().toLocaleDateString() : 'N/A';
 			const estado = usuario.activo === false ? '<span class="badge inactivo">Inactivo</span>' : '<span class="badge activo">Activo</span>';
 			const rolClass = usuario.rol || 'cliente';
+			const accionesParaAdmin = `
+					<td class="acciones">
+						<button onclick="crudFunctions.editarUsuario('${usuario.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+						<button onclick="crudFunctions.cambiarEstadoUsuario('${usuario.id}', ${usuario.activo !== false})" class="btn btn-sm btn-secondary" title="${usuario.activo !== false ? 'Desactivar' : 'Activar'}"><i class="bi bi-${usuario.activo !== false ? 'pause' : 'play'}"></i></button>
+						<button onclick="crudFunctions.cambiarRolUsuario('${usuario.id}')" class="btn btn-sm btn-info" title="Cambiar Rol"><i class="bi bi-person-gear"></i></button>
+						<button onclick="crudFunctions.eliminarUsuario('${usuario.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+					</td>
+			`;
+
+			const accionesHtml = this._isVendedor() ? '<td class="acciones">-</td>' : accionesParaAdmin;
+
 			return `
 				<tr>
 					<td>${usuario.nombre || 'N/A'}</td>
@@ -165,12 +209,7 @@ class CRUDFunctionsSafe {
 					<td><span class="badge ${rolClass}">${rolClass}</span></td>
 					<td>${estado}</td>
 					<td>${fechaRegistro}</td>
-					<td class="acciones">
-						<button onclick="crudFunctions.editarUsuario('${usuario.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
-						<button onclick="crudFunctions.cambiarEstadoUsuario('${usuario.id}', ${usuario.activo !== false})" class="btn btn-sm btn-secondary" title="${usuario.activo !== false ? 'Desactivar' : 'Activar'}"><i class="bi bi-${usuario.activo !== false ? 'pause' : 'play'}"></i></button>
-						<button onclick="crudFunctions.cambiarRolUsuario('${usuario.id}')" class="btn btn-sm btn-info" title="Cambiar Rol"><i class="bi bi-person-gear"></i></button>
-						<button onclick="crudFunctions.eliminarUsuario('${usuario.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
-					</td>
+					${accionesHtml}
 				</tr>
 			`;
 		}).join('');
@@ -185,18 +224,24 @@ class CRUDFunctionsSafe {
 			return;
 		}
 
-		tbody.innerHTML = categorias.map(categoria => `
-			<tr>
-				<td>${categoria.nombre}</td>
-				<td>${categoria.descripcion || 'Descripción no disponible'}</td>
-				<td><span class="badge auto-generada">Auto-generada</span></td>
-				<td>${categoria.cantidad}</td>
-				<td class="acciones">
-					<button onclick="crudFunctions.editarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
-					<button onclick="crudFunctions.eliminarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
-				</td>
-			</tr>
-		`).join('');
+			body.innerHTML = categorias.map(categoria => {
+				const accionesAdmin = `
+					<td class="acciones">
+						<button onclick="crudFunctions.editarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+						<button onclick="crudFunctions.eliminarCategoria('${categoria.id || categoria.nombre}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+					</td>
+				`;
+				const acciones = this._isVendedor() ? '<td class="acciones">-</td>' : accionesAdmin;
+				return `
+				<tr>
+					<td>${categoria.nombre}</td>
+					<td>${categoria.descripcion || 'Descripción no disponible'}</td>
+					<td><span class="badge auto-generada">Auto-generada</span></td>
+					<td>${categoria.cantidad}</td>
+					${acciones}
+				</tr>
+				`;
+			}).join('');
 	}
 
 	// Stubs for actions
@@ -913,17 +958,22 @@ async function cargarProductos() {
 		}
 		tbody.innerHTML = productos.map(producto => {
             const estado = (producto.stock || producto.cantidad || 0) > 0 ? '<span class="badge activo">En Stock</span>' : '<span class="badge inactivo">Agotado</span>';
+            const accionesAdmin = `
+                <td class="acciones">
+                    <button onclick="crudFunctions.editarProducto('${producto.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
+                    <button onclick="crudFunctions.eliminarProducto('${producto.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
+                </td>
+            `;
+            const accionesVendedor = `<td class="acciones">-</td>`;
+            const acciones = (window.crudFunctionsSafe && window.crudFunctionsSafe._isVendedor && window.crudFunctionsSafe._isVendedor()) ? accionesVendedor : accionesAdmin;
             return `
 			<tr>
 				<td>${producto.nombre || 'Sin nombre'}</td>
 				<td>$${(producto.precio || 0).toFixed(2)}</td>
 				<td>${producto.stock || producto.cantidad || 0}</td>
-                <td>${producto.categoria || 'N/A'}</td>
+	                <td>${producto.categoria || 'N/A'}</td>
 				<td>${estado}</td>
-				<td class="acciones">
-					<button onclick="crudFunctions.editarProducto('${producto.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>
-					<button onclick="crudFunctions.eliminarProducto('${producto.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
-				</td>
+				${acciones}
 			</tr>
 		`}).join('');
 	} catch (err) {
@@ -962,6 +1012,11 @@ async function cargarOrdenes() {
             } else if (o.clienteNombre) {
                 clienteLabel = o.clienteNombre;
             }
+
+            const verBtn = `<button onclick="crudFunctions.verOrden('${o.id}')" class="btn btn-sm btn-info" title="Ver"><i class="bi bi-eye"></i></button>`;
+            const editarBtn = `<button onclick="crudFunctions.editarOrden('${o.id}')" class="btn btn-sm btn-warning" title="Editar"><i class="bi bi-pencil"></i></button>`;
+            const eliminarBtn = `<button onclick="crudFunctions.eliminarOrden('${o.id}')" class="btn btn-sm btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>`;
+            const acciones = (window.crudFunctionsSafe && window.crudFunctionsSafe._isVendedor && window.crudFunctionsSafe._isVendedor()) ? `<td class="acciones">${verBtn}</td>` : `<td class="acciones">${verBtn}${editarBtn}${eliminarBtn}</td>`;
 
             return `
 			<tr>

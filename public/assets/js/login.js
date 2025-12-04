@@ -82,7 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
             mensaje.style.color = "green";
             mensaje.innerText = "Bienvenido " + nombre + ", redirigiendo...";
             setTimeout(() => {
-                if (rol === "admin") {
+                // Admin y vendedor van al dashboard (admin.html)
+                if (rol === "admin" || rol === "vendedor") {
                     window.location.href = "admin.html";
                 } else {
                     window.location.href = "../../index.html";
