@@ -648,15 +648,28 @@ class CRUDFunctionsSafe {
 
 	async actualizarPerfil(perfilData) {
 		try {
-			const usuarioStr = localStorage.getItem('usuario');
-			const usuario = usuarioStr ? JSON.parse(usuarioStr) : null;
+			let usuarioStr = localStorage.getItem('usuario');
+			let usuario = usuarioStr ? JSON.parse(usuarioStr) : null;
+			let docId = usuario && (usuario.uid || usuario.id || usuario.email);
 
-			if (!usuario || !usuario.email) {
-				alert('No se pudo obtener la información del usuario');
-				return false;
+			// Si no hay usuario en localStorage, intentar buscar por email en Firestore (fallback)
+			if ((!usuario || !docId) && this.verificarFirebase() && this.db) {
+				try {
+					const q = await this.db.collection('usuario').where('email', '==', perfilData.email).limit(1).get();
+					if (!q.empty) {
+						const d = q.docs[0];
+						docId = d.id;
+						usuario = Object.assign({}, d.data(), { uid: d.id });
+					}
+				} catch (e) {
+					console.warn('Error buscando usuario por email en Firestore (fallback):', e);
+				}
 			}
 
-			const docId = usuario.uid || usuario.id || usuario.email;
+			if (!usuario || !docId) {
+				alert('No se pudo obtener la información del usuario. Inicia sesión e inténtalo de nuevo.');
+				return false;
+			}
 
 			// Intentar actualizar vía crudManager si está disponible (React)
 			if (window.crudManager?.updateUsuario) {
@@ -675,7 +688,6 @@ class CRUDFunctionsSafe {
 			// Fallback: actualizar directamente en Firestore si está disponible
 			if (this.verificarFirebase() && this.db) {
 				try {
-					// Intentar actualizar primero
 					await this.db.collection('usuario').doc(docId).update({
 						nombre: perfilData.nombre,
 						email: perfilData.email || usuario.email,
@@ -684,7 +696,7 @@ class CRUDFunctionsSafe {
 					});
 				} catch (err) {
 					// Si el documento no existe, crearlo
-					if (err.code === 'not-found' || err.message.includes('No document')) {
+					if (err.code === 'not-found' || (err.message && err.message.includes('No document'))) {
 						console.log('Documento no existe, creándolo...');
 						await this.db.collection('usuario').doc(docId).set({
 							nombre: perfilData.nombre,
@@ -721,6 +733,7 @@ class CRUDFunctionsSafe {
 			return true;
 		} catch (error) {
 			console.error('Error actualizando perfil:', error);
+			alert('Error al actualizar el perfil');
 			return false;
 		}
 	}

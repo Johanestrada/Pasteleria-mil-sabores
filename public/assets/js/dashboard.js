@@ -170,6 +170,24 @@ class DashboardManager {
         if (seccion === 'dashboard' && this.firebaseInicializado) {
             this.cargarEstadisticasReales();
         }
+
+        // Auto-cargar datos CRUD cuando se navega a las secciones correspondientes
+        try {
+            if (seccion === 'ordenes' && typeof window.cargarOrdenes === 'function') {
+                window.cargarOrdenes();
+            }
+            if (seccion === 'productos' && typeof window.cargarProductos === 'function') {
+                window.cargarProductos();
+            }
+            if (seccion === 'usuarios' && typeof window.cargarUsuarios === 'function') {
+                window.cargarUsuarios();
+            }
+            if (seccion === 'categorias' && typeof window.cargarCategorias === 'function') {
+                window.cargarCategorias();
+            }
+        } catch (err) {
+            console.warn('Error auto-cargando módulo al navegar:', err);
+        }
     }
 
     // ==================== MÉTODOS DEL DASHBOARD ====================
