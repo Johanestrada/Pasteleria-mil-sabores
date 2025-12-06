@@ -1207,3 +1207,258 @@ body {
         justify-content: center;
     }
 }
+
+/* ==================== RESPONSIVO MÓVIL - ADMIN PANEL ==================== */
+
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        max-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ffb3d9;
+        padding: 1rem;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+    .admin-main {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .sidebar-section {
+        margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+        font-size: 0.9rem;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .menu-item {
+        flex: 0 1 auto;
+    }
+
+    .menu-link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+        white-space: nowrap;
+    }
+
+    .menu-icon {
+        font-size: 1rem;
+    }
+
+    .dashboard-cards-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .summary-card {
+        padding: 1rem;
+    }
+
+    .card-title {
+        font-size: 0.9rem;
+    }
+
+    .card-value {
+        font-size: 1.5rem;
+    }
+
+    .crud-container {
+        padding: 0.5rem;
+    }
+
+    .crud-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .crud-header h3 {
+        font-size: 1rem;
+    }
+
+    .filtros {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .filtros input,
+    .filtros select {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .crud-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .crud-actions .btn {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .crud-table {
+        font-size: 0.7rem;
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .crud-table thead {
+        display: none;
+    }
+
+    .crud-table tbody,
+    .crud-table tr,
+    .crud-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .crud-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ffb3d9;
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+
+    .crud-table td {
+        padding: 0.5rem 0;
+        text-align: right;
+        padding-right: 50%;
+        position: relative;
+    }
+
+    .crud-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        color: #d42d6b;
+        width: 50%;
+        text-align: left;
+    }
+
+    .profile-form {
+        max-width: 100%;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn-sm {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Botón de volver para móvil */
+    .btn-back-mobile {
+        display: block !important;
+        width: 100%;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #ff7ba5, #e5518c) !important;
+        color: white !important;
+        border: 1px solid #ff7ba5 !important;
+        padding: 0.75rem !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        text-align: center !important;
+    }
+
+    .btn-back-mobile:hover {
+        background: linear-gradient(135deg, #e5518c, #d42d6b) !important;
+    }
+
+    .welcome-section {
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+    }
+
+    .welcome-title {
+        font-size: 1.3rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-header {
+        padding: 0.5rem;
+    }
+
+    .logo-img {
+        max-height: 40px !important;
+    }
+
+    .sidebar-menu {
+        gap: 0.25rem;
+    }
+
+    .menu-link {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+    }
+
+    .crud-table {
+        font-size: 0.65rem;
+    }
+
+    .crud-table td {
+        padding: 0.3rem 0;
+        padding-right: 45%;
+    }
+
+    .crud-table td::before {
+        width: 45%;
+        font-size: 0.7rem;
+    }
+
+    .btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+    }
+}

@@ -79,13 +79,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Guardar en localStorage y redirigir según rol
             localStorage.setItem("usuario", JSON.stringify({ uid: user.uid, nombre, correo, rol }));
+            localStorage.setItem("rol", rol);
             mensaje.style.color = "green";
             mensaje.innerText = "Bienvenido " + nombre + ", redirigiendo...";
             setTimeout(() => {
-                // Admin y vendedor van al dashboard (admin.html)
-                if (rol === "admin" || rol === "vendedor") {
+                // Redirigir según el rol
+                if (rol === "admin") {
                     window.location.href = "admin.html";
+                } else if (rol === "vendedor") {
+                    window.location.href = "vendedor.html";
                 } else {
+                    // Cliente u otro rol
                     window.location.href = "../../index.html";
                 }
             }, 800);

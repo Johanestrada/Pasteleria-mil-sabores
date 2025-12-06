@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Vendedor</title>
+    <link rel="stylesheet" href="../css/perfilAdmin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Protección contra errores de extensiones (cargar PRIMERO) -->
+    <script src="../js/error-handler.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <a href="#" class="logo">
+                <img src="../img/Logo_Pasteleria_mil.png" alt="Pastelería Mil Sabores" class="logo-img" style="max-height:48px;">
+            </a>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <!-- Sección de Bienvenida -->
+            <div class="sidebar-section">
+                <section class="welcome-section">
+                    <h1 class="welcome-title" id="bienvenidoPrincipal">Bienvenido al Panel de Vendedor</h1>
+                    <p class="welcome-subtitle" id="userEmail">vendedor@mitienda.com</p>
+                </section>
+            </div>
+
+            <!-- Menú Principal (Solo lectura) -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Consultable</h3>
+                <ul class="sidebar-menu">
+                    <li class="menu-item">
+                        <a href="#dashboard" class="menu-link">
+                            <i class="bi bi-speedometer2 menu-icon"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#ordenes" class="menu-link">
+                            <i class="bi bi-clipboard-check menu-icon"></i>
+                            Órdenes
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#productos" class="menu-link">
+                            <i class="bi bi-box-seam menu-icon"></i>
+                            Productos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Sección de Perfil y Acciones -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Cuenta</h3>
+                <ul class="sidebar-menu">
+                    <li class="menu-item">
+                        <a href="#perfil" class="menu-link">
+                            <i class="bi bi-person menu-icon"></i>
+                            Perfil
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="sidebar-section sidebar-actions">
+                <button class="action-btn btn-store" onclick="irATienda()">
+                    <i class="bi bi-shop menu-icon"></i>
+                    Tienda
+                </button>
+                <button class="action-btn btn-logout" onclick="cerrarSesion()">
+                    <i class="bi bi-box-arrow-right menu-icon"></i>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="admin-main">
+            <!-- Dashboard de Vendedor -->
+            <section id="dashboard">
+                <h2 class="sidebar-title">Resumen General</h2>
+                
+                <!-- Cards de Resumen -->
+                <div class="dashboard-cards-row">
+                    <div class="summary-card blue-card">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3 class="card-title">Órdenes Este Mes</h3>
+                                <p class="card-value" id="totalOrdenesMes">0</p>
+                                <p class="card-subtitle">
+                                    Total Ventas: <span id="totalVentasMes">$0</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card green-card">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-box"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3 class="card-title">Productos Activos</h3>
+                                <p class="card-value" id="totalProductos">0</p>
+                                <p class="card-subtitle">
+                                    Stock Total: <span id="inventarioTotal">0</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card yellow-card">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3 class="card-title">Órdenes Pendientes</h3>
+                                <p class="card-value" id="ordenesPendientes">0</p>
+                                <p class="card-subtitle">
+                                    Requieren atención
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Órdenes (Solo lectura) -->
+            <section id="ordenes" style="display: none;">
+                <div class="welcome-section">
+                    <h2 class="welcome-title">Órdenes de Compra</h2>
+                    <p class="welcome-subtitle">Visualiza las órdenes del sistema (solo lectura)</p>
+                </div>
+                <div class="crud-container">
+                    <div class="crud-header">
+                        <h3>Listado de Órdenes</h3>
+                        <div class="filtros">
+                            <select id="filtroEstado" onchange="cargarOrdenesVendedor()">
+                                <option value="">Todos los estados</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="procesando">Procesando</option>
+                                <option value="completado">Completado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table class="crud-table">
+                        <thead>
+                            <tr>
+                                <th>Número de Orden</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordenes-tbody">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">Cargando órdenes...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Sección de Productos (Solo lectura) -->
+            <section id="productos" style="display: none;">
+                <div class="welcome-section">
+                    <h2 class="welcome-title">Catálogo de Productos</h2>
+                    <p class="welcome-subtitle">Visualiza los productos disponibles (solo lectura)</p>
+                </div>
+                <div class="crud-container">
+                    <div class="crud-header">
+                        <h3>Listado de Productos</h3>
+                        <div class="filtros">
+                            <input type="text" id="buscarProducto" placeholder="Buscar producto..." onkeyup="filtrarProductos()">
+                            <select id="filtroCategoria" onchange="cargarProductosVendedor()">
+                                <option value="">Todas las categorías</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table class="crud-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Estado</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productos-tbody">
+                            <tr>
+                                <td colspan="6" style="text-align: center;">Cargando productos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Sección de Perfil -->
+            <section id="perfil" style="display: none;">
+                <div class="welcome-section">
+                    <h2 class="welcome-title">Perfil de Vendedor</h2>
+                    <p class="welcome-subtitle">Visualiza tu información personal</p>
+                </div>
+                <div class="crud-container">
+                    <div class="profile-form">
+                        <div class="form-group">
+                            <label for="profileNombre">Nombre Completo</label>
+                            <input type="text" id="profileNombre" value="" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileCorreo">Email</label>
+                            <input type="email" id="profileCorreo" value="" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileTelefono">Teléfono</label>
+                            <input type="tel" id="profileTelefono" value="" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileRol">Rol</label>
+                            <input type="text" id="profileRol" value="Vendedor" disabled>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" onclick="editarPerfil()">Editar Perfil</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para ver detalles de orden -->
+    <div id="modalOrden" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('modalOrden')">&times;</span>
+            <h3>Detalles de la Orden</h3>
+            <div id="detallesOrden">
+                <!-- Los detalles se llenarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver detalles de producto -->
+    <div id="modalProducto" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('modalProducto')">&times;</span>
+            <h3 id="modalProductoTitulo">Detalles del Producto</h3>
+            <div id="detallesProducto">
+                <!-- Los detalles se llenarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/saludo.js"></script>
+    <script src="../js/logout.js"></script>
+    <script src="../js/vendedor-functions.js"></script>
+    <script src="../js/vendedor-dashboard.js"></script>
+    <script src="../js/mobile-back-button-vendedor.js"></script>
+    <script>
+        // Verificar que solo vendedores accedan a esta página
+        window.addEventListener('load', () => {
+            const rol = localStorage.getItem('rol');
+            const usuario = localStorage.getItem('usuario');
+            
+            if (!usuario) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            if (rol !== 'vendedor') {
+                alert('Acceso denegado. Solo vendedores pueden acceder a esta página.');
+                if (rol === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = '../../index.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

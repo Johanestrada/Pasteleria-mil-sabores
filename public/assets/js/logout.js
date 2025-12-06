@@ -1,7 +1,5 @@
 // ==================== LOGOUT ====================
 
-// ==================== LOGOUT ====================
-
 function cerrarSesion() {
     try {
         console.log('Cerrando sesión...');
@@ -15,6 +13,7 @@ function cerrarSesion() {
         }
         // Limpieza y redirección se hacen siempre.
         localStorage.removeItem('usuario');
+        localStorage.removeItem('rol');
         localStorage.removeItem('carrito');
         localStorage.removeItem('authToken');
         alert('Has cerrado sesión.');
