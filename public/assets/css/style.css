@@ -181,6 +181,80 @@ h3 {
    HEADER
 =================================*/
 
+
+body {
+      background-color: #fff5f7;
+    }
+
+    .categorias-grid,
+    .productos-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .card-producto {
+      background-color: #ffeef2;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .card-producto:hover {
+      transform: translateY(-5px);
+    }
+
+    .btn-ver-todos {
+      background-color: #f48fb1;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-ver-todos:hover {
+      background-color: #ec407a;
+    }
+
+    /* 🔍 Estilos del buscador */
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ffeef2;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 5px 10px;
+      flex: 1;
+    }
+
+    .btn-buscar {
+      background-color: #f48fb1;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-buscar:hover {
+      background-color: #ec407a;
+    }
+
+
+
+
+
+
 .header-custom {
   background: #FFC0CB;
   /* Rosa suave */
@@ -1134,6 +1208,14 @@ h2.fw-bold {
     font-size: 1rem;
   }
 }
+
+/* Navbar dropdown on hover (desktop): show submenu */
+@media (min-width: 992px) {
+  .navbar-nav .dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+}
+
 
 @media (min-width: 992px) {
   h2.fw-bold {

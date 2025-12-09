@@ -15,9 +15,19 @@ let productosOferta = [];
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    inicializarCarrito();
-    cargarProductosOferta();
-    configurarEventos();
+    // Detectar si estamos en la página del carrito (elementos específicos existen)
+    const hasCartTable = !!document.getElementById('tablaCarritoBody');
+    const hasTotalCarrito = !!document.getElementById('totalCarrito');
+
+    if (hasCartTable || hasTotalCarrito) {
+        inicializarCarrito();
+        // Cargar ofertas solo en la página del carrito (evita duplicar en ofertas.html)
+        cargarProductosOferta();
+        configurarEventos();
+    } else {
+        // Si no estamos en la página de carrito, solo actualizar el contador del header
+        actualizarCarritoHeader();
+    }
 });
 
 /**
@@ -34,15 +44,16 @@ function inicializarCarrito() {
  */
 async function cargarProductosOferta() {
     try {
-        const snapshot = await db.collection("producto").get();
-        productosOferta = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        }));
-        
-        // Filtrar productos con oferta (precio anterior)
-        const productosConOferta = productosOferta.filter(producto => producto.precioAnterior);
-        renderizarProductosOferta(productosConOferta);
+            // Consultar solo productos que tengan precioAnterior mayor a 0 (ofertas)
+            const snapshot = await db.collection("producto").where('precioAnterior', '>', 0).get();
+            productosOferta = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+
+            // Los documentos ya vienen filtrados por la consulta, pero aseguramos formato
+            const productosConOferta = productosOferta.filter(producto => producto.precioAnterior && Number(producto.precioAnterior) > 0);
+            renderizarProductosOferta(productosConOferta);
     } catch (error) {
         console.error("Error cargando productos en oferta:", error);
     }
@@ -93,7 +104,8 @@ function renderizarProductosOferta(productos) {
  */
 function renderizarCarrito() {
     const tbody = document.getElementById('tablaCarritoBody');
-    
+    if (!tbody) return; // Página no tiene tabla de carrito
+
     if (carrito.length === 0) {
         tbody.innerHTML = `
             <tr>
@@ -289,8 +301,8 @@ function calcularTotal() {
     const total = carrito.reduce((sum, producto) => {
         return sum + ((producto.precio || 0) * (producto.cantidad || 1));
     }, 0);
-    
-    document.getElementById('totalCarrito').textContent = total.toLocaleString('es-CL');
+    const totalEl = document.getElementById('totalCarrito');
+    if (totalEl) totalEl.textContent = total.toLocaleString('es-CL');
     actualizarCarritoHeader();
 }
 
@@ -387,8 +399,10 @@ function mostrarNotificacion(mensaje) {
  * Configura los eventos de la página
  */
 function configurarEventos() {
-    document.getElementById('btnLimpiarCarrito').addEventListener('click', limpiarCarrito);
-    document.getElementById('btnComprarAhora').addEventListener('click', irAlCheckout);
+    const btnLimpiar = document.getElementById('btnLimpiarCarrito');
+    const btnComprar = document.getElementById('btnComprarAhora');
+    if (btnLimpiar) btnLimpiar.addEventListener('click', limpiarCarrito);
+    if (btnComprar) btnComprar.addEventListener('click', irAlCheckout);
 }
 
 // Hacer funciones disponibles globalmente

@@ -53,6 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Productos completos:", productosGlobal);
       inicializarInterfaz(productosGlobal);
 
+      // Si existe un query param `q`, ejecutamos la búsqueda ahora que los productos ya están cargados
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        if (q && buscador) {
+          buscador.value = q;
+          // Ejecutar búsqueda después de breve tick para asegurar interfaz lista
+          setTimeout(() => buscarProductos(), 50);
+        }
+      } catch (err) {
+        console.warn('No se pudo procesar query param q para búsqueda', err);
+      }
+
     } catch (error) {
       console.error("Error cargando productos:", error);
       if (tituloProductos) tituloProductos.textContent = "Error al cargar productos";
@@ -283,4 +296,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   console.log("Catálogo inicializado correctamente");
+  // (nota) la búsqueda por query se maneja después de cargar productos para evitar condiciones de carrera
 });
