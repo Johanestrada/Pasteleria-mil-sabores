@@ -39,13 +39,72 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const usuario = JSON.parse(usuarioStr);
 
-    // Lógica para regiones y comunas (simplificada)
+    // Lógica para regiones y comunas de Chile (todas las 16 regiones)
     const comunasPorRegion = {
-        rm: ["Santiago", "Puente Alto", "Maipú", "Las Condes", "Ñuñoa"],
-        valparaiso: ["Valparaíso", "Viña del Mar", "Quilpué", "Villa Alemana"],
-        biobio: ["Concepción", "Talcahuano", "Chiguayante", "Los Ángeles"],
-        araucania: ["Temuco", "Padre Las Casas", "Villarrica", "Pucón"],
-        antofagasta: ["Antofagasta", "Calama", "Mejillones", "Tocopilla"]
+        arioca: {
+            nombre: "Arica y Parinacota",
+            comunas: ["Arica", "Camarones", "Putre", "General Lagos"]
+        },
+        tarapaca: {
+            nombre: "Tarapacá",
+            comunas: ["Iquique", "Alto Hospicio", "Camiña", "Colchane", "Huara", "Pica", "Pozo Almonte"]
+        },
+        antofagasta: {
+            nombre: "Antofagasta",
+            comunas: ["Antofagasta", "Calama", "San Pedro de Atacama", "Tocopilla", "María Elena", "Mejillones", "Taltal"]
+        },
+        atacama: {
+            nombre: "Atacama",
+            comunas: ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"]
+        },
+        coquimbo: {
+            nombre: "Coquimbo",
+            comunas: ["La Serena", "Coquimbo", "Ovalle", "Illapel", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Combarbala", "Monte Patria", "Punitaqui", "Río Hurtado"]
+        },
+        valparaiso: {
+            nombre: "Valparaíso",
+            comunas: ["Valparaíso", "Viña del Mar", "Concón", "Quilpué", "Villa Alemana", "Limache", "Olmué", "Calle Larga", "Rinconada", "La Ligua", "Petorca", "Papudo", "Zapallar", "Cartagena", "El Quisco", "Algarrobo", "San Antonio", "Santo Domingo", "Casablanca", "Juan Fernández"]
+        },
+        metropolitana: {
+            nombre: "Metropolitana de Santiago",
+            comunas: ["Santiago", "Puente Alto", "Maipú", "Las Condes", "Ñuñoa", "Providencia", "La Florida", "La Reina", "Peñalolén", "La Cisterna", "La Granja", "Renca", "Pudahuel", "Huechuraba", "Vitacura", "Lo Barnechea", "Colina", "Lampa", "Tiltil", "San Bernardo", "Pirque", "San José de Maipo", "Buin", "Paine"]
+        },
+        ohiggins: {
+            nombre: "Libertador General Bernardo O'Higgins",
+            comunas: ["Rancagua", "Machalí", "Graneros", "Doñihue", "Requínoa", "Rengo", "Olivar", "Pichidegua", "San Vicente de Tagua Tagua", "Peumo", "Coltauco", "Santa Cruz", "Nancagua", "Chépica", "Palmilla", "San Fernando", "Peralillo", "Pichilemu", "Navidad", "Litueche", "La Estrella", "Marchihue"]
+        },
+        maule: {
+            nombre: "Maule",
+            comunas: ["Talca", "San Clemente", "Macoleta", "Pencahue", "Río Claro", "San Rafael", "Curicó", "Teno", "Rauco", "Licantén", "Molina", "Romeral", "Longaví", "Retiro", "Linares", "Parral", "Cauquenes", "Chanco", "Pelluhue", "Constitución"]
+        },
+        nable: {
+            nombre: "Ñuble",
+            comunas: ["Chillán", "Chillán Viejo", "Ñiquén", "San Ignacio", "Pemuco", "Yungay", "Coihueco", "Ranquil", "Bulnes", "Quillón", "San Carlos", "Ránquil", "Portezuelo", "Treguaco", "Pinto", "Cobquecura", "Quirihue", "Ninhue"]
+        },
+        biobio: {
+            nombre: "Bío-Bío",
+            comunas: ["Concepción", "Talcahuano", "Chiguayante", "Los Ángeles", "Arauco", "Curanilahue", "Lebu", "Cañete", "Contulmo", "Tirúa", "Santa Bárbara", "Nacimiento", "Lota", "Coronel", "Hualpén", "Penco", "Tomé"]
+        },
+        araucania: {
+            nombre: "La Araucanía",
+            comunas: ["Temuco", "Padre Las Casas", "Villarrica", "Pucón", "Curarrehue", "Pitrufquén", "Manzanares", "Gorbea", "Loncoche", "Ercilla", "Collipulli", "Lonquimay", "Los Sauces", "Purén", "Victoria", "Traiguén", "Nueva Imperial", "Carahue", "Cunco", "Freire"]
+        },
+        losrios: {
+            nombre: "Los Ríos",
+            comunas: ["Valdivia", "Corral", "Lachon", "Máfil", "Mariquina", "Paillaco", "Pangipulli", "La Unión", "Futrono", "Río Bueno", "Lago Ranco"]
+        },
+        loslagos: {
+            nombre: "Los Lagos",
+            comunas: ["Puerto Montt", "Puerto Varas", "Los Muermos", "Llanquihue", "Frutillar", "Puyehue", "Osorno", "Purranque", "Río Negro", "San Juan de la Costa", "San Pablo", "Maullín", "Calbuco", "Cochamó", "Leptepu", "Chonchi", "Dalcahue", "Curaco de Vélez", "Quinchao", "Quellón", "Achao", "Castro"]
+        },
+        aysen: {
+            nombre: "Aysén del General Carlos Ibáñez del Campo",
+            comunas: ["Coyhaique", "Lago Verde", "Aysén", "Guaitecas", "Cisnes", "Puerto Aysén", "Tortel", "Villa O'Higgins"]
+        },
+        magallanes: {
+            nombre: "Magallanes y de la Antártica Chilena",
+            comunas: ["Punta Arenas", "Puerto Natales", "Río Verde", "Laguna Blanca", "San Gregorio", "Timaukel"]
+        }
     };
 
     // Poblar regiones
@@ -54,8 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Object.keys(comunasPorRegion).forEach(key => {
             const option = document.createElement('option');
             option.value = key;
-            let nombreRegion = key.charAt(0).toUpperCase() + key.slice(1);
-            if (key === 'rm') nombreRegion = 'Metropolitana';
+            const nombreRegion = comunasPorRegion[key].nombre;
             option.textContent = nombreRegion;
             regionInput.appendChild(option);
         });
@@ -68,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 comunaInput.disabled = true;
 
                 if (regionSeleccionada && comunasPorRegion[regionSeleccionada]) {
-                    comunasPorRegion[regionSeleccionada].forEach(comuna => {
+                    comunasPorRegion[regionSeleccionada].comunas.forEach(comuna => {
                         const option = document.createElement('option');
                         option.value = comuna;
                         option.textContent = comuna;

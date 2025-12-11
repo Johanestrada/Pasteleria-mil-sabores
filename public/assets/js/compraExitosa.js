@@ -30,9 +30,11 @@ function inicializarPaginaExito() {
  * Muestra los datos de la compra en los formularios
  */
 function mostrarDatosCompra(compra) {
-    // Actualizar numeros de orden y compra
-    document.getElementById('codigoOrden').textContent = compra.numeroOrden;
-    document.getElementById('numeroCompra').textContent = compra.numeroOrden;
+    // Actualizar numeros de orden y compra (comprobar existencia para evitar errores)
+    const codigoEl = document.getElementById('codigoOrden');
+    if (codigoEl) codigoEl.textContent = 'ORDEN: ' + compra.numeroOrden;
+    const numeroEl = document.getElementById('numeroCompra');
+    if (numeroEl) numeroEl.textContent = compra.numeroOrden;
 
     // Mostrar datos del cliente
     document.getElementById('exitoNombre').value = compra.cliente.nombre;

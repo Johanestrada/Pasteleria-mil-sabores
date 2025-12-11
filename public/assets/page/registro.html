@@ -14,40 +14,67 @@
   <!-- HEADER -->
   <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
     <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand" href="../../index.html">
-        <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
+      <a class="navbar-brand" href="/index.html">
+        <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="logo img-fluid" style="max-width:80px;">
       </a>
 
-      <!-- Botón hamburguesa -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Menú -->
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link active" href="../../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
-          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        <ul class="navbar-nav mx-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Inicio</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/assets/page/catalogo.html" id="productosMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+            <ul class="dropdown-menu" aria-labelledby="productosMenu">
+              <li><a class="dropdown-item" href="/assets/page/catalogo.html">Catálogo</a></li>
+              <li><a class="dropdown-item" href="/assets/page/ofertas.html">Ofertas</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/contacto.html">Contacto</a></li>
+
+          <!-- 🔍 Buscador integrado -->
+          <li class="nav-item ms-3">
+            <div class="search-container">
+              <input type="text" id="buscador" placeholder="Buscar productos..." class="search-input">
+              <button id="btnBuscar" class="btn-buscar">Buscar</button>
+            </div>
+          </li>
         </ul>
 
         <!-- Iconos de login y carrito -->
         <div class="d-flex align-items-center ms-lg-3 gap-2">
           <!-- Carrito -->
-          <a href="carrito.html" class="btn position-relative p-0">
+          <a href="/assets/page/carrito.html" class="btn position-relative p-0">
             <i class="bi bi-cart fs-4"></i>
-            <span
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
           </a>
-          <!-- Icono login (siempre visible en esta página) -->
-          <a href="login.html" class="btn text-dark p-0">
-            <i class="bi bi-person fs-4"></i>
-          </a>
+          <!-- Contenedor Dinámico de Usuario -->
+          <div id="user-status-container">
+            <a href="/assets/page/login.html" id="login-link" class="btn text-dark p-0">
+              <i class="bi bi-person fs-4"></i>
+            </a>
+
+            <!-- Para usuarios logueados (oculto por defecto) -->
+            <div class="nav-item dropdown" id="user-dropdown" style="display: none;">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="user-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-check-fill fs-4 text-success"></i>
+                <span id="user-name" class="ms-2 d-none d-lg-inline"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu">
+                <li><a class="dropdown-item" href="/assets/page/usuario.html">Ver Perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar Sesión</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </nav>
       </div>
     </div>
   </nav>

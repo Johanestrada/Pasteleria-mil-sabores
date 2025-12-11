@@ -1,5 +1,3 @@
-// ==================== FUNCIONES DE VENDEDOR - SOLO LECTURA ====================
-
 class VendedorFunctions {
     constructor() {
         this.db = null;

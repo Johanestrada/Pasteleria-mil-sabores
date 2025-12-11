@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Pastelería Mil Sabores</title>
+
+  <link rel="stylesheet" href="../css/catalogo.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    body {
+      background-color: #fff5f7;
+    }
+
+    /* 🔍 Estilos del buscador */
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #ffeef2;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 5px 10px;
+      flex: 1;
+      font-size: 0.9rem;
+    }
+
+    .btn-buscar {
+      background-color: #f48fb1;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: 600;
+    }
+
+    .btn-buscar:hover {
+      background-color: #ec407a;
+    }
+
+    .noticias-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 3rem 0 2rem 0;
+      color: #5D4037;
+    }
+
+    .caso-curioso-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin: 2rem 0;
+      background-color: #ffeef2;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .caso-contenido {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .caso-titulo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #5D4037;
+    }
+
+    .caso-descripcion {
+      color: #5D4037;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-ver-caso {
+      background-color: #FFCCCB;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-ver-caso:hover {
+      background-color: #ec407a;
+      color: white;
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+
+    .caso-imagen {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .footer {
+      background-color: #FEE2E2;
+      margin-top: auto;
+      color: #5D4037;
+    }
+
+    .footer a {
+      color: #5D4037;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #ec407a;
+    }
+
+    @media (max-width: 768px) {
+      .caso-curioso-container {
+        grid-template-columns: 1fr;
+      }
+
+      .noticias-title {
+        font-size: 1.8rem;
+      }
+
+      .caso-titulo {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER (copiado del index para consistencia) -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">
+        <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="logo img-fluid" style="max-width:80px;">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Inicio</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/assets/page/catalogo.html" id="productosMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+            <ul class="dropdown-menu" aria-labelledby="productosMenu">
+              <li><a class="dropdown-item" href="/assets/page/catalogo.html">Catálogo</a></li>
+              <li><a class="dropdown-item" href="/assets/page/ofertas.html">Ofertas</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/assets/page/blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/contacto.html">Contacto</a></li>
+
+          <!-- 🔍 Buscador integrado -->
+          <li class="nav-item ms-3">
+            <div class="search-container">
+              <input type="text" id="buscador" placeholder="Buscar productos..." class="search-input">
+              <button id="btnBuscar" class="btn-buscar">Buscar</button>
+            </div>
+          </li>
+        </ul>
+
+        <!--buscar-->
+        <div class="d-flex align-items-center ms-lg-3 gap-2">
+          <a href="/assets/page/carrito.html" class="btn position-relative">
+            <i class="bi bi-cart fs-4"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+          </a>
+          <!-- Contenedor Dinámico de Usuario -->
+          <div id="user-status-container">
+            <a href="/assets/page/login.html" id="login-link" class="btn text-dark p-0">
+              <i class="bi bi-person fs-4"></i>
+            </a>
+
+            <!-- Para usuarios logueados (oculto por defecto) -->
+            <div class="nav-item dropdown" id="user-dropdown" style="display: none;">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="user-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-check-fill fs-4 text-success"></i>
+                <span id="user-name" class="ms-2 d-none d-lg-inline"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu">
+                <li><a class="dropdown-item" href="/assets/page/usuario.html">Ver Perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar Sesión</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container">
+    <h2 class="noticias-title">Noticias Importantes</h2>
+
+    <!-- CASO CURIOSO #1 -->
+    <section class="caso-curioso-container">
+      <div class="caso-contenido">
+        <h3 class="caso-titulo">Caso Curioso #1: La Historia de Nuestras Tortas Clásicas</h3>
+        <p class="caso-descripcion">
+          Descubre los secretos detrás de nuestros mejores postres. Cada creación es el resultado de años de 
+          experiencia y dedicación a la repostería. Conoce las historias que hacen especiales nuestros productos 
+          y por qué nuestros clientes nos prefieren.
+        </p>
+        <a href="detalleCase.html?caso=1" class="btn-ver-caso">Ver Caso</a>
+      </div>
+      <img src="../img/torta_clasica.jpg" alt="Torta Clásica" class="caso-imagen" style="object-fit: cover;">
+    </section>
+
+    <!-- CASO CURIOSO #2 -->
+    <section class="caso-curioso-container">
+      <img src="../img/pastelchocolate.jpg" alt="Pastel Chocolate" class="caso-imagen" style="object-fit: cover;">
+      <div class="caso-contenido">
+        <h3 class="caso-titulo">Caso Curioso #2: Innovación en Repostería Moderna</h3>
+        <p class="caso-descripcion">
+          Aprende sobre las tendencias actuales en repostería y cómo las implementamos en nuestro menú. 
+          Desde técnicas clásicas hasta innovaciones modernas, nos mantenemos a la vanguardia del arte 
+          culinario para ofrecerte siempre lo mejor en calidad y sabor.
+        </p>
+        <a href="detalleCase.html?caso=2" class="btn-ver-caso">Ver Caso</a>
+      </div>
+    </section>
+
+    <!-- CASO CURIOSO #3 -->
+    <section class="caso-curioso-container">
+      <div class="caso-contenido">
+        <h3 class="caso-titulo">Caso Curioso #3: Compromiso con la Sostenibilidad</h3>
+        <p class="caso-descripcion">
+          Acompáñanos en nuestro viaje hacia la sostenibilidad. Conoce cómo seleccionamos nuestros ingredientes, 
+          apoyamos a productores locales y trabajamos por un futuro más responsable. Cada compra es un paso 
+          hacia una mejor Pastelería.
+        </p>
+        <a href="detalleCase.html?caso=3" class="btn-ver-caso">Ver Caso</a>
+      </div>
+      <img src="../img/tVegana.jpg" alt="Torta Vegana" class="caso-imagen" style="object-fit: cover;">
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer py-4 bg-pink">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-3 text-center text-md-start mb-3 mb-md-0">
+          <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="logo img-fluid" style="max-width:80px;">
+        </div>
+        <div class="col-12 col-md-3">
+          <h3>Información</h3>
+          <ul class="list-unstyled">
+            <li>Teléfono: +569 27905271</li>
+            <li>Avenida Concha y Toro...</li>
+            <li>Correo: pasteleria100...@milsabores.cl</li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-3">
+          <h3>Productos</h3>
+          <ul class="list-unstyled">
+            <li><a href="/index.html">Inicio</a></li>
+            <li><a href="/assets/page/catalogo.html">Productos</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-md-3">
+          <h3>Redes</h3>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#">
+                <i class="bi bi-instagram" style="font-size: 28px; color: #5D4037;"></i>
+              </a>
+            </li>
+            <li>
+              <i class="bi bi-whatsapp" style="font-size: 28px; color: #5D4037;"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/auth-status.js"></script>
+  <script src="../js/actualizarCarrito.js"></script>
+
+</body>
+
+</html>

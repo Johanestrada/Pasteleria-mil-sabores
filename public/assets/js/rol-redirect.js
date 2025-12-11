@@ -1,5 +1,3 @@
-// ==================== REDIRECCIÓN POR ROL ====================
-
 function redirectPorRol() {
     try {
         const usuarioStr = localStorage.getItem('usuario');

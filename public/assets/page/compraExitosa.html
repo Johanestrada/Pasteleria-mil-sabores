@@ -4,68 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compra Exitosa - Mi Tienda</title>
-  <link rel="stylesheet" href="../css/catalogo.css">
-  <link rel="stylesheet" href="../css/carrito.css">
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/catalogo.css">
+    <link rel="stylesheet" href="../css/carrito.css">
 </head>
 <body>
-  <!-- HEADER: Barra de navegación estándar. -->
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-pink shadow-sm">
-    <div class="container">
-        <!-- Logo -->
-        <a class="navbar-brand" href="index.html">
-            <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="img-fluid" style="max-width:80px;">
-        </a>
+        <div class="container">
+            <a class="navbar-brand" href="/index.html">
+                <img src="../img/Logo_Pasteleria_mil.png" alt="Logo" class="logo img-fluid" style="max-width:80px;">
+            </a>
 
-        <!-- Botón para móvil -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <!-- Menú -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra el menú -->
-                <li class="nav-item">
-                    <a class="nav-link active" href="../../index.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="catalogo.html">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="nosotros.html">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="noticias.html">Noticias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contacto.html">Contacto</a>
-                </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Inicio</a></li>
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="/assets/page/catalogo.html" id="productosMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+            <ul class="dropdown-menu" aria-labelledby="productosMenu">
+              <li><a class="dropdown-item" href="/assets/page/catalogo.html">Catálogo</a></li>
+              <li><a class="dropdown-item" href="/assets/page/ofertas.html">Ofertas</a></li>
             </ul>
-            <!--buscar-->
-            <div class="d-flex align-items-center ms-lg-3 gap-2">
-                <a href="carrito.html" class="btn position-relative">
-                    <i class="bi bi-cart fs-4"></i>
-                    <span
-                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
-                </a>
-                <!-- Icono login -->
-                <a href="login.html" class="btn text-dark p-0">
-                    <i class="bi bi-person fs-4"></i>
-                </a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/assets/page/contacto.html">Contacto</a></li>
+
+          <!-- 🔍 Buscador integrado -->
+          <li class="nav-item ms-3">
+            <div class="search-container">
+              <input type="text" id="buscador" placeholder="Buscar productos..." class="search-input">
+              <button id="btnBuscar" class="btn-buscar">Buscar</button>
             </div>
+          </li>
+        </ul>
+
+        <!--buscar-->
+        <div class="d-flex align-items-center ms-lg-3 gap-2">
+          <a href="assets/page/carrito.html" class="btn position-relative">
+            <i class="bi bi-cart fs-4"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrito-total">0</span>
+          </a>
+          <!-- Contenedor Dinámico de Usuario -->
+          <div id="user-status-container">
+            <a href="assets/page/login.html" id="login-link" class="btn text-dark p-0">
+              <i class="bi bi-person fs-4"></i>
+            </a>
+          
+            <!-- Para usuarios logueados (oculto por defecto) -->
+            <div class="nav-item dropdown" id="user-dropdown" style="display: none;">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="user-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-check-fill fs-4 text-success"></i>
+                <span id="user-name" class="ms-2 d-none d-lg-inline"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="user-menu"><li><a class="dropdown-item" href="/assets/page/usuario.html">Ver Perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logout-link">Cerrar Sesión</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div>
-</nav>
+                </div>
+            </div>
+        </nav>
   <!-- MAIN CONTENT: Contenido principal de la página de compra exitosa. -->
   <main class="main">
     <div class="exito-container">
       <!-- Encabezado de Éxito: Confirma la compra y muestra el número de orden. -->
       <div class="exito-header">
-        <!-- El código de la orden y el número de compra se cargan dinámicamente. -->
-        <span class="codigo-orden" id="codigoOrden">ORDEN: 20240705</span>
+        <!-- Mostrar código de orden -->
+        <span class="codigo-orden" id="codigoOrden">ORDEN: --</span>
         <div class="exito-titulo">
           <span class="icono-exito">✅</span>
           <h1>Se ha realizado la compra nro <span id="numeroCompra">#000001</span></h1>

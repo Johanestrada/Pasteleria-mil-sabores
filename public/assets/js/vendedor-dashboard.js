@@ -1,5 +1,3 @@
-// ==================== DASHBOARD DEL VENDEDOR ====================
-
 class VendedorDashboard {
     constructor() {
         this.db = null;
