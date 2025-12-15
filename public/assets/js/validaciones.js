@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const mes = hoy.getMonth() - nacimiento.getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) edad--;
 
-            if (edad > 50) promociones.push("🎉 ¡Felicidades! Recibes un <b>50% de descuento</b> por ser mayor de 50 años.");
+            if (edad > 50) promociones.push("¡Felicidades! Recibes un <b>50% de descuento</b> por ser mayor de 50 años.");
             const esCumple = hoy.getDate() === nacimiento.getDate() && hoy.getMonth() === nacimiento.getMonth();
             if (esCumple && email.endsWith("@duocuc.cl")) promociones.push("¡Feliz cumpleaños! Como estudiante DUOC recibes una <b>torta gratis</b>.");
         }
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 createdAt: new Date()
             });
 
-            mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso! Se envió un correo de verificación.</span>`;
+            mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso!.</span>`;
 
             if (promociones.length > 0) {
                 mensajeRegistro.innerHTML += `<br>${promociones.join("<br>")}`;
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
             formRegistro.reset();
 
             // Redirigir al panel de usuario
-            window.location.href = "usuario.html"; // <-- Ajusta ruta según tu carpeta
+            window.location.href = "usuario.html";
         } catch (error) {
             console.error("Error al registrar usuario:", error);
             mensajeRegistro.innerHTML = `<span class="text-danger">${error.message}</span>`;

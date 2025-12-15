@@ -1,16 +1,10 @@
-﻿// Versión segura y mínima de crud-functions para evitar errores cuando
-// la instancia Firestore (this.db) no está inicializada y/o cuando
-// window.crudManager (React) está disponible.
-
-class CRUDFunctionsSafe {
+﻿class CRUDFunctionsSafe {
 	constructor() {
 		this.db = null;
 		this.role = this._getRoleFromLocalStorage();
-		// Exponer la instancia en globales para compatibilidad con scripts existentes
 		window.crudFunctionsSafe = this;
 		if (!window.crudFunctions) window.crudFunctions = this;
 		
-		// Estas funciones no dependen de Firebase, se pueden ejecutar de inmediato
 		this.cargarDatosPerfil();
 		this.ocultarModalesAlInicio();
 		this._applyRoleUiRestrictions();

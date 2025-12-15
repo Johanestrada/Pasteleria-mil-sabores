@@ -21,8 +21,6 @@ const analytics = getAnalytics(app);
 try {
   analytics = getAnalytics(app);
 } catch (err) {
-  // No crítico: solo informamos en consola si falla (ej. entorno de test o SSR)
-  // console.debug('Firebase Analytics no disponible:', err);
 }
 
 export const db = getFirestore(app);

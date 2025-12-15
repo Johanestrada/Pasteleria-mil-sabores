@@ -9,9 +9,6 @@ class DashboardManager {
 
     async init() {
         console.log('Iniciando DashboardManager...');
-        
-        // IMPORTANTE: admin.html es HTML estático, no React
-        // Así que inicializamos Firebase v8 directamente (con TU config)
         await this.inicializarFirebase();
         
         // Marcar como listo
