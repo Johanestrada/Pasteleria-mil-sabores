@@ -33,25 +33,106 @@ document.addEventListener("DOMContentLoaded", async () => {
     const comunaInput = document.getElementById('profile-comuna');
     const ciudadInput = document.getElementById('profile-ciudad');
 
-    // Usar datos de Firestore si existen, si no, los del localStorage
-    const userDoc = await db.collection("usuario").doc(usuario.uid).get();
-    if (userDoc.exists) {
-        const data = userDoc.data();
-        if (nombreInput) nombreInput.value = data.nombre || '';
-        if (apellidoInput) apellidoInput.value = data.apellido || ''; // Asumiendo que guardas apellido
-        if (emailInput) emailInput.value = data.email || usuario.correo;
-        if (telefonoInput) telefonoInput.value = data.telefono || '';
-        if (data.direccion) {
-            if (calleInput) calleInput.value = data.direccion.calle || '';
-            if (deptoInput) deptoInput.value = data.direccion.depto || '';
-            if (comunaInput) comunaInput.value = data.direccion.comuna || '';
-            if (ciudadInput) ciudadInput.value = data.direccion.ciudad || '';
+    // Intentar obtener datos desde Firestore por UID
+    let data = null;
+    if (usuario.uid) {
+        const userDoc = await db.collection("usuario").doc(usuario.uid).get();
+        if (userDoc.exists) data = userDoc.data();
+    }
+
+    // Si no se encontró por UID, buscar por correo (campo 'email' o 'correo')
+    if (!data) {
+        const correo = usuario.email || usuario.correo || usuario.mail;
+        if (correo) {
+            const q = await db.collection('usuario').where('email', '==', correo).get();
+            if (q.empty) {
+                // Try alternative field 'correo'
+                const q2 = await db.collection('usuario').where('correo', '==', correo).get();
+                if (!q2.empty) data = q2.docs[0].data();
+            } else {
+                data = q.docs[0].data();
+            }
         }
-    } else {
-        // Fallback con datos básicos del localStorage
-        if (nombreHeader) nombreHeader.textContent = usuario.nombre;
-        if (nombreInput) nombreInput.value = usuario.nombre;
-        if (emailInput) emailInput.value = usuario.correo;
+    }
+
+    // Merge datos: Firestore data tiene prioridad, luego localStorage 'usuario'
+    const merged = { ...(usuario || {}), ...(data || {}) };
+
+    // Rellenar campos visibles en el formulario
+    if (nombreInput) nombreInput.value = merged.nombre || merged.nombreCompleto || '';
+    if (apellidoInput) apellidoInput.value = merged.apellido || '';
+    if (emailInput) emailInput.value = merged.email || merged.correo || usuario.correo || '';
+    if (telefonoInput) telefonoInput.value = merged.telefono || merged.telefonoMovil || '';
+
+    // Dirección: puede estar en 'direccion' (objeto), 'direcciones' (array) o en otras claves.
+    function guessAddressFromObject(obj) {
+        if (!obj || typeof obj !== 'object') return null;
+        const addressKeys = ['calle', 'direccion', 'street', 'address', 'comuna', 'ciudad', 'city', 'numero', 'num', 'depto', 'departamento', 'postal', 'codigo'];
+
+        // If object itself looks like an address
+        const keys = Object.keys(obj).map(k => k.toLowerCase());
+        const match = addressKeys.some(k => keys.includes(k));
+        if (match) return obj;
+
+        // Search nested objects / arrays for address-like objects
+        for (const k of Object.keys(obj)) {
+            const v = obj[k];
+            if (!v) continue;
+            if (Array.isArray(v) && v.length > 0) {
+                for (const item of v) {
+                    if (item && typeof item === 'object') {
+                        const itemKeys = Object.keys(item).map(ik => ik.toLowerCase());
+                        if (addressKeys.some(ak => itemKeys.includes(ak))) return item;
+                    }
+                }
+            } else if (typeof v === 'object') {
+                const nested = guessAddressFromObject(v);
+                if (nested) return nested;
+            }
+        }
+
+        return null;
+    }
+
+    let detectedAddress = null;
+    if (merged.direccion && typeof merged.direccion === 'object') detectedAddress = merged.direccion;
+    else if (Array.isArray(merged.direcciones) && merged.direcciones.length > 0) detectedAddress = merged.direcciones[0];
+    else detectedAddress = guessAddressFromObject(merged);
+
+    if (detectedAddress) {
+        if (calleInput) calleInput.value = detectedAddress.calle || detectedAddress.street || detectedAddress.address || detectedAddress.direccion || '';
+        if (deptoInput) deptoInput.value = detectedAddress.depto || detectedAddress.departamento || detectedAddress.numero || detectedAddress.num || '';
+        if (comunaInput) comunaInput.value = detectedAddress.comuna || detectedAddress.neighborhood || '';
+        if (ciudadInput) ciudadInput.value = detectedAddress.ciudad || detectedAddress.city || '';
+    }
+
+    // Actualizar encabezado si existe
+    if (nombreHeader) nombreHeader.textContent = merged.nombre || merged.nombreCompleto || usuario.nombre || '';
+
+    // Renderizar todos los datos del usuario en la tarjeta 'usuario-datos-completos'
+    const datosCont = document.getElementById('usuario-datos-completos');
+    if (datosCont) {
+        // Mostrar solo los campos principales de forma legible (sin tabla JSON)
+        let html = '';
+        html += `<div class="mb-2"><strong>Nombre:</strong> ${merged.nombre || merged.nombreCompleto || ''}</div>`;
+        html += `<div class="mb-2"><strong>Apellido:</strong> ${merged.apellido || ''}</div>`;
+        html += `<div class="mb-2"><strong>Correo:</strong> ${merged.email || merged.correo || usuario.correo || ''}</div>`;
+        html += `<div class="mb-2"><strong>Teléfono:</strong> ${merged.telefono || ''}</div>`;
+        if (merged.rol) html += `<div class="mb-2"><strong>Rol:</strong> ${merged.rol}</div>`;
+
+        if (detectedAddress) {
+            const a = detectedAddress;
+            html += `<div class="mt-3"><strong>Dirección de envío</strong>`;
+            html += `<div class="small bg-light p-2 mt-2">`;
+            if (a.calle || a.street || a.address) html += `<div>${a.calle || a.street || a.address} ${a.numero || a.num || ''}</div>`;
+            if (a.depto || a.departamento) html += `<div>Depto/Casa: ${a.depto || a.departamento}</div>`;
+            if (a.comuna) html += `<div>Comuna: ${a.comuna}</div>`;
+            if (a.ciudad || a.city) html += `<div>Ciudad: ${a.ciudad || a.city}</div>`;
+            if (a.postal) html += `<div>Código postal: ${a.postal}</div>`;
+            html += `</div></div>`;
+        }
+
+        datosCont.innerHTML = html || '<p class="text-muted">No se encontraron datos adicionales del usuario.</p>';
     }
 
     // 3. Configurar el botón de "Cerrar Sesión"
