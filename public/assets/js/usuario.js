@@ -27,6 +27,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const telefonoInput = document.getElementById('profile-telefono');
     const nombreHeader = document.getElementById('header-nombre');
 
+    // Address inputs and display
+    const calleInput = document.getElementById('profile-calle');
+    const deptoInput = document.getElementById('profile-depto');
+    const comunaInput = document.getElementById('profile-comuna');
+    const ciudadInput = document.getElementById('profile-ciudad');
+    const currentAddressEl = document.getElementById('current-address-display');
+    const formDireccion = document.getElementById('form-direccion');
+
     // Usar datos de Firestore si existen, si no, los del localStorage
     const userDoc = await db.collection("usuario").doc(usuario.uid).get();
     if (userDoc.exists) {
@@ -36,6 +44,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (apellidoInput) apellidoInput.value = data.apellido || ''; // Asumiendo que guardas apellido
         if (emailInput) emailInput.value = data.email || usuario.correo;
         if (telefonoInput) telefonoInput.value = data.telefono || '';
+
+        // Cargar dirección si existe
+        const direccion = data.direccion || data.shippingAddress || data.address || null;
+        if (direccion) {
+            if (calleInput) calleInput.value = direccion.calle || direccion.street || direccion.direccion || '';
+            if (deptoInput) deptoInput.value = direccion.depto || direccion.departamento || direccion.numero || '';
+            if (comunaInput) comunaInput.value = direccion.comuna || direccion.commune || '';
+            if (ciudadInput) ciudadInput.value = direccion.ciudad || direccion.region || '';
+
+            // Mostrar en la tarjeta de Dirección Actual
+            if (currentAddressEl) {
+                currentAddressEl.innerHTML = `
+                    <p class="mb-0"><strong>${direccion.calle || direccion.street || ''}</strong> ${direccion.depto || direccion.departamento || ''}</p>
+                    <p class="mb-0 text-muted">${direccion.comuna || ''}, ${direccion.ciudad || direccion.region || ''}</p>
+                    ${direccion.indicaciones ? `<p class="text-muted small">${direccion.indicaciones}</p>` : ''}
+                `;
+            }
+        }
+
     } else {
         // Fallback con datos básicos del localStorage
         if (nombreHeader) nombreHeader.textContent = usuario.nombre;
@@ -139,5 +166,61 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
     }
+
+    // Helper: escapar texto para atributos HTML
+    function escapeHtml(text) {
+        return String(text || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // Cargar historial de compras del usuario
+    async function cargarHistorialCompras() {
+        const tbody = document.getElementById('historial-compras-body');
+        if (!tbody) return;
+
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">Cargando historial...</td></tr>';
+
+        try {
+            const query = db.collection('compras').where('usuarioId', '==', usuario.uid).orderBy('fecha', 'desc');
+            const snapshot = await query.get();
+
+            if (snapshot.empty) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4">No hay pedidos aún.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            snapshot.forEach(doc => {
+                const compra = doc.data();
+
+                // Productos: mostrar solo nombres (concatenados) y título con la lista completa
+                const productosArr = Array.isArray(compra.productos) ? compra.productos : [];
+                const nombres = productosArr.map(p => (typeof p === 'string') ? p : (p.nombre || p.titulo || '')).filter(Boolean).join(', ');
+                const displayNombres = nombres.length > 60 ? nombres.slice(0, 60) + '...' : nombres;
+
+                const fecha = compra.fecha && typeof compra.fecha.toDate === 'function'
+                    ? compra.fecha.toDate().toLocaleString()
+                    : (compra.fecha ? new Date(compra.fecha).toLocaleString() : '—');
+                const total = typeof compra.total === 'number' ? `$${compra.total.toLocaleString('es-CL')}` : (compra.total || '—');
+                const estado = compra.estado || '—';
+
+                const row = `
+                    <tr>
+                        <td title="${escapeHtml(nombres)}">${displayNombres || '—'}</td>
+                        <td>${fecha}</td>
+                        <td>${total}</td>
+                        <td>${estado}</td>
+                        <td><a class="btn btn-sm btn-outline-primary" href="compraExitosa.html?orden=${doc.id}">Ver</a></td>
+                    </tr>`;
+
+                tbody.innerHTML += row;
+            });
+        } catch (err) {
+            console.error('Error cargando historial de compras:', err);
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger py-4">Error al cargar historial. Revisa la consola.</td></tr>';
+        }
+    }
+
+    // Llamada inicial para cargar el historial
+    if (usuario && usuario.uid) cargarHistorialCompras();
 
 });

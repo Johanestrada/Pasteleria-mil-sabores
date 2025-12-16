@@ -1,6 +1,6 @@
 // Inicializar página de éxito cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    inicializarPaginaExito();
+document.addEventListener('DOMContentLoaded', async function() {
+    await inicializarPaginaExito();
     configurarEventosExito();
     actualizarCarritoHeader(); // Actualizar header
 });
@@ -8,22 +8,76 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
  * Inicializa la pagina de exito con los datos de la compra
  */
-function inicializarPaginaExito() {
+async function inicializarPaginaExito() {
     // Obtener parametros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const ordenParam = urlParams.get('orden');
-    const ultimaCompra = JSON.parse(localStorage.getItem('ultimaCompra'));
-    
-    // Si no hay datos de compra, redirigir al carrito
-    if (!ultimaCompra && !ordenParam) {
+    let compra = null;
+
+    // Intentar leer de localStorage primero
+    try {
+        compra = JSON.parse(localStorage.getItem('ultimaCompra')) || null;
+    } catch (err) {
+        compra = null;
+    }
+
+    // Si no hay datos de localStorage pero sí viene un id en la URL, intentar cargar desde Firestore
+    if (!compra && ordenParam) {
+        try {
+            // Inicializar firebase si no está
+            const firebaseConfig = {
+                apiKey: "AIzaSyAHAFW0zClY_Snm0tUWnF6n-VuKCoxggyY",
+                authDomain: "tiendapasteleriamilsabor-a193d.firebaseapp.com",
+                projectId: "tiendapasteleriamilsabor-a193d",
+            };
+            if (!firebase.apps?.length) firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+
+            const doc = await db.collection('compras').doc(ordenParam).get();
+            if (!doc.exists) {
+                alert('No se encontró la orden solicitada.');
+                window.location.href = 'carrito.html';
+                return;
+            }
+
+            compra = doc.data();
+            compra.numeroOrden = doc.id; // usar el id como número de orden si no existe en el documento
+
+            // Guardar una copia simplificada en localStorage para compatibilidad con otras funciones
+            try {
+                const compraParaStore = {
+                    numeroOrden: compra.numeroOrden,
+                    cliente: compra.cliente || compra.clienteInfo || {},
+                    direccion: compra.direccion || compra.shippingAddress || {},
+                    productos: Array.isArray(compra.productos) ? compra.productos : (compra.items || []),
+                    total: compra.total || 0,
+                    fecha: compra.fecha && compra.fecha.toDate ? compra.fecha.toDate().toString() : (compra.fecha ? String(compra.fecha) : '')
+                };
+                localStorage.setItem('ultimaCompra', JSON.stringify(compraParaStore));
+            } catch (errStore) {
+                console.warn('No se pudo guardar ultimaCompra en localStorage:', errStore);
+            }
+
+        } catch (err) {
+            console.error('Error al cargar la orden desde Firestore:', err);
+            alert('Error al cargar la orden. Revisa la consola.');
+            return;
+        }
+    }
+
+    // Si al final no hay compra, redirigir
+    if (!compra) {
         window.location.href = 'carrito.html';
         return;
     }
 
+    // Exponer globalmente la compra actual para otras funciones (imprimir/enviar)
+    window.currentCompra = compra;
+
     // Mostrar los datos de la compra
-    mostrarDatosCompra(ultimaCompra);
-    renderizarProductosExito(ultimaCompra.productos);
-    actualizarTotalExito(ultimaCompra.total);
+    mostrarDatosCompra(compra);
+    renderizarProductosExito(compra.productos || []);
+    actualizarTotalExito(compra.total || 0);
 }
 
 /**
@@ -32,21 +86,42 @@ function inicializarPaginaExito() {
 function mostrarDatosCompra(compra) {
     // Actualizar numeros de orden y compra (comprobar existencia para evitar errores)
     const codigoEl = document.getElementById('codigoOrden');
-    if (codigoEl) codigoEl.textContent = 'ORDEN: ' + compra.numeroOrden;
     const numeroEl = document.getElementById('numeroCompra');
-    if (numeroEl) numeroEl.textContent = compra.numeroOrden;
+    const numeroOrdenText = compra.numeroOrden || compra.numero || compra.id || '—';
+    if (codigoEl) codigoEl.textContent = 'ORDEN: ' + numeroOrdenText;
+    if (numeroEl) numeroEl.textContent = numeroOrdenText;
 
-    // Mostrar datos del cliente
-    document.getElementById('exitoNombre').value = compra.cliente.nombre;
-    document.getElementById('exitoApellidos').value = compra.cliente.apellidos;
-    document.getElementById('exitoCorreo').value = compra.cliente.correo;
+    // Mostrar datos del cliente con seguridad
+    const cliente = compra.cliente || compra.clienteInfo || {};
+    const nombreVal = cliente.nombre || cliente.nombreCliente || '';
+    const apellidosVal = cliente.apellidos || cliente.apellido || cliente.apellidosCliente || '';
+    const correoVal = cliente.correo || cliente.email || cliente.correoCliente || '';
+    const elNombre = document.getElementById('exitoNombre');
+    const elApellidos = document.getElementById('exitoApellidos');
+    const elCorreo = document.getElementById('exitoCorreo');
+    if (elNombre) elNombre.value = nombreVal;
+    if (elApellidos) elApellidos.value = apellidosVal;
+    if (elCorreo) elCorreo.value = correoVal;
 
-    // Mostrar datos de direccion
-    document.getElementById('exitoCalle').value = compra.direccion.calle;
-    document.getElementById('exitoDepartamento').value = compra.direccion.departamento;
-    document.getElementById('exitoRegion').value = compra.direccion.region;
-    document.getElementById('exitoComuna').value = compra.direccion.comuna;
-    document.getElementById('exitoIndicaciones').value = compra.direccion.indicaciones;
+    // Mostrar datos de direccion con varios fallback de propiedades
+    const direccion = compra.direccion || compra.shippingAddress || compra.address || {};
+    const calle = direccion.calle || direccion.street || direccion.direccion || '';
+    const departamento = direccion.departamento || direccion.depto || direccion.numero || '';
+    const region = direccion.region || direccion.regionName || '';
+    const comuna = direccion.comuna || direccion.commune || '';
+    const indicaciones = direccion.indicaciones || direccion.notes || '';
+
+    const elCalle = document.getElementById('exitoCalle');
+    const elDepto = document.getElementById('exitoDepartamento');
+    const elRegion = document.getElementById('exitoRegion');
+    const elComuna = document.getElementById('exitoComuna');
+    const elIndic = document.getElementById('exitoIndicaciones');
+
+    if (elCalle) elCalle.value = calle;
+    if (elDepto) elDepto.value = departamento;
+    if (elRegion) elRegion.value = region;
+    if (elComuna) elComuna.value = comuna;
+    if (elIndic) elIndic.value = indicaciones;
 }
 
 /**
@@ -95,14 +170,14 @@ function actualizarCarritoHeader() {
 function imprimirBoletaPDF() {
     try {
         // Crear contenido HTML para la boleta
-        const compra = JSON.parse(localStorage.getItem('ultimaCompra'));
+        const compra = window.currentCompra || JSON.parse(localStorage.getItem('ultimaCompra'));
         const fecha = new Date().toLocaleDateString('es-CL');
         
         const contenidoBoleta = `
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Boleta de Compra - Orden ${compra.numeroOrden}</title>
+                <title>Boleta de Compra - Orden ${compra?.numeroOrden || '—'}</title>
                 <style>
                     body { font-family: Arial, sans-serif; margin: 20px; }
                     .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
@@ -187,12 +262,12 @@ function imprimirBoletaPDF() {
  */
 function enviarBoletaEmail() {
     try {
-        const compra = JSON.parse(localStorage.getItem('ultimaCompra'));
-        const email = compra.cliente.correo;
+        const compra = window.currentCompra || JSON.parse(localStorage.getItem('ultimaCompra'));
+        const email = (compra && (compra.cliente && (compra.cliente.correo || compra.cliente.email))) || '';
         
         // Mostrar mensaje de carga
         const btnEnviar = document.getElementById('btnEnviarEmail');
-        const textoOriginal = btnEnviar.innerHTML;
+        const textoOriginal = btnEnviar ? btnEnviar.innerHTML : 'Enviando...';
         btnEnviar.innerHTML = 'Enviando...';
         btnEnviar.disabled = true;
         
