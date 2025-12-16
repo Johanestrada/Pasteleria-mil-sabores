@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const carritoTotal = document.querySelector('.carrito-total');
   const btnVerTodos = document.getElementById("btnVerTodos");
   const btnCarrito = document.querySelector('.btn-carrito');
+  const sortSelect = document.getElementById('sortSelect');
 
   // ==== VARIABLES GLOBALES ====
   let productosGlobal = [];
@@ -24,6 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
+
+  // === Eventos adicionales de UI ===
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      // Mantener orden actual cuando haya productos en pantalla
+      if (categoriaActiva === 'todos') mostrarTodosLosProductos();
+      else filtrarPorCategoria(categoriaActiva);
+    });
+  }
 
   // ==== INICIALIZAR APLICACIÓN ====
   actualizarCarritoTotal();
@@ -114,21 +124,30 @@ document.addEventListener("DOMContentLoaded", () => {
   function mostrarCardsCategorias(categorias) {
     if (!cardsCategorias) return;
     cardsCategorias.innerHTML = categorias.map(c => `
-      <div class="categoria-card" data-categoria="${c}">
+      <div class="categoria-card" data-categoria="${c}" role="button" tabindex="0" aria-label="Filtrar por ${c}">
         <div class="categoria-img">${obtenerIconoCategoria(c)}</div>
         <div class="categoria-nombre">${c}</div>
       </div>
     `).join("");
 
+    // Delegación de eventos para clic y teclado (accesibilidad)
     cardsCategorias.addEventListener("click", e => {
       const card = e.target.closest(".categoria-card");
       if (card) filtrarPorCategoria(card.dataset.categoria);
+    });
+    cardsCategorias.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.categoria-card');
+        if (card) filtrarPorCategoria(card.dataset.categoria);
+      }
     });
   }
 
   // ==== ICONOS DE CATEGORÍAS ====
   function obtenerIconoCategoria(categoria) {
     const iconos = {
+      'Tortas': '🍰', 'Cupcakes': '🧁', 'Macarons': '🍥', 'Alfajores': '🍪',
+      'Trufas': '🍫', 'Galletas': '🍪', 'Pastel': '🎂', 'Postres': '🍮',
       'Ropa': '👕', 'Tecnología': '💻', 'Electrónica': '📱',
       'Hogar': '🏠', 'Deportes': '⚽', 'Zapatos': '👟',
       'Accesorios': '🕶️', 'Libros': '📚', 'Juguetes': '🧸', 'Belleza': '💄'
@@ -156,6 +175,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==== RENDERIZAR PRODUCTOS ====
+  function aplicarOrden(productos) {
+    if (!sortSelect) return productos;
+    const val = sortSelect.value;
+    let copia = [...productos];
+    if (val === 'price-asc') {
+      copia.sort((a, b) => (a.precio || 0) - (b.precio || 0));
+    } else if (val === 'price-desc') {
+      copia.sort((a, b) => (b.precio || 0) - (a.precio || 0));
+    }
+    return copia;
+  }
+
   function mostrarProductos(productos) {
     if (!productosGrid) return;
     if (productos.length === 0) {
@@ -167,7 +198,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    productosGrid.innerHTML = productos.map(p => `
+    const productosOrdenados = aplicarOrden(productos);
+
+    productosGrid.innerHTML = productosOrdenados.map(p => `
       <div class="producto-card">
         <img src="${p.imagen || 'https://via.placeholder.com/400x300/cccccc/969696?text=Imagen+No+Disponible'}"
              alt="${p.nombre}" class="producto-imagen">

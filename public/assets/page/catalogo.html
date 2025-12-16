@@ -13,75 +13,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  <style>
-    body {
-      background-color: #fff5f7;
-    }
-
-    .categorias-grid,
-    .productos-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-
-    .card-producto {
-      background-color: #ffeef2;
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease;
-    }
-
-    .card-producto:hover {
-      transform: translateY(-5px);
-    }
-
-    .btn-ver-todos {
-      background-color: #f48fb1;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      transition: background-color 0.3s;
-    }
-
-    .btn-ver-todos:hover {
-      background-color: #ec407a;
-    }
-
-    /* 🔍 Estilos del buscador */
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background-color: #ffeef2;
-      padding: 5px 10px;
-      border-radius: 20px;
-    }
-
-    .search-input {
-      border: none;
-      outline: none;
-      background: transparent;
-      padding: 5px 10px;
-      flex: 1;
-    }
-
-    .btn-buscar {
-      background-color: #f48fb1;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .btn-buscar:hover {
-      background-color: #ec407a;
-    }
-  </style>
+  <!-- Estilos centralizados en ../css/catalogo.css -->
 </head>
 
 <body>
@@ -155,6 +87,18 @@
     <section class="text-center mb-5">
       <h2 class="section-title mb-3">Categorías</h2>
       <button id="btnVerTodos" class="btn-ver-todos mb-4">Ver todos los productos</button>
+
+      <!-- Toolbar: orden y vistas -->
+      <div class="catalog-toolbar d-flex justify-content-center align-items-center gap-3 mb-3">
+        <div class="d-flex align-items-center gap-2">
+          <label for="sortSelect" class="mb-0">Ordenar:</label>
+          <select id="sortSelect" class="form-select form-select-sm">
+            <option value="default">Por defecto</option>
+            <option value="price-asc">Precio: menor a mayor</option>
+            <option value="price-desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+      </div>
 
       <div id="cardsCategorias" class="categorias-grid"></div>
     </section>

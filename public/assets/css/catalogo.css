@@ -211,3 +211,245 @@ button:hover,
     width: 100%;
   }
 }
+
+/* ==============================
+   MEJORAS: Categorías (logos adaptables) y toolbar
+   - Estilos responsivos, centrado en desktop y estilos para el selector
+=================================*/
+.categorias-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  align-items: stretch;
+  /* Centrado en escritorio */
+  max-width: 1100px;
+  margin: 0 auto;
+  justify-items: center;
+  grid-auto-rows: 1fr; /* asegura tarjetas de igual altura */
+}
+
+.categoria-card {
+  background: linear-gradient(180deg, #fff 0%, #fff5f7 100%);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 14px rgba(156, 97, 124, 0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+  width: 100%;
+  max-width: 240px; /* limita ancho para que se vean centradas en columnas grandes */
+}
+
+.categoria-card:focus,
+.categoria-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(156, 97, 124, 0.12);
+  outline: none;
+}
+
+.categoria-img {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #ec407a;
+  font-size: 34px;
+  border: 6px solid rgba(244, 143, 177, 0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.categoria-nombre {
+  font-weight: 700;
+  color: #5D4037;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.catalog-toolbar {
+  gap: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.catalog-toolbar label {
+  color: #5D4037;
+  font-weight: 600;
+}
+
+.catalog-toolbar .form-select {
+  width: 220px;
+  background: #fff5f7;
+  border: 1px solid #f48fb1;
+  color: #5D4037;
+  border-radius: 12px;
+  padding: .15rem .5rem;
+  box-shadow: 0 4px 14px rgba(156,97,124,0.06);
+}
+
+.catalog-toolbar .form-select:focus {
+  border-color: #ec407a;
+  box-shadow: 0 8px 24px rgba(156,97,124,0.12);
+  outline: none;
+}
+
+@media (min-width: 992px) {
+  .categorias-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+  .catalog-toolbar .form-select { width: 300px; }
+}
+
+@media (max-width: 480px) {
+  .categoria-img {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+    border-width: 4px;
+  }
+  .categoria-nombre {
+    font-size: 0.9rem;
+  }
+  .catalog-toolbar { flex-direction: column; gap: 8px; }
+}
+
+
+/* ==============================
+   STYLES MOVED FROM blog.html
+   (Blog-specific and buscador styles)
+=================================*/
+
+.noticias-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 3rem 0 2rem 0;
+  color: #5D4037;
+}
+
+.caso-curioso-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin: 2rem 0;
+  background-color: #ffeef2;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.caso-contenido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.caso-titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #5D4037;
+}
+
+.caso-descripcion {
+  color: #5D4037;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.btn-ver-caso {
+  background-color: #FFCCCB;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-ver-caso:hover {
+  background-color: #ec407a;
+  color: white;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.caso-imagen {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.footer a {
+  color: #5D4037;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #ec407a;
+}
+
+/* 🔍 Buscador (copiado para asegurar consistencia con index) */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffeef2;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 5px 10px;
+  flex: 1;
+}
+
+.btn-buscar {
+  background-color: #f48fb1;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-buscar:hover {
+  background-color: #ec407a;
+}
+
+@media (max-width: 768px) {
+  .caso-curioso-container {
+    grid-template-columns: 1fr;
+  }
+
+  .noticias-title {
+    font-size: 1.8rem;
+  }
+
+  .caso-titulo {
+    font-size: 1.2rem;
+  }
+}

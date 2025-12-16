@@ -108,6 +108,6 @@ export default function RegistroForm({ userId = null, collectionName = 'usuarios
           {mensajes.promociones.map((p, i) => <div key={i} dangerouslySetInnerHTML={{ __html: p }} />)}
         </div>
       )}
-    </form>
-  );
+    </form>
+  );
 }
