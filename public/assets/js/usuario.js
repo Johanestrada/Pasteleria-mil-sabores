@@ -27,13 +27,54 @@ document.addEventListener("DOMContentLoaded", async () => {
     const telefonoInput = document.getElementById('profile-telefono');
     const nombreHeader = document.getElementById('header-nombre');
 
-    // Address inputs and display
+    // Address inputs and display (region + comuna like checkout)
     const calleInput = document.getElementById('profile-calle');
     const deptoInput = document.getElementById('profile-depto');
+    const regionInput = document.getElementById('profile-region');
     const comunaInput = document.getElementById('profile-comuna');
-    const ciudadInput = document.getElementById('profile-ciudad');
     const currentAddressEl = document.getElementById('current-address-display');
     const formDireccion = document.getElementById('form-direccion');
+
+    // Lista de comunas por región (ampliada y similar a la usada en registro/login)
+    const comunasPorRegion = {
+        rm: ["Santiago","Puente Alto","Maipú","Las Condes","Ñuñoa"],
+        valparaiso: ["Valparaíso","Viña del Mar","Quilpué","Villa Alemana"],
+        biobio: ["Concepción","Talcahuano","Chiguayante","Los Ángeles"],
+        araucania: ["Temuco","Padre Las Casas","Villarrica","Pucón"],
+        antofagasta: ["Antofagasta","Calama","Mejillones","Tocopilla"],
+        metropolitana: ["Cerrillos","Cerro Navia","Conchalí","El Bosque","Estación Central","Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana","La Reina","Las Condes","Lo Barnechea","Lo Espejo","Lo Prado","Macul","Maipú","Ñuñoa","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura","Quinta Normal","Recoleta","Renca","San Joaquín","San Miguel","San Ramón","Santiago","Vitacura"]
+    };
+
+    // Poblar regiones y manejo de cambio para poblar comunas
+    if (regionInput) {
+        regionInput.innerHTML = '<option value="">Seleccione una región</option>';
+        const regionLabels = { rm: 'Metropolitana', valparaiso: 'Valparaíso', biobio: 'Biobío', araucania: 'La Araucanía', antofagasta: 'Antofagasta', metropolitana: 'Metropolitana (alt)' };
+        Object.keys(comunasPorRegion).forEach(key => {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = regionLabels[key] || key;
+            regionInput.appendChild(option);
+        });
+
+        regionInput.addEventListener('change', () => {
+            const regionSeleccionada = regionInput.value;
+            if (comunaInput) {
+                comunaInput.innerHTML = '<option value="">Seleccione una comuna</option>';
+                comunaInput.disabled = true;
+
+                if (regionSeleccionada && comunasPorRegion[regionSeleccionada]) {
+                    const lista = Array.isArray(comunasPorRegion[regionSeleccionada]) ? comunasPorRegion[regionSeleccionada] : (comunasPorRegion[regionSeleccionada].comunas || []);
+                    lista.forEach(comuna => {
+                        const option = document.createElement('option');
+                        option.value = comuna;
+                        option.textContent = comuna;
+                        comunaInput.appendChild(option);
+                    });
+                    comunaInput.disabled = false;
+                }
+            }
+        });
+    }
 
     // Usar datos de Firestore si existen, si no, los del localStorage
     const userDoc = await db.collection("usuario").doc(usuario.uid).get();
@@ -50,14 +91,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (direccion) {
             if (calleInput) calleInput.value = direccion.calle || direccion.street || direccion.direccion || '';
             if (deptoInput) deptoInput.value = direccion.depto || direccion.departamento || direccion.numero || '';
-            if (comunaInput) comunaInput.value = direccion.comuna || direccion.commune || '';
-            if (ciudadInput) ciudadInput.value = direccion.ciudad || direccion.region || '';
+
+            // Si hay region, asignarla y disparar evento para poblar comunas
+            if (regionInput && (direccion.region || direccion.regionKey)) {
+                // Función para intentar resolver una región a su key conocida
+                function findRegionKey(regionValue) {
+                    if (!regionValue) return '';
+                    if (comunasPorRegion[regionValue]) return regionValue;
+                    const labels = { rm: 'Metropolitana', valparaiso: 'Valparaíso', biobio: 'Biobío', araucania: 'La Araucanía', antofagasta: 'Antofagasta', metropolitana: 'Metropolitana (alt)' };
+                    const found = Object.keys(labels).find(k => labels[k] === regionValue);
+                    if (found) return found;
+                    const found2 = Object.keys(comunasPorRegion).find(k => k.toLowerCase() === String(regionValue).toLowerCase());
+                    if (found2) return found2;
+                    return '';
+                }
+
+                const regionKey = direccion.regionKey || findRegionKey(direccion.region) || direccion.region || '';
+                if (regionKey) {
+                    regionInput.value = regionKey;
+                    regionInput.dispatchEvent(new Event('change'));
+                }
+            }
+
+            if (comunaInput && direccion.comuna) {
+                // Esperar a que las comunas se poblen (si se hizo dispatchEvent)
+                setTimeout(() => {
+                    comunaInput.value = direccion.comuna;
+                }, 80);
+            }
 
             // Mostrar en la tarjeta de Dirección Actual
             if (currentAddressEl) {
                 currentAddressEl.innerHTML = `
                     <p class="mb-0"><strong>${direccion.calle || direccion.street || ''}</strong> ${direccion.depto || direccion.departamento || ''}</p>
-                    <p class="mb-0 text-muted">${direccion.comuna || ''}, ${direccion.ciudad || direccion.region || ''}</p>
+                    <p class="mb-0 text-muted">${direccion.comuna || ''}${direccion.region ? ', ' + (direccion.region) : ''}</p>
                     ${direccion.indicaciones ? `<p class="text-muted small">${direccion.indicaciones}</p>` : ''}
                 `;
             }
@@ -166,6 +233,83 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
     }
+
+    // Helper para mostrar la dirección actual en la UI
+    function mostrarDireccionActual(direccion) {
+        if (!currentAddressEl) return;
+        if (!direccion) {
+            currentAddressEl.innerHTML = '<p class="text-muted">No hay una dirección guardada.</p>';
+            return;
+        }
+        currentAddressEl.innerHTML = `
+            <p class="mb-0"><strong>${direccion.calle || direccion.street || ''}</strong> ${direccion.depto || direccion.departamento || ''}</p>
+            <p class="mb-0 text-muted">${direccion.comuna || ''}${direccion.ciudad ? ', ' + direccion.ciudad : ''}</p>
+            ${direccion.indicaciones ? `<p class="text-muted small">${direccion.indicaciones}</p>` : ''}
+        `;
+    }
+
+    // Manejar envío del formulario de dirección
+    if (formDireccion) {
+        formDireccion.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const calle = (calleInput || { value: '' }).value.trim();
+            const depto = (deptoInput || { value: '' }).value.trim();
+            const comuna = (comunaInput || { value: '' }).value.trim();
+
+            if (!calle || !comuna || !regionInput || !regionInput.value) {
+                alert('Por favor completa al menos la calle, región y comuna.');
+                return;
+            }
+
+            // Buscar docId del usuario (misma lógica que en perfil)
+            const usuarioStr2 = localStorage.getItem('usuario');
+            if (!usuarioStr2) {
+                alert('No se encontró usuario en localStorage. Por favor inicia sesión.');
+                return;
+            }
+            const usuario2 = JSON.parse(usuarioStr2);
+            let docId = usuario2.uid || usuario2.id;
+
+            try {
+                if (!docId) {
+                    const emailToSearch = usuario2.email || usuario2.correo;
+                    if (emailToSearch) {
+                        let snapshot = await db.collection('usuario').where('email', '==', emailToSearch).get();
+                        if (snapshot.empty) snapshot = await db.collection('usuario').where('correo', '==', emailToSearch).get();
+                        if (!snapshot.empty) docId = snapshot.docs[0].id;
+                    }
+                }
+
+                if (!docId) {
+                    alert('No se pudo identificar el documento del usuario para guardar la dirección.');
+                    return;
+                }
+
+                const direccionObj = {
+                    calle,
+                    departamento: depto,
+                    depto,
+                    region: regionInput ? (regionInput.options[regionInput.selectedIndex].text || '') : '',
+                    regionKey: regionInput ? (regionInput.value || '') : '',
+                    comuna
+                };
+
+                await db.collection('usuario').doc(docId).set({ direccion: direccionObj }, { merge: true });
+
+                // Actualizar UI y localStorage
+                mostrarDireccionActual(direccionObj);
+                const usuarioLocal = JSON.parse(localStorage.getItem('usuario') || '{}');
+                usuarioLocal.direccion = direccionObj;
+                localStorage.setItem('usuario', JSON.stringify(usuarioLocal));
+
+                alert('Dirección guardada correctamente.');
+            } catch (err) {
+                console.error('Error guardando la dirección:', err);
+                alert('Ocurrió un error al guardar la dirección. Revisa la consola.');
+            }
+        });
+    }
 
     // Helper: escapar texto para atributos HTML
     function escapeHtml(text) {

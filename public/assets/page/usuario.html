@@ -174,15 +174,19 @@
                   <label for="profile-depto" class="form-label">Depto/Casa (Opcional)</label>
                   <input type="text" id="profile-depto" class="form-control" placeholder="Ej: Depto 4B">
                 </div>
-                <!-- Comuna -->
+                <!-- Región -->
+                <div class="col-12 col-md-6">
+                  <label for="profile-region" class="form-label">Región</label>
+                  <select id="profile-region" class="form-select">
+                    <option value="">Seleccione una región</option>
+                  </select>
+                </div>
+                <!-- Comuna (select dependiente) -->
                 <div class="col-12 col-md-6">
                   <label for="profile-comuna" class="form-label">Comuna</label>
-                  <input type="text" id="profile-comuna" class="form-control" placeholder="Ej: Santiago">
-                </div>
-                <!-- Ciudad -->
-                <div class="col-12 col-md-6">
-                  <label for="profile-ciudad" class="form-label">Ciudad</label>
-                  <input type="text" id="profile-ciudad" class="form-control" placeholder="Ej: Santiago">
+                  <select id="profile-comuna" class="form-select" disabled>
+                    <option value="">Seleccione una comuna</option>
+                  </select>
                 </div>
               </div>
               <hr class="my-3 my-md-4">

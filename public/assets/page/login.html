@@ -83,7 +83,10 @@
         <!-- Contraseña -->
         <div class="mb-3">
           <label for="claveLogin" class="form-label">Contraseña: <span class="text-danger">*</span></label>
-          <input type="password" id="claveLogin" name="password" class="form-control" required>
+          <div class="input-group">
+            <input type="password" id="claveLogin" name="password" class="form-control" required>
+            <button class="btn btn-outline-secondary btn-show-password" type="button" data-target="#claveLogin" aria-label="Mostrar contraseña"><i class="bi bi-eye"></i></button>
+          </div>
         </div>
 
         <p class="text-center mb-3">
@@ -145,6 +148,7 @@
   <!-- Scripts de la página de login -->
   <script src="../js/validaciones.js"></script>
   <script src="../../assets/js/login.js"></script>
+  <script src="../../assets/js/show-password.js"></script>
   <script src="../js/actualizarCarrito.js"></script>
 </body>
 

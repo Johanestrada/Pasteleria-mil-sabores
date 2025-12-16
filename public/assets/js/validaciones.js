@@ -118,7 +118,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 createdAt: new Date()
             });
 
-            mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso!.</span>`;
+            // Mantener al usuario 'logueado' en la app: guardar referencia en localStorage
+            try {
+                const sesionUsuario = { uid: user.uid, nombre, correo: email, email, rol: 'cliente' };
+                localStorage.setItem('usuario', JSON.stringify(sesionUsuario));
+            } catch (errLocal) {
+                console.warn('No se pudo guardar la sesión en localStorage:', errLocal);
+            }
+
+            mensajeRegistro.innerHTML = `<span class="text-success">Registro exitoso y has iniciado sesión.</span>`;
 
             if (promociones.length > 0) {
                 mensajeRegistro.innerHTML += `<br>${promociones.join("<br>")}`;
@@ -126,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             formRegistro.reset();
 
-            // Redirigir al panel de usuario
-            window.location.href = "usuario.html";
+            // Redirigir a la página de inicio (evitar errores al ir directamente a perfil)
+            window.location.href = "/index.html";
         } catch (error) {
             console.error("Error al registrar usuario:", error);
             mensajeRegistro.innerHTML = `<span class="text-danger">${error.message}</span>`;
