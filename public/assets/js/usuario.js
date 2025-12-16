@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else if (typeof v === 'object') {
                 const nested = guessAddressFromObject(v);
                 if (nested) return nested;
-            }
+            }º
         }
 
         return null;
@@ -212,6 +212,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 await db.collection('usuario').doc(usuario.uid).set({
                     direccion: direccionData
                 }, { merge: true });
+
+                // Actualizar localStorage para reflejar el cambio
+                const usuarioActualizado = { ...JSON.parse(localStorage.getItem("usuario")), direccion: direccionData };
+                localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+
+                // Actualizar la vista de la dirección actual
+                const currentAddressDisplay = document.getElementById('current-address-display');
+                if (currentAddressDisplay) {
+                    currentAddressDisplay.innerHTML = `
+                        <p><strong>Calle:</strong> ${direccionData.calle || ''}</p>
+                        <p><strong>Departamento/Casa:</strong> ${direccionData.depto || ''}</p>
+                        <p><strong>Comuna:</strong> ${direccionData.comuna || ''}</p>
+                        <p><strong>Ciudad:</strong> ${direccionData.ciudad || ''}</p>
+                    `;
+                }
 
                 alert('Dirección guardada correctamente.');
             } catch (error) {

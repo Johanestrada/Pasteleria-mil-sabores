@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userDropdown = document.getElementById('user-dropdown');
     const userNameSpan = document.getElementById('user-name');
     const logoutLinks = document.querySelectorAll('.logout-button, #logout-link');
+    const dashboardLink = document.getElementById('dashboard-link');
 
     // Verificar si hay un usuario en localStorage
     const usuarioStr = localStorage.getItem("usuario");
@@ -15,6 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (loginLink) loginLink.style.display = 'none'; // Ocultar enlace de login
         if (userDropdown) userDropdown.style.display = 'block'; // Mostrar menú de usuario
         if (userNameSpan) userNameSpan.textContent = usuario.nombre || 'Usuario'; // Mostrar nombre
+
+        // Mostrar el enlace al dashboard según el rol
+        if (dashboardLink && usuario.rol) {
+            if (usuario.rol === 'admin') {
+                dashboardLink.href = '/assets/page/admin.html';
+                dashboardLink.style.display = 'block';
+            } else if (usuario.rol === 'vendedor') {
+                dashboardLink.href = '/assets/page/vendedor.html';
+                dashboardLink.style.display = 'block';
+            }
+        }
 
     } else {
         // Usuario NO está logueado
