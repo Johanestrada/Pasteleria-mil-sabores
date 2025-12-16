@@ -250,6 +250,95 @@ body {
       background-color: #ec407a;
     }
 
+/* ==============================
+   NOTIFICACIÓN (Campana)
+   Muestra una campana junto al carrito para usuarios logueados (clientes)
+=================================*/
+.noti-badge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
+}
+
+#notification-bell {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: transparent; /* no white background */
+  color: inherit;
+}
+
+/* Subtle hover so it remains discoverable without a solid background */
+#notification-bell:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Active/focus state for keyboard accessibility */
+#notification-bell:focus {
+  outline: 2px solid rgba(255, 74, 130, 0.22);
+  outline-offset: 2px;
+}
+
+/* small label for accessibility if needed */
+#notification-bell .label {
+  display: none;
+}
+
+/* Dropdown de notificaciones */
+.noti-wrapper { position: relative; display: inline-block; }
+.noti-wrapper { display: inline-flex; align-items: center; }
+.noti-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 260px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 12px 14px;
+  z-index: 1000000; /* ensure dropdown sits above most UI layers */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.16);
+  display: none;
+}
+.noti-wrapper.open .noti-dropdown { display: block; }
+.noti-title { font-weight: 700; margin-bottom: 8px; color: #333; }
+.noti-list .noti-item { padding: 8px; border-radius: 6px; cursor: pointer; }
+.noti-list .noti-item:hover { background: #fff0f6; }
+.noti-subtext { font-size: 12px; color: #666; }
+.noti-footer { margin-top: 8px; }
+
+/* Atenuar otros elementos cuando el dropdown está abierto */
+.noti-open .navbar .nav-item:not(.noti-parent),
+.noti-open .navbar .d-flex:not(.noti-parent) { opacity: 0.35; pointer-events: none; transition: opacity 120ms ease; }
+.noti-open #notification-bell { pointer-events: auto; }
+
+.noti-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: var(--noti-arrow-left, 16px);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  filter: drop-shadow(0 -1px 0 rgba(0,0,0,0.03));
+  transform: translateX(-50%);
+}
+
+/* Ensure wrapper sits above header content to avoid overlapping issues */
+.noti-wrapper { z-index: 1000001; }
+
+/* Alineamiento consistente para navegaciones con layout diferente */
+.navbar .noti-wrapper { margin-left: 10px; }
+@media (max-width: 768px) {
+  .navbar .noti-wrapper { margin-left: 6px; }
+  .noti-dropdown { right: 6px; left: auto; min-width: 220px; }
+}
+
 
 
 
@@ -993,6 +1082,32 @@ h3 {
   color: #d63384 !important;
 }
 
+/* Tienda (dashboard) */
+.tienda-content .tienda-body {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.tienda-iframe {
+  border: 0;
+  width: 100%;
+  max-width: 720px;
+  height: 420px;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.tienda-info {
+  flex: 1 1 260px;
+}
+.map-wrapper {
+  flex: 1 1 420px;
+}
+
+@media (max-width: 768px) {
+  .tienda-iframe { height: 320px; }
+  .tienda-content .tienda-body { gap: 1rem; }
+}
 .navbar-brand img {
   max-height: 60px;
 }

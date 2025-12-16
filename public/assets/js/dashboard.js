@@ -146,6 +146,26 @@ class DashboardManager {
     }
 
     navegarASeccion(seccion) {
+        // Mostrar la sección 'tienda' dentro del dashboard y rellenarla según el rol
+        if (seccion === 'tienda') {
+            const rol = localStorage.getItem('rol');
+            const tiendaSection = document.getElementById('tienda');
+            const googleLink = 'https://www.google.com/search?newwindow=1&sca_esv=8efe466fbfa838b2&q=Paradero+37+Av.Concha+y+Toro&ludocid=9472218623307551877&lsig=AB86z5XKoVh6NMu83UsDLIEu8fAb&sa=X&sqi=2&ved=2ahUKEwiFtvGkw8GRAxUiqZUCHWS1N00Q8G0oAHoECCUQAQ';
+            const mapsEmbed = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3328.123456789012!2d-70.650123456789!3d-33.456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c1234567890%3A0xabcdef1234567890!2sPasteler%C3%ADa%20Mil%20Sabores!5e0!3m2!1ses-419!2scl!4v1699999999999!5m2!1ses-419!2scl';
+
+            if (tiendaSection) {
+                // Igualar apariencia para admin y vendedor: mostrar siempre el mapa embebido (no la página completa)
+                tiendaSection.querySelector('.welcome-subtitle').textContent = (rol === 'admin' || rol === 'vendedor') ? 'Vista interna de la tienda' : 'Ubicación de la tienda';
+                const iframe = tiendaSection.querySelector('.tienda-iframe');
+                if (iframe) {
+                    iframe.src = mapsEmbed; // usar siempre el mapa embebido para evitar cargar la página completa
+                }
+                // Mostrar siempre el mismo contenido (mapa + info); el enlace abre Google en nueva pestaña
+            } else {
+                console.warn('Sección tienda no encontrada en el DOM');
+            }
+        }
+
         const sections = document.querySelectorAll('main > section:not(.welcome-section)');
         sections.forEach(section => {
             section.style.display = 'none';
@@ -419,7 +439,44 @@ function navegarA(seccion) {
 }
 
 function irATienda() {
-    window.location.href = '../../index.html';
+    // Navegar a la sección 'tienda' dentro del dashboard (robusto)
+    const mapsEmbed = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3328.123456789012!2d-70.650123456789!3d-33.456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c1234567890%3A0xabcdef1234567890!2sPasteler%C3%ADa%20Mil%20Sabores!5e0!3m2!1ses-419!2scl!4v1699999999999!5m2!1ses-419!2scl';
+
+    if (typeof navegarA === 'function') {
+        navegarA('tienda');
+        return;
+    }
+
+    if (typeof window.dashboardManager?.navegarASeccion === 'function') {
+        window.dashboardManager.navegarASeccion('tienda');
+        return;
+    }
+
+    if (typeof window.vendedorDashboard?.navegarASeccion === 'function') {
+        window.vendedorDashboard.navegarASeccion('tienda');
+        return;
+    }
+
+    // Fallback seguro: mostrar la sección manualmente y cargar el mapa embebido
+    try {
+        const sections = document.querySelectorAll('main > section:not(.welcome-section)');
+        sections.forEach(s => { s.style.display = 'none'; });
+        const tienda = document.getElementById('tienda');
+        if (tienda) {
+            tienda.style.display = 'block';
+            const iframe = tienda.querySelector('.tienda-iframe');
+            if (iframe) iframe.src = mapsEmbed;
+            const subtitle = tienda.querySelector('.welcome-subtitle');
+            if (subtitle) subtitle.textContent = 'Vista interna de la tienda';
+            return;
+        }
+    } catch (err) {
+        console.warn('irATienda fallback failed:', err);
+    }
+
+    // Último recurso: abrir búsqueda de Google en nueva pestaña
+    const googleLink = 'https://www.google.com/search?newwindow=1&sca_esv=8efe466fbfa838b2&q=Paradero+37+Av.Concha+y+Toro&ludocid=9472218623307551877&lsig=AB86z5XKoVh6NMu83UsDLIEu8fAb&sa=X&sqi=2&ved=2ahUKEwiFtvGkw8GRAxUiqZUCHWS1N00Q8G0oAHoECCUQAQ';
+    window.open(googleLink, '_blank');
 }
 
 // Inicialización

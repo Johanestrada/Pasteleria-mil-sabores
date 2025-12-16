@@ -9,54 +9,13 @@ document.addEventListener('DOMContentLoaded', async function() {
  * Inicializa la pagina de exito con los datos de la compra
  */
 async function inicializarPaginaExito() {
-    // --- Debugging temporal: detectar borrado de localStorage('usuario') ---
+    // Session debug instrumentation removed — ensure any leftover flags/logs are cleared so users don't see debug UI
     try {
-        const debugActive = localStorage.getItem('sessionDebugActive');
-        if (debugActive) {
-            // Mostrar banner informativo en la página para indicar que el debug está activo
-            const banner = document.createElement('div');
-            banner.style.cssText = 'background:#fff3cd;color:#856404;padding:10px 12px;border:1px solid #ffeeba;text-align:center;font-size:14px;';
-            banner.textContent = 'DEBUG: sessionDebugActive habilitado — registrando borrados de localStorage(\'usuario\'). Revisa la consola.';
-            document.body.insertBefore(banner, document.body.firstChild);
-
-            // Instrumentar removeItem para detectar cuando se borra la clave 'usuario'
-            const originalRemoveItem = Storage.prototype.removeItem;
-            Storage.prototype.removeItem = function(key) {
-                if (key === 'usuario') {
-                    const info = { ts: Date.now(), stack: new Error().stack };
-                    console.error('Detected localStorage.removeItem("usuario") call', info);
-                    try {
-                        const logs = JSON.parse(localStorage.getItem('sessionDebugLogs') || '[]');
-                        logs.push(info);
-                        localStorage.setItem('sessionDebugLogs', JSON.stringify(logs));
-                    } catch (e) {
-                        console.error('Could not save sessionDebugLogs:', e);
-                    }
-                }
-                return originalRemoveItem.apply(this, arguments);
-            };
-
-            // Guardar snapshot actual del localStorage por si se sobreescribe
-            try { localStorage.setItem('sessionDebugSnapshot', JSON.stringify({ usuario: localStorage.getItem('usuario'), ts: Date.now() })); } catch (e) {/* noop */}
-            // Limpiar flag de debug después de 30s para que no quede activo permanentemente
-            setTimeout(() => { try { localStorage.removeItem('sessionDebugActive'); } catch (e) { /* noop */ } }, 30000);
-
-            // Exponer utilidad para revisar logs desde la consola: window.getSessionDebugLogs()
-            window.getSessionDebugLogs = function() {
-                try {
-                    const logs = JSON.parse(localStorage.getItem('sessionDebugLogs') || '[]');
-                    const snapshot = JSON.parse(localStorage.getItem('sessionDebugSnapshot') || '{}');
-                    console.log('sessionDebugSnapshot', snapshot);
-                    console.log('sessionDebugLogs', logs);
-                    return { snapshot, logs };
-                } catch (e) {
-                    console.error('Error leyendo session debug logs:', e);
-                    return null;
-                }
-            };
-        }
-    } catch (err) {
-        console.warn('Error initializing session debug instrumentation:', err);
+        localStorage.removeItem('sessionDebugActive');
+        localStorage.removeItem('sessionDebugLogs');
+        localStorage.removeItem('sessionDebugSnapshot');
+    } catch (e) {
+        // ignore any storage errors
     }
 
     // Obtener parametros de la URL

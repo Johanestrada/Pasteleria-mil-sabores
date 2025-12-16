@@ -214,55 +214,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             btnPagarAhora.disabled = true;
             btnPagarAhora.textContent = 'Procesando...';
 
-            // --- Instrumentación temporal para depurar pérdida de sesión ---
-            try {
-                // Snapshot previo
-                try { localStorage.setItem('sessionDebugSnapshot', JSON.stringify({ usuario: localStorage.getItem('usuario'), ts: Date.now() })); } catch (e) {}
-
-                const originalRemove = Storage.prototype.removeItem;
-                Storage.prototype.removeItem = function(key) {
-                    if (String(key) === 'usuario') {
-                        const info = { ts: Date.now(), stack: new Error().stack };
-                        console.error('SESSION DEBUG: detected localStorage.removeItem("usuario")', info);
-                        try {
-                            const logs = JSON.parse(localStorage.getItem('sessionDebugLogs') || '[]');
-                            logs.push(info);
-                            localStorage.setItem('sessionDebugLogs', JSON.stringify(logs));
-                        } catch (err) {
-                            console.error('SESSION DEBUG: could not write logs', err);
-                        }
-                    }
-                    return originalRemove.apply(this, arguments);
-                };
-
-                const originalClear = Storage.prototype.clear;
-                Storage.prototype.clear = function() {
-                    const info = { ts: Date.now(), type: 'clear', stack: new Error().stack };
-                    console.error('SESSION DEBUG: detected localStorage.clear()', info);
-                    try {
-                        const logs = JSON.parse(localStorage.getItem('sessionDebugLogs') || '[]');
-                        logs.push(info);
-                        localStorage.setItem('sessionDebugLogs', JSON.stringify(logs));
-                    } catch (err) { console.error('SESSION DEBUG: could not write logs', err); }
-                    return originalClear.apply(this, arguments);
-                };
-
-                if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().signOut) {
-                    const origSignOut = firebase.auth().signOut.bind(firebase.auth());
-                    firebase.auth().signOut = async function() {
-                        const info = { ts: Date.now(), type: 'signOut', stack: new Error().stack };
-                        console.error('SESSION DEBUG: detected firebase.auth().signOut()', info);
-                        try {
-                            const logs = JSON.parse(localStorage.getItem('sessionDebugLogs') || '[]');
-                            logs.push(info);
-                            localStorage.setItem('sessionDebugLogs', JSON.stringify(logs));
-                        } catch (err) { console.error('SESSION DEBUG: could not write logs', err); }
-                        return origSignOut.apply(this, arguments);
-                    };
-                }
-            } catch (err) {
-                console.warn('SESSION DEBUG: error installing instrumentation', err);
-            }
+            // (Removed temporary session debug instrumentation in production)
 
             // Validar campos requeridos
             const camposRequeridos = [nombreInput, apellidosInput, correoInput, calleInput, regionInput, comunaInput];
@@ -310,8 +262,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     localStorage.setItem('ultimaCompra', JSON.stringify({ ...datosCompra, numeroOrden: docRef.id }));
                     localStorage.removeItem('carrito');
 
-                    // Habilitar flag de debugging de sesión (temporal) para investigar pérdida de sesión post-compra
-                    try { localStorage.setItem('sessionDebugActive', '1'); } catch (e) { /* noop */ }
+                    // Debug flag removed: no session debug set here in production
 
                     window.location.href = `compraExitosa.html?orden=${docRef.id}`;
                 } catch (error) {
